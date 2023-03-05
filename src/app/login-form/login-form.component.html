@@ -2,24 +2,24 @@
     <h1 class="text-center mb-3">Faça seu login</h1>
     <div class="flex flex-column gap-4">
         <span class="p-float-label">
-            <input type="text" pInputText class="w-12" [(ngModel)]="name" name="name"/>
+            <input type="text" pInputText class="w-12" [(ngModel)]="user.name" name="name"/>
             <label for="nameInput">Seu nome</label>
         </span>
         <span class="p-float-label">
-            <input type="email" pInputText class="w-12"[(ngModel)]="email" name="email"/>
+            <input type="email" pInputText class="w-12"[(ngModel)]="user.email" name="email"/>
             <label for="emailInput">Seu email</label>
         </span>
     </div>
     <div class="mt-4 flex justify-content-between">
         <div>
             <span class="p-float-label">
-                <input type="password" pInputText [(ngModel)]="password" name="password"/>
+                <input type="password" pInputText [(ngModel)]="user.password" name="password"/>
                 <label for="passwordInput">Sua senha</label>
             </span>
         </div>
         <div>
             <span class="p-float-label">
-                <input type="password" pInputText [(ngModel)]="confirmPass" name="confirmPassword"/>
+                <input type="password" pInputText [(ngModel)]="user.confirmPass" name="confirmPassword"/>
                 <label for="confirmPasswordInput">Confirme sua senha</label>
             </span>
         </div>
@@ -28,8 +28,8 @@
         type="submit" 
         class="btn-submit w-12 mt-4 p-button-raised" 
         pButton 
-        [disabled]="password !== confirmPass || !password || !email || !name" 
-        (click)="submit({name, email, password}, $event)" >
+        [disabled]="user.password !== user.confirmPass || !user.password || !user.email || !user.name" 
+        (click)="submit(user, $event)">
         Registrar
     </button>
 </form>

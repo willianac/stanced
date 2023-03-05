@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserInterface } from './login/IUser';
+import { LoginService } from './login/login.service';
 
 @Component({
   selector: 'app-login-form',
@@ -7,16 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent {
-  name!: string;
-  email!: string
-  password!: string;
-  confirmPass!: string;
+  user: UserInterface = {
+    name: "",
+    email: "",
+    password: "",
+    confirmPass: ""
+  }
   
-  constructor(private router: Router) {}
+  constructor(private router: Router, private loginservice: LoginService) {}
   
   submit(user: any, event: Event): void {
     event.preventDefault()
+    this.loginservice.salvarUsuario(user)
     this.router.navigateByUrl("/teste")
   }
-  
 }
