@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime, finalize, fromEvent, interval, map, of, switchMap, take, tap } from 'rxjs';
+import { catchError, debounceTime, finalize, fromEvent, interval, map, of, switchMap, take, tap, throwError } from 'rxjs';
 import { RobotsService } from '../robots/robots.service';
 
 @Component({
@@ -23,7 +23,8 @@ export class DashboardComponent implements OnInit{
   
   alterado$ = this.inputForm.valueChanges.pipe(
     debounceTime(500),
-    tap(x => console.log(x))
+    tap(x => console.log(x)),
+    catchError(() => throwError(() => console.log()))
   ).subscribe()
   
 

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,8 +8,11 @@ import { Observable } from 'rxjs';
 export class RobotsService {
 
   constructor(private http: HttpClient) { }
+  httpOptions = {
+    headers: new HttpHeaders({"Content-Type" : "application/json"})
+}
 
-  public catchOneRobot(): Observable<Object[]> {
-    return this.http.get<Object[]>("http://localhost:3000/carros")
+  public catchOneRobot(): any {
+    
   }
 }

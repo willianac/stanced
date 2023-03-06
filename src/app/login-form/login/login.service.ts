@@ -1,3 +1,4 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { UserInterface } from "./IUser";
 
@@ -5,8 +6,10 @@ import { UserInterface } from "./IUser";
 export class LoginService {
     todosUsuarios: UserInterface[] = []
 
+    constructor(private http: HttpClient) {}
+
     salvarUsuario(usuario: UserInterface) {
-        this.todosUsuarios.push(usuario)
+        return this.http.post("http://localhost:3000/carros", usuario)
     }
 
     listarUsuarios(): UserInterface[] {
