@@ -9,12 +9,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InOutPutComponent } from './in-out-put/in-out-put.component';
 import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CarrosComponent } from './core/carros/carros.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    InOutPutComponent
+    InOutPutComponent,
+    CarrosComponent
   ],
   imports: [
     BrowserModule,

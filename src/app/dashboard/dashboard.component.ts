@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { catchError, debounceTime, finalize, fromEvent, interval, map, of, switchMap, take, tap, throwError } from 'rxjs';
-import { RobotsService } from '../robots/robots.service';
+import { Observable, tap } from 'rxjs';
+
+import { ICarro } from '../core/carros/carro';
+import { CarrosService } from '../core/carros/carros.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,31 +10,10 @@ import { RobotsService } from '../robots/robots.service';
  
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit{
-
-  constructor(private robots: RobotsService , private privaterouter: Router) {}
-
-
-  onMudouValor(evento: Event) {
-    console.log(evento)
-  }
+export class DashboardComponent{
+  constructor(private carService: CarrosService) {}
+  carros$: Observable<ICarro[]> = this.carService.retornaCarros().pipe(
+    tap(val => console.log(val))
+  ) 
   
-  inputForm = new FormControl()
-  
-  alterado$ = this.inputForm.valueChanges.pipe(
-    debounceTime(500),
-    tap(x => console.log(x)),
-    catchError(() => throwError(() => console.log()))
-  ).subscribe()
-  
-
-  // voltar() {
-  //   this.source.subscribe({
-  //     next : (valor) => console.log(valor)
-  //   })
-  // }
-  
-  ngOnInit(): void {
-   
-  }
 }

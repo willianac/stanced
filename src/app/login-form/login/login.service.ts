@@ -9,7 +9,7 @@ export class LoginService {
     constructor(private http: HttpClient) {}
 
     salvarUsuario(usuario: UserInterface) {
-        return this.http.post("http://localhost:3000/carros", usuario)
+        return this.http.post("http://localhost:3000/login", usuario, {responseType : "text"})
     }
 
     listarUsuarios(): UserInterface[] {

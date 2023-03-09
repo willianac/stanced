@@ -21,7 +21,10 @@ export class LoginFormComponent {
   submit(user: any, event: Event): void {
     event.preventDefault()
     this.loginservice.salvarUsuario(user).subscribe({
-      next : (resposta) => console.log(resposta)
+      next : (resposta) => {
+        console.log(resposta)
+        this.router.navigateByUrl("teste")
+      }
     })
   }
 }
