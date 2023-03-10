@@ -1,0 +1,35 @@
+h1 {
+    color : #F4C823;
+}
+
+label {
+    color : #2D383C
+}
+
+label > small {
+    color: #C7CBCE
+}
+
+input {
+    background-color: #F5F5F5;
+    border-color: #C7CBCE;
+    outline: none;
+    color: #2D383C;
+}
+
+input:focus {
+    border-color: #FEC000;
+}
+
+.btn {
+    background-color: #FEC000;
+    letter-spacing: 1.25px;
+    font-size: 15px;
+}
+
+.flex > small {
+    text-decoration: underline;
+    text-underline-offset: 7px;
+    cursor: pointer;
+    color: #C7CBCE;
+}
