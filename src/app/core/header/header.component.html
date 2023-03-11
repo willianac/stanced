@@ -1,0 +1,18 @@
+<header>
+    <div class="flex h-16 justify-between items-center max-w-7xl mx-auto">
+        <div>
+            <h1 class="text-3xl font-semibold">Cars Saloon</h1>
+        </div>
+        <nav class="flex gap-3">
+            <a routerLink="home" class="hover:underline">Login</a>
+            <a routerLink="dashboard" class="hover:underline">Dashboard</a>
+            <div class="pl-6 font-semibold">
+                <span *ngIf="username; else doLogin">Olá, {{username}} </span>
+                <ng-template #doLogin>
+                    <span>Faça o Login primeiro</span>
+                </ng-template>
+                <i class="pi pi-user pl-2"></i>
+            </div>
+        </nav>
+    </div>
+</header>

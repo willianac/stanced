@@ -1,16 +1,32 @@
-<form class="max-w-md mt-40 ml-40 p-2 font-bold" (ngSubmit)="fazerLogin()">
+<form (ngSubmit)="fazerLogin()" class="max-w-md mt-40 ml-40 p-2 font-bold" [formGroup]="loginForm">
     <h1 class="mb-11 text-center text-4xl">LOGO</h1>
     <div class="flex flex-col mb-6">
         <label for="email" class="mb-3">Usuário <small>(email ou usuário)</small> </label>
-        <input type="email" class="border-2 h-16 rounded-lg font-normal text-base indent-4" [(ngModel)]="username" name="userInput" />
+        <input type="email" formControlName="username" class="border-2 h-16 rounded-lg font-normal text-base indent-4"/>
+        <app-error-message 
+            message="email em formato invalido"
+            *ngIf="loginForm.get('username')?.errors?.['email']"
+        ></app-error-message>
+        <app-error-message 
+            message="email é obrigatório"
+            *ngIf="loginForm.get('username')?.errors?.['required'] && loginForm.get('username')?.touched"
+        ></app-error-message>
     </div>
     <div class="flex flex-col">
         <label for="password" class="mb-3">Senha</label>
-        <input type="password" class="border-2 h-16 rounded-lg font-normal text-base indent-4" [(ngModel)]="password" name="passwordInput" />
+        <input type="password" formControlName="password" class="border-2 h-16 rounded-lg font-normal text-base indent-4"/>
+        <app-error-message
+            message="senha deve ter no minimo 6 caracteres"
+            *ngIf="loginForm.get('password')?.errors?.['minlength']"
+        ></app-error-message>
+        <app-error-message
+            message="senha é obrigatória"
+            *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched"
+        ></app-error-message>
         <div class="flex justify-end mt-2">
             <small>esqueceu a senha?</small>
         </div>
     </div>
-    <button class="btn mt-5 min-w-full h-14 rounded-lg font-medium text-white">ENTRAR</button>
+    <button class="btn mt-5 min-w-full h-14 rounded-lg font-medium text-white" [disabled]="loginForm.invalid" type="submit">ENTRAR</button>
 </form>
 {{user}}

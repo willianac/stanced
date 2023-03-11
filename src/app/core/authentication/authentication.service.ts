@@ -18,7 +18,7 @@ export class AuthenticationService {
     public login(user: IUser): Observable<IUser> {
         return this.http.post<IUser>("http://localhost:3000/login", user).pipe(
             tap(val => {
-                this.token.setToken()
+                this.token.setToken(val.username)
                 this.notify()
             }) 
         )
@@ -30,6 +30,6 @@ export class AuthenticationService {
 
     private notify() {
         const token = this.token.getToken()
-        this.user.next("Willian")
+        this.user.next(token)
     }
 }

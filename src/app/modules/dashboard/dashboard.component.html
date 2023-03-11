@@ -1,15 +1,7 @@
-<form class="max-w-md mt-40 ml-40 p-2 font-bold">
-    <h1 class="mb-11 text-center text-4xl">LOGO</h1>
-    <div class="flex flex-col mb-6">
-        <label for="email" class="mb-3">Usuário <small>(email ou usuário)</small> </label>
-        <input type="email" class="border-2 h-16 rounded-lg font-normal text-base indent-4"/>
-    </div>
-    <div class="flex flex-col">
-        <label for="password" class="mb-3">Senha</label>
-        <input type="password" class="border-2 h-16 rounded-lg font-normal text-base indent-4"/>
-        <div class="flex justify-end mt-2">
-            <small>esqueceu a senha?</small>
+<div *ngIf="carros$ | async as carros" id="div de fora">
+    <app-photo-grid>
+        <div *ngFor="let carro of carros" id="div de dentro">
+            <app-card-photo></app-card-photo>
         </div>
-    </div>
-    <button class="btn mt-5 min-w-full h-14 rounded-lg font-medium text-white">ENTRAR</button>
-</form>
+    </app-photo-grid>
+</div>
