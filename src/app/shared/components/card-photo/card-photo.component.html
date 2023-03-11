@@ -1,4 +1,14 @@
-<div>
-    <img src="../../../assets/imgs/cars-saloon.jpg" alt="saloon car" class="max-w-xs">
-    <h1>{{car.marca}}}</h1>
+<div class="card" >
+    <img [src]="url" [alt]="alt">
+    <div class="flex flex-col px-3 py-5 gap-2 ">
+        <div class="flex items-center gap-2">
+            <p class="font-bold text-xl">{{car.marca}}</p>
+            <p class="font-bold text-xl">{{car.modelo}}</p>
+        </div>
+        <div class="flex justify-between">
+            <p class="font-sans font-bold">{{car.ano}}</p>
+            <p class="font-sans font-bold">{{car.cor}}</p>
+        </div>
+        <p class="font-extrabold text-center">R${{car.valor}}.000</p>
+    </div>
 </div>
