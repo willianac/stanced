@@ -12,8 +12,8 @@ export class TokenService {
         return window.localStorage.getItem("x-access-token") ?? ""
     }
 
-    setToken() {
-        window.localStorage.setItem("x-access-token", "tuneAuthentication")
+    setToken(token: string) {
+        window.localStorage.setItem("x-access-token", token)
     }
 
     deleteToken() {
