@@ -24,6 +24,11 @@ export class AuthenticationService {
         )
     }
 
+    public logout() {
+        this.token.deleteToken()
+        this.user.next("")
+    }
+
     public getUser() {
         return this.user.asObservable()
     }

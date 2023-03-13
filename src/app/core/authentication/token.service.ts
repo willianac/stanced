@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
     providedIn : "root"
 })
 export class TokenService {
-    hasToken() {
+    hasToken(): boolean {
         return !!this.getToken()
     }
 
@@ -17,6 +17,6 @@ export class TokenService {
     }
 
     deleteToken() {
-
+        window.localStorage.removeItem("x-access-token")
     }
 }

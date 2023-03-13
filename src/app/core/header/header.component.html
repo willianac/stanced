@@ -1,18 +1,28 @@
 <header>
     <div class="flex h-16 justify-between items-center max-w-7xl mx-auto">
-        <div>
+        <div class="flex items-center gap-2">
+            <div>
+                <i (click)="aside.handleMenu()" class="pi pi-bars text-xl" ></i>
+            </div>
             <h1 class="text-3xl font-semibold">JDM Project</h1>
         </div>
-        <nav class="flex gap-3">
-            <a routerLink="home" class="hover:underline">Login</a>
-            <a routerLink="dashboard" class="hover:underline">Dashboard</a>
-            <div class="pl-6 font-semibold">
-                <span *ngIf="username; else doLogin">Olá, {{username}} </span>
-                <ng-template #doLogin>
-                    <span>Faça o Login primeiro</span>
-                </ng-template>
-                <i class="pi pi-user pl-2"></i>
+        <nav class="flex gap-2">
+            <div *ngIf="username$ | async as user; else loginTemplate" class="flex gap-7">
+                <a class="hover:underline cursor-pointer" (click)="fazerLogout()">Logout</a>
+                <div>
+                    <span class="font-semibold">Olá, {{user}} </span>
+                    <i class="pi pi-user pl-1"></i>
+                </div>
             </div>
         </nav>
     </div>
 </header>
+
+<ng-template #loginTemplate>
+    <a routerLink="home" class="hover:underline">Login</a>
+    <a routerLink="dashboard" class="hover:underline">Dashboard</a>
+    <span class="pl-6">Faça o Login primeiro</span>
+    <i class="pi pi-user pl-1"></i>
+</ng-template>
+
+<app-sidebar #aside></app-sidebar>

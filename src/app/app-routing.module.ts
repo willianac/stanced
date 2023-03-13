@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { AuthenticationGuard } from './core/guards/authentication.guard';
 
 const routes: Routes = [
   {path : "", redirectTo : "home", pathMatch : "full"},
@@ -10,7 +10,8 @@ const routes: Routes = [
   },
   {
     path : "dashboard",
-    loadChildren : () => import("./modules/dashboard/dashboard.module").then(m => m.DashboardModule)
+    loadChildren : () => import("./modules/dashboard/dashboard.module").then(m => m.DashboardModule),
+    canMatch : [AuthenticationGuard]
   }
 ];
 

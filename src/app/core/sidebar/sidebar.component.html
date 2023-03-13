@@ -1,0 +1,9 @@
+<aside class="fixed left-0 h-full w-52 bg-slate-50 shadow-xl" [ngClass]="isAsideOpen ? 'open' : 'close' ">
+    <div class="top-menu h-14">
+        <i (click)="handleMenu()" class="pi pi-times absolute right-1 text-white"></i>
+        <h1 class="text-center text-xl leading-10 font-bold">MENU</h1>
+    </div>
+    <nav class="flex flex-col items-center p-3">
+        <a routerLink="home" class="text-purple-500">Novo carro</a>
+    </nav>
+</aside>
