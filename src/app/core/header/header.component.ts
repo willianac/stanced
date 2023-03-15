@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
@@ -6,14 +8,16 @@ import { AuthenticationService } from '../authentication/authentication.service'
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
-  username = ""
+export class HeaderComponent {
+  username$ = this.auth.getUser()
 
-  constructor(private auth: AuthenticationService) {}
+  constructor(
+    private auth: AuthenticationService, 
+    private router: Router, 
+  ){}
 
-  ngOnInit() {
-    this.auth.getUser().subscribe({
-      next : (name) => this.username = name
-    })
+  public fazerLogout() {
+    this.auth.logout()
+    this.router.navigateByUrl("")
   }
 }
