@@ -1,8 +1,8 @@
-.close {
-    left: -50%;
+.menu {
+    left: -90%;
 }
 
-.open {
+.open .menu {
     left: 0px;
     transition: all 0.2s ease-in-out;
 }

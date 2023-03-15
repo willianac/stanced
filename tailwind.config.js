@@ -8,7 +8,8 @@ module.exports = {
     "./src/app/shared/card-photo/card-photo.component.html",
     "./src/app/modules/dashboard/components/photo-grid/photo-grid.component.html",
     "./src/app/shared/components/card-photo/card-photo.component.html",
-    "./src/app/core/sidebar/sidebar.component.html"
+    "./src/app/core/sidebar/sidebar.component.html",
+    "./src/app/modules/dashboard/components/newcar/newcar.component.html"
   ],
   theme: {
     extend: {},

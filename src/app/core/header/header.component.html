@@ -4,7 +4,7 @@
             <div>
                 <i (click)="aside.handleMenu()" class="pi pi-bars text-xl" ></i>
             </div>
-            <h1 class="text-3xl font-semibold">JDM Project</h1>
+            <a routerLink="dashboard" class="logo text-3xl font-semibold">JDM Project</a>
         </div>
         <nav class="flex gap-2">
             <div *ngIf="username$ | async as user; else loginTemplate" class="flex gap-7">
