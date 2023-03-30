@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, Subject, tap } from "rxjs";
 import { TokenService } from "./token.service";
-import { IUser } from "./user";
+import { IFullUser, IUser } from "./user";
 
 @Injectable({
     providedIn : "root"
@@ -13,6 +13,10 @@ export class AuthenticationService {
     constructor(private http: HttpClient, private token: TokenService) {
         this.token.hasToken() && 
             this.notify()
+    }
+
+    public register(user: IFullUser): Observable<IFullUser> {
+        return this.http.post<IFullUser>("http://localhost:3000/register", user)
     }
 
     public login(user: IUser): Observable<IUser> {
