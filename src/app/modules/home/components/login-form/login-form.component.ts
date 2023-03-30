@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -11,14 +11,14 @@ import { IUser } from 'src/app/core/authentication/user';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
 
   loginForm = this.fb.group({
     username: ["", [Validators.required]],
     password: ["", [Validators.required, Validators.minLength(6)]]
   })
-  user$ = Observable<IUser>
-  user!: string
+  // user$ = Observable<IUser>
+  // user!: string
 
   constructor(private router: Router, private auth: AuthenticationService, private fb: FormBuilder) {}
 
@@ -30,9 +30,9 @@ export class LoginFormComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-    this.auth.getUser().subscribe({
-      next: (value) => this.user = value
-    })
-  }
+  // ngOnInit() {
+  //   this.auth.getUser().subscribe({
+  //     next: (value) => this.user = value
+  //   })
+  // }
 }
