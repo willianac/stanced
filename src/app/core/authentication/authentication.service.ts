@@ -1,8 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, Subject, tap } from "rxjs";
+import { BehaviorSubject, Observable, tap } from "rxjs";
+
+import jwt_decode from "jwt-decode";
 import { TokenService } from "./token.service";
-import { IFullUser, IUser } from "./user";
+import { IFullUser, IUser, JWTtoken } from "./user";
+
 
 @Injectable({
     providedIn : "root"
@@ -11,18 +14,19 @@ export class AuthenticationService {
     user = new BehaviorSubject("")
 
     constructor(private http: HttpClient, private token: TokenService) {
-        this.token.hasToken() && 
-            this.notify()
+        if(this.token.hasToken()) {
+            this.validateToken()
+        } 
     }
 
     public register(user: IFullUser): Observable<IFullUser> {
         return this.http.post<IFullUser>("http://localhost:3000/register", user)
     }
 
-    public login(user: IUser): Observable<IUser> {
-        return this.http.post<IUser>("http://localhost:3000/login", user).pipe(
+    public login(user: IFullUser): Observable<any> {
+        return this.http.post<any>("http://localhost:3000/login", user).pipe(
             tap(val => {
-                this.token.setToken(val.username)
+                this.token.setToken(val.token)
                 this.notify()
             }) 
         )
@@ -33,12 +37,21 @@ export class AuthenticationService {
         this.user.next("")
     }
 
+    public validateToken() {
+        const token = this.token.getToken()
+        this.http.post("http://localhost:3000/verifytoken", {token}).subscribe({
+            next : (val) => this.notify(),
+            error : (err) => this.logout()
+        })
+    }
+
     public getUser() {
         return this.user.asObservable()
     }
 
     private notify() {
         const token = this.token.getToken()
-        this.user.next(token)
+        const decoded: JWTtoken = jwt_decode(token)
+        this.user.next(decoded.name)
     }
 }
