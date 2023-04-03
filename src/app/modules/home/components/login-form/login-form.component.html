@@ -1,8 +1,8 @@
 <form (ngSubmit)="fazerLogin()" class="max-w-md mt-40 ml-40 p-2 font-bold" [formGroup]="loginForm">
     <h1 class="mb-11 text-center text-4xl">LOGO</h1>
     <div class="flex flex-col mb-6">
-        <label for="email" class="mb-3">Usuário <small>(email ou usuário)</small> </label>
-        <input type="email" formControlName="username" class="border-2 h-16 rounded-lg font-normal text-base indent-4"/>
+        <label for="email" class="mb-3">E-mail</label>
+        <input type="email" formControlName="email" class="border-2 h-16 rounded-lg font-normal text-base indent-4"/>
         <app-error-message 
             message="email em formato invalido"
             *ngIf="loginForm.get('username')?.errors?.['email']"
