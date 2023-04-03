@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, tap } from "rxjs";
 
 import jwt_decode from "jwt-decode";
 import { TokenService } from "./token.service";
-import { IFullUser, IUser, JWTtoken } from "./user";
+import { IFullUser, JWTtoken } from "./user";
 
 
 @Injectable({
@@ -19,8 +19,13 @@ export class AuthenticationService {
         } 
     }
 
-    public register(user: IFullUser): Observable<IFullUser> {
-        return this.http.post<IFullUser>("http://localhost:3000/register", user)
+    public register(user: IFullUser): Observable<any> {
+        return this.http.post<any>("http://localhost:3000/register", user).pipe(
+            tap(val => {
+                this.token.setToken(val.token)
+                this.notify()
+            })
+        )
     }
 
     public login(user: IFullUser): Observable<any> {
