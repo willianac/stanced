@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
-import { IFullUser, IUser } from 'src/app/core/authentication/user';
+import { IFullUser } from 'src/app/core/authentication/user';
 
 @Component({
   selector: 'app-login-form',
@@ -17,8 +16,6 @@ export class LoginFormComponent {
     email: ["", [Validators.required, Validators.email]],
     password: ["", [Validators.required, Validators.minLength(6)]]
   })
-  // user$ = Observable<IUser>
-  // user!: string
 
   constructor(private router: Router, private auth: AuthenticationService, private fb: FormBuilder) {}
 
@@ -29,10 +26,4 @@ export class LoginFormComponent {
       error: (err) => console.error(err)
     })
   }
-
-  // ngOnInit() {
-  //   this.auth.getUser().subscribe({
-  //     next: (value) => this.user = value
-  //   })
-  // }
 }
