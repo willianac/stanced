@@ -1,10 +1,10 @@
-<div *ngIf="carros$ | async as carros" id="div de fora">
+<div id="div de fora">
     <app-photo-grid>
-        <div *ngFor="let carro of carros" id="div de dentro">
+        <div *ngFor="let carro of carros$" id="div de dentro">
             <app-card-photo
-                url="../../../../assets/imgs/{{carro.modelo | lowercase}}.jpg"
+                url="https://jdmpics.s3.sa-east-1.amazonaws.com/{{carro.Key}}"
                 alt="Carro salao"
-                [car]="carro"
+                
             ></app-card-photo>
         </div>
     </app-photo-grid>

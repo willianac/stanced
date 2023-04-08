@@ -9,5 +9,5 @@ import { ICarro } from '../../models/carro';
 export class CardPhotoComponent {
   @Input() url!:string
   @Input() alt!: string
-  @Input() car!: ICarro
+  // @Input() car!: ICarro
 }
