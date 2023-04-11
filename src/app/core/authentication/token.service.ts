@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import jwtDecode from "jwt-decode";
+import { JWTtoken } from "./user";
 
 @Injectable({
     providedIn : "root"
@@ -18,5 +20,10 @@ export class TokenService {
 
     deleteToken() {
         window.localStorage.removeItem("x-access-token")
+    }
+
+    getDecodedToken(): JWTtoken {
+        const token = this.getToken();
+        return jwtDecode(token)
     }
 }

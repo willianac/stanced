@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import NewCarService from 'src/app/core/services/newcar.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class NewcarComponent {
 
   file!: File
 
-  constructor(private fb: FormBuilder, private newCarService: NewCarService) {}
+  constructor(private fb: FormBuilder, private newCarService: NewCarService, private router: Router) {}
 
   uploadFoto() {
     const allowComments = this.photoForm.get("allowComments")?.value
@@ -24,6 +25,9 @@ export class NewcarComponent {
     formdata.append("comments", allowComments ? "true" : "false")
     formdata.append("description", this.photoForm.get("description")?.value as string)
     formdata.append("image", this.file)
-    this.newCarService.sendNewCar(formdata)
+    this.newCarService.sendNewCar(formdata).subscribe({
+      next : (res) =>  this.router.navigateByUrl("dashboard"),
+      error : (err) => console.error(err)
+    })
   }
 }

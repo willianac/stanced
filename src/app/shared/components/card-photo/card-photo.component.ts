@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ICarro } from '../../models/carro';
 
 @Component({
   selector: 'app-card-photo',
@@ -9,5 +8,4 @@ import { ICarro } from '../../models/carro';
 export class CardPhotoComponent {
   @Input() url!:string
   @Input() alt!: string
-  // @Input() car!: ICarro
 }
