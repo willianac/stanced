@@ -1,0 +1,11 @@
+.body-background {
+    height: calc(100vh - 64px);
+    background: linear-gradient(rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.92)), url("../../../assets/imgs/cars-saloon.jpg");
+    background-size: cover;
+}
+.grid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

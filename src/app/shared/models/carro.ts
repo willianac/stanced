@@ -1,7 +1,6 @@
-export interface ICarro {
-    marca: string
-    modelo: string
-    ano: number
-    cor: string
-    valor: number    
+export interface ICarPicture {
+    id: number
+    url: string
+    description: string
+    name: string 
 }

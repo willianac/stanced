@@ -2,7 +2,10 @@
     <div class="flex h-16 justify-between items-center max-w-7xl mx-auto">
         <div class="flex items-center gap-2">
             <div>
-                <i (click)="aside.handleMenu()" class="pi pi-bars text-xl" ></i>
+                <i
+                    (click)="aside.handleMenu()" 
+                    class="pi pi-bars text-xl p-1 rounded-sm hover:bg-black hover:bg-opacity-10 hover:transition-all">
+                </i>
             </div>
             <a routerLink="dashboard" class="logo text-3xl font-semibold">JDM Project</a>
         </div>

@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class CardPhotoComponent {
   @Input() url!:string
-  @Input() alt!: string
+  @Input() description!: string
+  @Input() username!: string
 }
