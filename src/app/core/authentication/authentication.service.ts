@@ -57,7 +57,6 @@ export class AuthenticationService {
     private notify() {
         const token = this.token.getToken()
         const decoded: JWTtoken = jwt_decode(token)
-        console.log(decoded)
         this.user.next(decoded.name)
     }
 }

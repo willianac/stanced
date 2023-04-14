@@ -1,9 +1,11 @@
 <div id="div de fora">
     <app-photo-grid>
-        <div *ngFor="let carro of carros$" id="div de dentro">
+        <div *ngFor="let carro of carros" id="div de dentro">
             <app-card-photo
-                url="https://jdmpics.s3.sa-east-1.amazonaws.com/{{carro.Key}}"
-                alt="Carro salao"
+                [url]="carro.url"
+                [description]="carro.description"
+                [username]="carro.name"
+                routerLink="car/{{carro.id}}"
             ></app-card-photo>
         </div>
     </app-photo-grid>

@@ -1,8 +1,8 @@
-<form (ngSubmit)="fazerLogin()" class="max-w-md mt-40 ml-40 p-2 font-bold" [formGroup]="loginForm">
-    <h1 class="mb-11 text-center text-4xl">LOGO</h1>
+<form (ngSubmit)="fazerLogin()" class="w-96 font-bold" [formGroup]="loginForm">
+    <h1 class="mb-11 text-center text-4xl text-white">Entrar</h1>
     <div class="flex flex-col mb-6">
-        <label for="email" class="mb-3">E-mail</label>
-        <input type="email" formControlName="email" class="border-2 h-16 rounded-lg font-normal text-base indent-4"/>
+        <label for="email" class="mb-3 text-zinc-300">E-mail</label>
+        <input type="email" formControlName="email" class="border-2 h-16 rounded-lg font-normal text-base indent-4 bg-slate-200"/>
         <app-error-message 
             message="email em formato invalido"
             *ngIf="loginForm.get('username')?.errors?.['email']"
@@ -13,8 +13,8 @@
         ></app-error-message>
     </div>
     <div class="flex flex-col">
-        <label for="password" class="mb-3">Senha</label>
-        <input type="password" formControlName="password" class="border-2 h-16 rounded-lg font-normal text-base indent-4"/>
+        <label for="password" class="mb-3 text-zinc-300">Senha</label>
+        <input type="password" formControlName="password" class="border-2 h-16 rounded-lg font-normal text-base indent-4 bg-slate-200"/>
         <app-error-message
             message="senha deve ter no minimo 6 caracteres"
             *ngIf="loginForm.get('password')?.errors?.['minlength']"

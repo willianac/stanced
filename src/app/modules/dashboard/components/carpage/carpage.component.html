@@ -1,0 +1,31 @@
+<div class="conteiner flex flex-col items-center mt-24 mx-auto">
+    <div class="flex justify-between w-full">
+        <div class="w-1/2 flex justify-center">
+            <app-card-photo
+                [description]="carinfo.description"
+                [url]="carinfo.url"
+                [username]="carinfo.name"
+                [id]="carinfo.id"
+            ></app-card-photo>
+        </div>
+        <div *ngIf="commentList | async as comments" class="w-1/2 p-4 overflow-y-auto max-h-80">
+            <div *ngFor="let comment of comments" class="flex justify-between mb-3">
+                <div>
+                    <h1 class="font-semibold">{{comment.username}}</h1>
+                    <p class="text-sm">{{comment.comment}}</p>
+                </div>
+                 <span class="text-sm font-semibold">{{comment.createdAt | date}}</span>
+            </div>
+        </div>
+    </div>
+    <form (ngSubmit)="sendComment()" class="mt-8 flex gap-2 w-full">
+        <input 
+            [(ngModel)]="commentInput"
+            type="text" 
+            placeholder="Digite seu comentario" 
+            class="border-2 h-16 rounded-lg font-normal text-base indent-4 w-2/4"
+            name="comment"
+        >
+        <button class="btn px-4 rounded-lg font-medium text-white">Enviar</button>
+    </form>
+</div>

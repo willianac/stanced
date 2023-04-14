@@ -6,15 +6,17 @@ import { DashboardComponent } from './dashboard.component';
 import { PhotoGridComponent } from './components/photo-grid/photo-grid.component';
 import { CardPhotoComponent } from 'src/app/shared/components/card-photo/card-photo.component';
 import { NewcarComponent } from './components/newcar/newcar.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CarpageComponent } from './components/carpage/carpage.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, PhotoGridComponent, CardPhotoComponent, NewcarComponent],
+  declarations: [DashboardComponent, PhotoGridComponent, CardPhotoComponent, NewcarComponent, CarpageComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class DashboardModule { }
