@@ -1,13 +1,4 @@
-h1 {
-    color : #F4C823;
-}
-
-label {
-    color : #2D383C
-}
-
 input {
-    background-color: #F5F5F5;
     border-color: #C7CBCE;
     outline: none;
     color: #2D383C;
@@ -21,4 +12,9 @@ input:focus {
     background-color: #4831D4;
     letter-spacing: 1.25px;
     font-size: 15px;
+}
+
+.btn:disabled {
+    background-color: rgb(173, 211, 216);
+    color: gray;
 }

@@ -2,19 +2,26 @@
     <h1 class="mb-11 text-center text-4xl text-white">Entrar</h1>
     <div class="flex flex-col mb-6">
         <label for="email" class="mb-3 text-zinc-300">E-mail</label>
-        <input type="email" formControlName="email" class="border-2 h-16 rounded-lg font-normal text-base indent-4 bg-slate-200"/>
+        <input 
+            type="email" 
+            formControlName="email" 
+            class="border-2 h-16 rounded-lg font-normal text-base indent-4 bg-slate-200"
+        />
         <app-error-message 
             message="email em formato invalido"
-            *ngIf="loginForm.get('username')?.errors?.['email']"
+            *ngIf="loginForm.get('email')?.errors?.['email']"
         ></app-error-message>
         <app-error-message 
             message="email é obrigatório"
-            *ngIf="loginForm.get('username')?.errors?.['required'] && loginForm.get('username')?.touched"
+            *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched"
         ></app-error-message>
     </div>
     <div class="flex flex-col">
         <label for="password" class="mb-3 text-zinc-300">Senha</label>
-        <input type="password" formControlName="password" class="border-2 h-16 rounded-lg font-normal text-base indent-4 bg-slate-200"/>
+        <input 
+            type="password" 
+            formControlName="password" 
+            class="border-2 h-16 rounded-lg font-normal text-base indent-4 bg-slate-200"/>
         <app-error-message
             message="senha deve ter no minimo 6 caracteres"
             *ngIf="loginForm.get('password')?.errors?.['minlength']"
@@ -27,5 +34,10 @@
             <small>esqueceu a senha?</small>
         </div>
     </div>
-    <button class="btn mt-5 min-w-full h-14 rounded-lg font-medium text-white" [disabled]="loginForm.invalid" type="submit">ENTRAR</button>
+    <button 
+        class="btn mt-5 min-w-full h-14 rounded-lg font-medium text-textyellow" 
+        [disabled]="loginForm.invalid" 
+        type="submit">
+        ENTRAR
+    </button>
 </form>

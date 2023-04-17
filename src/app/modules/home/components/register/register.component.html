@@ -1,19 +1,33 @@
-<form [formGroup]="registerForm" (ngSubmit)="registrar()" class="max-w-md mt-40 ml-40 p-2 font-bold">
-    <h1 class="mb-11 text-center text-4xl">LOGO</h1>
-    <div class="flex flex-col mb-6">
-        <label for="name">Nome</label>
-        <input formControlName="name" type="text" class="border-2 h-16 rounded-lg font-normal text-base indent-4"/>
+<form [formGroup]="registerForm" (ngSubmit)="registrar()" class="w-96 font-bold">
+    <h1 class="mb-11 text-center text-4xl text-white">Registre-se</h1>
+    <div class="flex flex-col mb-2">
+        <label for="name" class="text-zinc-300">Nome</label>
+        <input formControlName="name" type="text" class="border-2 h-16 rounded-lg font-normal text-base indent-4 bg-slate-200"/>
     </div>
-    <div class="flex flex-col mb-6">
-        <label for="email" class="mb-3">E-mail</label>
-        <input formControlName="email" type="email" class="border-2 h-16 rounded-lg font-normal text-base indent-4"/>
+    <app-error-message
+        message="nome muito curto"
+        *ngIf="registerForm.get('name')?.errors?.['minlength']"
+    ></app-error-message>
+    <div class="flex flex-col mb-2">
+        <label for="email" class="mb-3 text-zinc-300">E-mail</label>
+        <input formControlName="email" type="email" class="border-2 h-16 rounded-lg font-normal text-base indent-4 bg-slate-200"/>
     </div>
+    <app-error-message
+        message="email inválido"
+        *ngIf="registerForm.get('email')?.errors?.['email']"
+    ></app-error-message>
     <div class="flex flex-col">
-        <label for="password" class="mb-3">Senha</label>
-        <input formControlName="password" type="password" class="border-2 h-16 rounded-lg font-normal text-base indent-4"/>
-        <div class="flex justify-end mt-2">
-            <small>esqueceu a senha?</small>
-        </div>
+        <label for="password" class="mb-3 text-zinc-300">Senha</label>
+        <input formControlName="password" type="password" class="border-2 h-16 rounded-lg font-normal text-base indent-4 bg-slate-200"/>
     </div>
-    <button class="btn mt-5 min-w-full h-14 rounded-lg font-medium text-white" type="submit">REGISTRAR</button>
+    <app-error-message
+        message="senha deve ter no minimo 6 caracteres"
+        *ngIf="registerForm.get('password')?.errors?.['minlength']"
+    ></app-error-message>
+    <button
+        [disabled]="registerForm.invalid"
+        class="btn mt-5 min-w-full h-14 rounded-lg font-medium text-textyellow" 
+        type="submit">
+        REGISTRAR
+    </button>
 </form>
