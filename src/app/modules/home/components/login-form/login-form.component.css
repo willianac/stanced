@@ -20,3 +20,8 @@ input:focus {
     cursor: pointer;
     color: #C7CBCE;
 }
+
+.btn:disabled {
+    background-color: rgb(173, 211, 216);
+    color: gray;
+}

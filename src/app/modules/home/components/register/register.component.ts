@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
@@ -9,11 +9,11 @@ import { IFullUser } from 'src/app/core/authentication/user';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   registerForm = this.fb.group({
-    name : ["", Validators.minLength(2)],
-    email : ["", Validators.email],
-    password : ["", [Validators.required, Validators.minLength(6)]]
+    name : ["", [Validators.minLength(2), Validators.required]],
+    email : ["", [Validators.email, Validators.required]],
+    password : ["", [Validators.minLength(6), Validators.required]]
   })
   
   constructor(private fb: FormBuilder, private auth: AuthenticationService, private router: Router) {}
@@ -25,9 +25,4 @@ export class RegisterComponent implements OnInit {
       error : (error) => console.error(error.statusText)
     })
   }
-
-  ngOnInit() {
-    
-  }
-
 }
