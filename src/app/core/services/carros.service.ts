@@ -7,17 +7,24 @@ import { ICarPicture } from "src/app/shared/models/carro";
     providedIn : "root"
 })
 export class CarrosService {
-    private cacheData!: ICarPicture[]
+    private cacheData: ICarPicture[] = []
+
     constructor(private http: HttpClient) {}
 
     public retornaCarros(): Observable<ICarPicture[]> {
-        if(this.cacheData) {
+        if(this.cacheData.length) {
+            console.log("cache existe, requsição nao")
             return from([this.cacheData])
         }
+        console.log("nao há cache, fazendo requisição")
         return this.http.get<ICarPicture[]>("http://localhost:3000/getimages").pipe(
             tap(res => {
                 this.cacheData = res
             })
         )
+    } 
+    public clearCache() {
+        this.cacheData.splice(0)
     }
+    
 }

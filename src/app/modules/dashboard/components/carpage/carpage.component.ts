@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { from } from 'rxjs';
 import { CarrosService } from 'src/app/core/services/carros.service';
 import { CommentsService } from 'src/app/core/services/comments.service';
 import { ICarPicture } from 'src/app/shared/models/carro';
@@ -23,7 +24,13 @@ export class CarpageComponent {
 
   sendComment() {
     if(this.commentInput.length > 3) {
-      this.commentService.send(this.commentInput, Number(this.carID)).subscribe()
+      this.commentService.send(this.commentInput, Number(this.carID)).subscribe({
+        next : (val) => {
+          this.commentInput = ""
+          this.commentList = from([val])
+        },
+        error : (err) => console.error(err)
+      })
     }
   }
 

@@ -1,6 +1,6 @@
 <div class="conteiner flex flex-col items-center mt-24 mx-auto">
     <div class="flex justify-between w-full">
-        <div class="w-1/2 flex justify-center">
+        <div *ngIf="carinfo" class="w-1/2 flex justify-center">
             <app-card-photo
                 [description]="carinfo.description"
                 [url]="carinfo.url"
