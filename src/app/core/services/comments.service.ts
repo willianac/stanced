@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TokenService } from '../authentication/token.service';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { IComment } from 'src/app/shared/models/comment';
 
 @Injectable({

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, from, tap } from "rxjs";
+import { Observable, from, map, tap } from "rxjs";
 import { ICarPicture } from "src/app/shared/models/carro";
 
 @Injectable({
@@ -13,18 +13,20 @@ export class CarrosService {
 
     public retornaCarros(): Observable<ICarPicture[]> {
         if(this.cacheData.length) {
-            console.log("cache existe, requsição nao")
             return from([this.cacheData])
         }
-        console.log("nao há cache, fazendo requisição")
         return this.http.get<ICarPicture[]>("http://localhost:3000/getimages").pipe(
             tap(res => {
                 this.cacheData = res
+            }),
+            map((res) => {
+                return res.map((car => {
+                    return {...car, description : car.description.toUpperCase()}
+                }))
             })
         )
     } 
     public clearCache() {
         this.cacheData.splice(0)
     }
-    
 }

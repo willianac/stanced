@@ -8,7 +8,7 @@
                 [id]="carinfo.id"
             ></app-card-photo>
         </div>
-        <div *ngIf="commentList | async as comments" class="w-1/2 p-4 overflow-y-auto max-h-80">
+        <div *ngIf="commentList | async as comments; else noCommentText" class="w-1/2 p-4 overflow-y-auto max-h-80">
             <div *ngFor="let comment of comments" class="flex justify-between mb-3">
                 <div>
                     <h1 class="font-semibold">{{comment.username}}</h1>
@@ -29,3 +29,7 @@
         <button class="btn px-4 rounded-lg font-medium text-white">Enviar</button>
     </form>
 </div>
+
+<ng-template #noCommentText>
+    <p class="text-base text-center">Sem comentários ainda</p>
+</ng-template>
