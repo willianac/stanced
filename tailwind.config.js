@@ -20,6 +20,9 @@ module.exports = {
         bgblue : "#4831D4"
       }
     },
+    fontFamily: {
+      "display": ["Oswald"]
+    }
   },
   plugins: [],
 }
