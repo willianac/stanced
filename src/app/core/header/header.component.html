@@ -15,9 +15,14 @@
         <nav class="flex gap-2" >
             <div *ngIf="username$ | async as user; else loginTemplate" class="flex gap-7">
                 <a class="hover:underline cursor-pointer" (click)="fazerLogout()">Logout</a>
-                <div>
-                    <span class="font-semibold">Olá, {{user}} </span>
-                    <i class="pi pi-user pl-1"></i>
+                <div class="relative" (click)="handlePopOverMenu()">
+                    <div class="cursor-pointer">
+                        <span class="font-semibold">Olá, {{user}} </span>
+                        <i class="pi pi-angle-down pl-0.5"></i>
+                    </div>
+                    <div class="absolute top-10 transition-opacity duration-500" [ngClass]="isPopOverMenuOpen ? 'opacity-100' : 'opacity-0'">
+                        <app-popover-menu *ngIf="isPopOverMenuOpen"></app-popover-menu>
+                    </div>
                 </div>
             </div>
         </nav>
