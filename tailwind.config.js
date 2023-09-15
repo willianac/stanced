@@ -11,7 +11,8 @@ module.exports = {
     "./src/app/shared/components/card-photo/card-photo.component.html",
     "./src/app/core/sidebar/sidebar.component.html",
     "./src/app/modules/dashboard/components/newcar/newcar.component.html",
-    "./src/app/modules/dashboard/components/carpage/carpage.component.html"
+    "./src/app/modules/dashboard/components/carpage/carpage.component.html",
+    "./src/app/core/header/components/popover-menu/popover-menu.component.html"
   ],
   theme: {
     extend: {
@@ -21,6 +22,9 @@ module.exports = {
       }
     },
     fontFamily: {
+      'sans': ['ui-sans-serif', 'system-ui'],
+      'serif': ['ui-serif', 'Georgia'],
+      'mono': ['ui-monospace', 'SFMono-Regular'],
       "display": ["Oswald"]
     }
   },

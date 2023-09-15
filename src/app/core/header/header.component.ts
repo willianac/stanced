@@ -10,11 +10,16 @@ import { AuthenticationService } from '../authentication/authentication.service'
 })
 export class HeaderComponent {
   username$ = this.auth.getUser()
+  isPopOverMenuOpen = true
 
   constructor(
     private auth: AuthenticationService, 
     private router: Router, 
   ){}
+
+  public handlePopOverMenu() {
+    this.isPopOverMenuOpen = !this.isPopOverMenuOpen
+  }
 
   public fazerLogout() {
     this.auth.logout()

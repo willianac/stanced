@@ -8,9 +8,9 @@
                     [username]="carinfo.name"
                     [id]="carinfo.id"
                 ></app-card-photo>
-                <div class="flex flex-col">
-                    <svg class="text-black" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path fill="currentColor" d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"/></svg>
-                    <svg (click)="deleteImage()" class="text-red-700" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path fill="currentColor" d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                <div class="flex flex-col gap-1 ml-0.5">
+                    <svg class="text-black" xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path fill="currentColor" d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"/></svg>
+                    <svg (click)="deleteImage()" class="text-red-500 cursor-pointer hover:text-red-800 transition" xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path fill="currentColor" d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
                 </div>
             </div>
             <form (ngSubmit)="sendComment()" class="mt-8 flex gap-2 w-full">
@@ -21,7 +21,7 @@
                     class="border-2 h-11 rounded font-normal text-base indent-4 w-full"
                     name="comment"
                 >
-                <button class="btn px-4 rounded font-medium text-white">Enviar</button>
+                <button class="bg-bgblue px-4 rounded font-medium text-white hover:bg-indigo-800 transition">Enviar</button>
             </form>
         </div>
         <div *ngIf="commentList | async as comments; else noCommentText" class="w-1/2 p-4 overflow-y-auto max-h-80">

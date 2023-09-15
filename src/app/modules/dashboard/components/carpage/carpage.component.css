@@ -12,9 +12,3 @@ input {
 input:focus {
     border-color: #CCF381;
 }
-
-.btn {
-    background-color: #4831D4;
-    letter-spacing: 1.25px;
-    font-size: 15px;
-}
