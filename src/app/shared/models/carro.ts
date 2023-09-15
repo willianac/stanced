@@ -2,5 +2,8 @@ export interface ICarPicture {
     id: number
     url: string
     description: string
-    name: string 
+    name: string
+    userid: number
+    createdAt: Date
+    updatedAt: Date
 }

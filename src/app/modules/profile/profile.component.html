@@ -1,0 +1,22 @@
+<main class="max-w-5xl mx-auto h-screen flex shadow-lg">
+  <div class="flex-1 border-x-2">
+    <h3 class="ml-9 text-xl font-bold mt-12 mb-3">Meu Perfil</h3>
+    <ul class="py-2">
+      <li>
+        <a routerLink="mypictures" class="flex hover:bg-zinc-300 items-center gap-2 py-1 transition duration-300">
+          <i class="pi pi-image ml-9 text-lg"></i>
+          <p class="text-lg">Minhas fotos</p>
+        </a>
+      </li>
+      <li>
+        <a routerLink="saved" class="flex hover:bg-zinc-300 items-center gap-2 py-1 transition duration-300">
+          <i class="pi pi-bookmark ml-9 text-lg"></i>
+          <p class="text-lg">Salvos</p>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="w-3/4 border-r-2">
+    <router-outlet></router-outlet>
+  </div>
+</main>

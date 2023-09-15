@@ -10,7 +10,7 @@ import { AuthenticationService } from '../authentication/authentication.service'
 })
 export class HeaderComponent {
   username$ = this.auth.getUser()
-  isPopOverMenuOpen = true
+  isPopOverMenuOpen = false
 
   constructor(
     private auth: AuthenticationService, 

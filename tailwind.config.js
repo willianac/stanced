@@ -12,7 +12,9 @@ module.exports = {
     "./src/app/core/sidebar/sidebar.component.html",
     "./src/app/modules/dashboard/components/newcar/newcar.component.html",
     "./src/app/modules/dashboard/components/carpage/carpage.component.html",
-    "./src/app/core/header/components/popover-menu/popover-menu.component.html"
+    "./src/app/core/header/components/popover-menu/popover-menu.component.html",
+    "./src/app/modules/profile/profile.component.html",
+    "./src/app/modules/profile/components/mypictures/mypictures.component.html"
   ],
   theme: {
     extend: {
