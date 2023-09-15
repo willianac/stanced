@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { from } from 'rxjs';
 import { CarrosService } from 'src/app/core/services/carros.service';
 import { CommentsService } from 'src/app/core/services/comments.service';
+import { DeleteCarService } from 'src/app/core/services/deletecar.service';
 import { ICarPicture } from 'src/app/shared/models/carro';
 
 @Component({
@@ -19,7 +20,8 @@ export class CarpageComponent {
   constructor(
     private route: ActivatedRoute, 
     private carService: CarrosService, 
-    private commentService: CommentsService
+    private commentService: CommentsService,
+    private deleteCarService: DeleteCarService
     ) {}
 
   sendComment() {
@@ -32,6 +34,10 @@ export class CarpageComponent {
         error : (err) => console.error(err)
       })
     }
+  }
+
+  deleteImage() {
+    this.deleteCarService.delete(this.carID!).subscribe()
   }
 
   ngOnInit() {
