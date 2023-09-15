@@ -8,6 +8,7 @@ import { CardPhotoComponent } from 'src/app/shared/components/card-photo/card-ph
 import { NewcarComponent } from './components/newcar/newcar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarpageComponent } from './components/carpage/carpage.component';
+import { HeaderModule } from 'src/app/core/header/header.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CarpageComponent } from './components/carpage/carpage.component';
     CommonModule,
     DashboardRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HeaderModule
   ]
 })
 export class DashboardModule { }

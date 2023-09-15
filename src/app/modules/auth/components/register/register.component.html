@@ -1,0 +1,36 @@
+<form [formGroup]="registerForm" (ngSubmit)="registrar()" class="w-96 font-bold">
+    <h1 class="mb-2 text-center text-2xl text-black">Crie sua conta</h1>
+    <div class="flex flex-col mb-6">
+        <label for="name" class="text-zinc-800 mb-2">Nome</label>
+        <input formControlName="name" type="text" class="border-2 h-12 rounded-sm bg-zinc-100 font-normal indent-4 focus:border-bgblue transition duration-300"/>
+        <app-error-message
+            message="nome muito curto"
+            *ngIf="registerForm.get('name')?.errors?.['minlength']"
+        ></app-error-message>
+    </div>
+    <div class="flex flex-col mb-6">
+        <label for="email" class="mb-2 text-zinc-800">E-mail</label>
+        <input formControlName="email" type="email" class="border-2 h-12 rounded-sm bg-zinc-100 font-normal indent-4 focus:border-bgblue transition duration-300"/>
+        <app-error-message
+            message="email inválido"
+            *ngIf="registerForm.get('email')?.errors?.['email']"
+        ></app-error-message>
+    </div>
+    <div class="flex flex-col">
+        <label for="password" class="mb-2 text-zinc-800">Senha</label>
+        <input formControlName="password" type="password" class="border-2 h-12 rounded-sm bg-zinc-100 font-normal indent-4 focus:border-bgblue transition duration-300"/>
+        <app-error-message
+            message="senha deve ter no minimo 6 caracteres"
+            *ngIf="registerForm.get('password')?.errors?.['minlength']"
+        ></app-error-message>
+    </div>
+    <button
+        [disabled]="registerForm.invalid"
+        class="mt-5 min-w-full h-12 rounded-sm font-bold disabled:text-zinc-800 bg-bgblue disabled:bg-zinc-300 text-textyellow transition-all hover:bg-indigo-800 duration-300" 
+        type="submit">
+        Registrar
+    </button>
+    <a routerLink="/auth" class="text-sm hover:text-bgblue transition mt-0.5">
+        Já possui uma conta?
+    </a>
+</form>

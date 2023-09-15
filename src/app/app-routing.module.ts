@@ -4,10 +4,10 @@ import { AuthenticationGuard } from './core/guards/authentication.guard';
 import { LoginpageGuard } from './core/guards/loginpage.guard';
 
 const routes: Routes = [
-  {path : "", redirectTo : "home", pathMatch : "full"},
+  {path : "", redirectTo : "auth", pathMatch : "full"},
   {
-    path : "home",
-    loadChildren : () => import("./modules/home/home.module").then(m => m.HomeModule),
+    path : "auth",
+    loadChildren : () => import("./modules/auth/auth.module").then(m => m.AuthModule),
     canMatch : [LoginpageGuard]
   },
   {

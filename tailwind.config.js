@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/app/modules/home/components/login-form/login-form.component.html",
-    "./src/app/modules/home/components/register/register.component.html",
-    "./src/app/modules/home/home.component.html",
+    "./src/app/modules/auth/components/login-form/login-form.component.html",
+    "./src/app/modules/auth/components/register/register.component.html",
+    "./src/app/modules/auth/auth.component.html",
     "./src/app/shared/components/error-message/error-message.component.html",
     "./src/app/core/header/header.component.html",
     "./src/app/shared/card-photo/card-photo.component.html",
