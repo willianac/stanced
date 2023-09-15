@@ -25,7 +25,12 @@ export class CarrosService {
                 }))
             })
         )
-    } 
+    }
+    
+    public getCarsByID(id: number): Observable<ICarPicture[]> {
+        return this.http.get<ICarPicture[]>("http://localhost:3000/getimagesbyuserid?id=" + id)
+    }
+
     public clearCache() {
         this.cacheData.splice(0)
     }
