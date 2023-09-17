@@ -12,6 +12,7 @@ export interface IFullUser {
 export interface JWTtoken {
     name: string
     id: number
+    email: string
     iat: number
     exp: number
 }

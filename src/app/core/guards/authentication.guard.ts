@@ -14,7 +14,7 @@ export class AuthenticationGuard implements CanMatch {
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if(!this.token.hasToken()) {
-      this.router.navigateByUrl("home")
+      this.router.navigateByUrl("auth")
       return false;
     }
     return true

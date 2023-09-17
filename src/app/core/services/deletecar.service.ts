@@ -11,7 +11,6 @@ export class DeleteCarService {
   constructor(private http: HttpClient, private cs: CarrosService) {}
 
   public delete(carID: string): Observable<any> {
-    console.log("deletando carro.")
     return this.http.delete<any>("http://localhost:3000/deleteimage", {body: { carID }}).pipe(
       tap(() => this.cs.clearCache())
     )

@@ -1,13 +1,11 @@
-<div class="mt-12 px-12">
-  <h2 class="text-2xl font-bold mb-6">Fotos publicadas</h2>
-  <div *ngIf="myCars$ | async as cars" class="w-full flex flex-col items-center gap-4">
-    <div *ngFor="let car of cars">
-      <span class="block text-right">{{car.createdAt | date }}</span>
-      <app-card-photo
-        [description]="car.description"
-        [url]="car.url"
-        [username]="car.name"
-      ></app-card-photo>
-    </div>
+<h2 class="text-2xl font-bold mb-6">Fotos publicadas</h2>
+<div *ngIf="myCars$ | async as cars" class="w-full flex flex-col items-center gap-4">
+  <div *ngFor="let car of cars">
+    <span class="block text-right">{{car.createdAt | date }}</span>
+    <app-card-photo
+      [description]="car.description"
+      [url]="car.url"
+      [username]="car.name"
+    ></app-card-photo>
   </div>
-</div>
+</div> 
