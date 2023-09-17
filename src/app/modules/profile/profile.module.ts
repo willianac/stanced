@@ -6,13 +6,15 @@ import { ProfileComponent } from './profile.component';
 import { MypicturesComponent } from './components/mypictures/mypictures.component';
 import { SavedComponent } from './components/saved/saved.component';
 import { CardPhotoModule } from 'src/app/shared/components/card-photo/card-photo.module';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 @NgModule({
   declarations: [
     ProfileComponent,
     MypicturesComponent,
-    SavedComponent
+    SavedComponent,
+    SettingsComponent
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,7 @@ import { from } from 'rxjs';
 import { CarrosService } from 'src/app/core/services/carros.service';
 import { CommentsService } from 'src/app/core/services/comments.service';
 import { DeleteCarService } from 'src/app/core/services/deletecar.service';
+import { SavedImagesService } from 'src/app/core/services/savedimages.service';
 import { ICarPicture } from 'src/app/shared/models/carro';
 
 @Component({
@@ -21,7 +22,8 @@ export class CarpageComponent {
     private route: ActivatedRoute, 
     private carService: CarrosService, 
     private commentService: CommentsService,
-    private deleteCarService: DeleteCarService
+    private deleteCarService: DeleteCarService,
+    private savedImagesService: SavedImagesService
     ) {}
 
   sendComment() {
@@ -38,6 +40,10 @@ export class CarpageComponent {
 
   deleteImage() {
     this.deleteCarService.delete(this.carID!).subscribe()
+  }
+
+  saveImage() {
+    this.savedImagesService.saveImage(this.carID!).subscribe()
   }
 
   ngOnInit() {

@@ -14,7 +14,8 @@ module.exports = {
     "./src/app/modules/dashboard/components/carpage/carpage.component.html",
     "./src/app/core/header/components/popover-menu/popover-menu.component.html",
     "./src/app/modules/profile/profile.component.html",
-    "./src/app/modules/profile/components/mypictures/mypictures.component.html"
+    "./src/app/modules/profile/components/mypictures/mypictures.component.html",
+    "./src/app/modules/profile/components/settings/settings.component.html"
   ],
   theme: {
     extend: {
