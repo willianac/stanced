@@ -4,6 +4,7 @@ export interface ICarPicture {
     description: string
     name: string
     userid: number
+    showTooltip: boolean
     createdAt: Date
     updatedAt: Date
 }

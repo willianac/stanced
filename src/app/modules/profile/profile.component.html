@@ -1,4 +1,4 @@
-<main class="max-w-5xl mx-auto h-screen flex shadow-lg">
+<main class="max-w-5xl mx-auto h-screen flex shadow-lg overflow-y-hidden">
   <div class="flex-1 border-x-2 relative">
     <h3 class="ml-9 text-xl font-bold mt-12 mb-3">Meu Perfil</h3>
     <ul class="py-2">
@@ -20,7 +20,7 @@
       <p class="text-lg">Configurações</p>
     </a>
   </div>
-  <div class="w-3/4 border-r-2 mt-12 px-12">
+  <div class="w-3/4 border-r-2 py-12 px-12 min-h-screen overflow-y-scroll">
     <router-outlet></router-outlet>
   </div>
 </main>

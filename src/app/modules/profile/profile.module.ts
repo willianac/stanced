@@ -7,6 +7,7 @@ import { MypicturesComponent } from './components/mypictures/mypictures.componen
 import { SavedComponent } from './components/saved/saved.component';
 import { CardPhotoModule } from 'src/app/shared/components/card-photo/card-photo.module';
 import { SettingsComponent } from './components/settings/settings.component';
+import { ChangeUserInfoModal } from 'src/app/shared/components/change-userinfo-modal/change-userinfo-modal.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SettingsComponent } from './components/settings/settings.component';
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    CardPhotoModule
+    CardPhotoModule,
+    ChangeUserInfoModal
   ]
 })
 export class ProfileModule { }
