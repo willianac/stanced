@@ -9,4 +9,5 @@ export class CardPhotoComponent {
   @Input() url!:string
   @Input() description!: string
   @Input() username!: string
+  showTooltip = false;
 }

@@ -15,7 +15,9 @@ module.exports = {
     "./src/app/core/header/components/popover-menu/popover-menu.component.html",
     "./src/app/modules/profile/profile.component.html",
     "./src/app/modules/profile/components/mypictures/mypictures.component.html",
-    "./src/app/modules/profile/components/settings/settings.component.html"
+    "./src/app/modules/profile/components/settings/settings.component.html",
+    "./src/app/modules/profile/components/saved/saved.component.html",
+    "./src/app/shared/components/change-userinfo-modal/change-userinfo-modal.component.html"
   ],
   theme: {
     extend: {
