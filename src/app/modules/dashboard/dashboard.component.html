@@ -1,7 +1,6 @@
 <app-header></app-header>
-<div id="div de fora">
     <app-photo-grid>
-        <div *ngFor="let carro of carros" id="div de dentro">
+        <div *ngFor="let carro of carros" class="cursor-pointer">
             <app-card-photo
                 [url]="carro.url"
                 [description]="carro.description"
@@ -10,4 +9,3 @@
             ></app-card-photo>
         </div>
     </app-photo-grid>
-</div>

@@ -17,7 +17,8 @@ const routes: Routes = [
   },
   {
     path: "profile",
-    loadChildren: () => import("./modules/profile/profile.module").then(m => m.ProfileModule)
+    loadChildren: () => import("./modules/profile/profile.module").then(m => m.ProfileModule),
+    canMatch: [AuthenticationGuard]
   }
 ];
 
