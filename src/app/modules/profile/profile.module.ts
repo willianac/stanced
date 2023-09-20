@@ -8,6 +8,7 @@ import { SavedComponent } from './components/saved/saved.component';
 import { CardPhotoModule } from 'src/app/shared/components/card-photo/card-photo.module';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ChangeUserInfoModal } from 'src/app/shared/components/change-userinfo-modal/change-userinfo-modal.module';
+import { HeaderModule } from 'src/app/core/header/header.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ChangeUserInfoModal } from 'src/app/shared/components/change-userinfo-m
     CommonModule,
     ProfileRoutingModule,
     CardPhotoModule,
-    ChangeUserInfoModal
+    ChangeUserInfoModal,
+    HeaderModule
   ]
 })
 export class ProfileModule { }
