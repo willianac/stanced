@@ -6,13 +6,13 @@
       <h2 class="font-bold">Alterar nome</h2>
     </div>
     <label for="username" class="text-zinc-600">Escolha um novo nome para ser exibido</label>
-    <input type="text" name="username" id="username" class="mt-4 outline-none border-2 h-8 rounded-sm font-normal text-base indent-4 bg-zinc-50 transition duration-300 focus:border-bgblue">
+    <input [(ngModel)]="newName" type="text" name="username" id="username" class="mt-4 outline-none border-2 h-8 rounded-sm font-normal text-base indent-4 bg-zinc-50 transition duration-300 focus:border-bgblue">
     <div class="flex justify-end mt-4 gap-1.5">
       <button (click)="closeModalEvent.emit()" class="bg-red-500 flex items-center gap-1 py-1 px-2.5 rounded-sm text-white font-bold hover:bg-red-600 transition">
         <i class="pi pi-times text-sm"></i>
         Cancelar
       </button>
-      <button class="bg-green-600 flex items-center gap-1 py-1 px-2.5 rounded-sm text-white font-bold hover:bg-green-700 transition">
+      <button (click)="changeUserName()" class="bg-green-600 flex items-center gap-1 py-1 px-2.5 rounded-sm text-white font-bold hover:bg-green-700 transition">
         <i class="pi pi-check"></i>
         Salvar
       </button>
@@ -28,13 +28,13 @@
       <h2 class="font-bold">Alterar Email</h2>
     </div>
     <label for="username" class="text-zinc-600">Digite seu novo email</label>
-    <input type="text" name="username" id="username" class="mt-4 outline-none border-2 h-8 rounded-sm font-normal text-base indent-4 bg-zinc-50 transition duration-300 focus:border-bgblue">
+    <input [(ngModel)]="newEmail" type="text" name="username" id="username" class="mt-4 outline-none border-2 h-8 rounded-sm font-normal text-base indent-4 bg-zinc-50 transition duration-300 focus:border-bgblue">
     <div class="flex justify-end mt-4 gap-1.5">
       <button (click)="closeModalEvent.emit()" class="bg-red-500 flex items-center gap-1 py-1 px-2.5 rounded-sm text-white font-bold hover:bg-red-600 transition">
         <i class="pi pi-times text-sm"></i>
         Cancelar
       </button>
-      <button class="bg-green-600 flex items-center gap-1 py-1 px-2.5 rounded-sm text-white font-bold hover:bg-green-700 transition">
+      <button (click)="changeEmail()" class="bg-green-600 flex items-center gap-1 py-1 px-2.5 rounded-sm text-white font-bold hover:bg-green-700 transition">
         <i class="pi pi-check"></i>
         Salvar
       </button>

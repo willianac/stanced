@@ -54,7 +54,7 @@ export class AuthenticationService {
         return this.user.asObservable()
     }
 
-    private notify() {
+    public notify() {
         const token = this.token.getToken()
         const decoded: JWTtoken = jwt_decode(token)
         this.user.next(decoded.name)
