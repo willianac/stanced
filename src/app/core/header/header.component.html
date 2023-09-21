@@ -20,7 +20,7 @@
                         <span class="font-semibold">Olá, {{user}} </span>
                         <i class="pi pi-angle-down pl-0.5"></i>
                     </div>
-                    <div class="absolute top-10 transition-opacity duration-500" [ngClass]="isPopOverMenuOpen ? 'opacity-100' : 'opacity-0'">
+                    <div class="absolute top-10 transition-opacity duration-500 z-50" [ngClass]="isPopOverMenuOpen ? 'opacity-100' : 'opacity-0'">
                         <app-popover-menu *ngIf="isPopOverMenuOpen"></app-popover-menu>
                     </div>
                 </div>

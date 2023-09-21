@@ -10,4 +10,5 @@ export class CardPhotoComponent {
   @Input() description!: string
   @Input() username!: string
   showTooltip = false;
+  showOverlay = false;
 }
