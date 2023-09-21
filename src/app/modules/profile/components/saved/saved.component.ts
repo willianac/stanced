@@ -1,6 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { SavedImagesService } from 'src/app/core/services/savedimages.service';
 import { ICarPicture } from 'src/app/shared/models/carro';
 
@@ -27,10 +26,15 @@ const fadeOut = trigger("leaveTr", [leaveTransition])
   animations: [fadeIn, fadeOut]
 })
 export class SavedComponent implements OnInit {
+  userSavedImages$ = this.savedImagesService.returnSavedImages()
+  
   constructor(private savedImagesService: SavedImagesService) {}
-  userSavedImages$!: Observable<ICarPicture[]> 
+
+  public removeFromSaved(car: ICarPicture) {
+    this.savedImagesService.removeSavedImage((car.id).toString()).subscribe()
+  }
 
   ngOnInit(): void {
-    this.userSavedImages$ = this.savedImagesService.getUserSavedImage()
+    this.savedImagesService.getUserSavedImage().subscribe()
   }
 }
