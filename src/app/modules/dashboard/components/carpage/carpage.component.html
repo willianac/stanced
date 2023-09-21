@@ -1,7 +1,7 @@
 <app-header></app-header>
-<div class="conteiner flex flex-col items-center mt-24 mx-auto">
-    <div class="flex justify-between w-full">
-        <div *ngIf="carinfo" class="flex flex-col justify-center items-center">
+<div class="max-w-7xl block mt-24 mx-auto">
+    <div class="flex flex-wrap gap-12 w-full">
+        <div *ngIf="carinfo" class="flex flex-col justify-center items-center max-w-2xl">
             <div class="flex">
                 <app-card-photo
                     [description]="carinfo.description"
@@ -19,23 +19,23 @@
                     [(ngModel)]="commentInput"
                     type="text" 
                     placeholder="Digite seu comentario" 
-                    class="border-2 h-11 rounded font-normal text-base indent-4 w-full"
+                    class="border-2 h-11 rounded-sm font-normal text-base indent-4 bg-zinc-100 transition duration-300 focus:border-bgblue outline-none w-full"
                     name="comment"
-                >
-                <button class="bg-bgblue px-4 rounded font-medium text-white hover:bg-indigo-800 transition">Enviar</button>
+                >   
+                <button class="bg-bgblue px-4 rounded-sm font-medium text-white hover:bg-indigo-800 transition">Enviar</button>
             </form>
         </div>
-        <div *ngIf="commentList | async as comments; else noCommentText" class="w-1/2 p-4 overflow-y-auto max-h-80">
-            <div *ngFor="let comment of comments" class="flex justify-between mb-3">
-                <div>
-                    <h1 class="font-semibold">{{comment.username}}</h1>
-                    <p class="text-sm">{{comment.comment}}</p>
+        <div *ngIf="commentList | async as comments; else noCommentText" class="flex-1 p-5 overflow-y-auto max-h-[40rem]">
+            <h2 class="font-bold text-xl mb-5">Comentários</h2>
+            <div *ngFor="let comment of comments" class="mb-3">
+                <div class="flex flex-col relative py-3 px-5 rounded-sm bg-zinc-500 bg-opacity-10">
+                    <span class="font-semibold text-zinc-800">{{comment.username}}</span>
+                    <p class="text-sm text-zinc-800">{{comment.comment}}</p>
+                    <span class="text-xs text-zinc-500 absolute left-28 top-3">{{comment.createdAt | date}}</span>       
                 </div>
-                 <span class="text-sm font-semibold">{{comment.createdAt | date}}</span>
             </div>
         </div>
     </div>
-    
 </div>
 
 <ng-template #noCommentText>
