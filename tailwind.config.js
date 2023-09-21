@@ -17,7 +17,8 @@ module.exports = {
     "./src/app/modules/profile/components/mypictures/mypictures.component.html",
     "./src/app/modules/profile/components/settings/settings.component.html",
     "./src/app/modules/profile/components/saved/saved.component.html",
-    "./src/app/shared/components/change-userinfo-modal/change-userinfo-modal.component.html"
+    "./src/app/shared/components/change-userinfo-modal/change-userinfo-modal.component.html",
+    "./src/app/modules/dashboard/dashboard.component.html"
   ],
   theme: {
     extend: {
