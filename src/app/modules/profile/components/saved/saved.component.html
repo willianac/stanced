@@ -2,7 +2,7 @@
 <div *ngIf="userSavedImages$ | async as savedCars" class="flex flex-col items-center gap-4">
   <div *ngFor="let car of savedCars" (mouseenter)="car.showTooltip = true" (mouseleave)="car.showTooltip = false" class="relative group overflow-hidden">
     <div *ngIf="car.showTooltip" class="absolute bg-black w-full flex justify-end px-2 py-1 bg-opacity-60" @enterTr @leaveTr>
-      <button class="text-white bg-red-800 py-0.5 px-2 rounded font-bold text-sm">Remover</button>
+      <button (click)="removeFromSaved(car)" class="text-white bg-red-800 py-0.5 px-2 rounded font-bold text-sm">Remover</button>
     </div>
     <app-card-photo
       [description]="car.description"

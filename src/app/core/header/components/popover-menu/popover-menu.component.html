@@ -8,5 +8,9 @@
       <i class="pi pi-cog ml-2"></i>
       <a routerLink="/profile/settings" class="ml-2">Configurações</a>
     </li>
+    <li (click)="logoutEvent.emit()" class="hover:bg-zinc-200 py-2 mt-3 cursor-pointer">
+      <i class="pi pi-sign-out ml-2"></i>
+      <span class="ml-2">Sair</span>
+    </li>
   </ul>
 </div>
