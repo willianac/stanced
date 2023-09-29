@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, from, map, tap } from "rxjs";
+import { Observable, forkJoin, map } from "rxjs";
 import { ICarPicture } from "src/app/shared/models/carro";
+import { LikesService } from "./likes.service";
 
 @Injectable({
     providedIn : "root"
@@ -9,20 +10,17 @@ import { ICarPicture } from "src/app/shared/models/carro";
 export class CarrosService {
     private cacheData: ICarPicture[] = []
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private likesService: LikesService) {}
 
-    public retornaCarros(): Observable<ICarPicture[]> {
-        if(this.cacheData.length) {
-            return from([this.cacheData])
-        }
-        return this.http.get<ICarPicture[]>("http://localhost:3000/getimages").pipe(
-            tap(res => {
-                this.cacheData = res
-            }),
-            map((res) => {
-                return res.map((car => {
-                    return {...car, description : car.description}
-                }))
+    private likes = this.likesService.getLikes()
+    private pictures = this.http.get<ICarPicture[]>("http://localhost:3000/getimages")
+
+    public getCars(): Observable<ICarPicture[]> {
+        return forkJoin([this.likes, this.pictures]).pipe(
+            map(([likesCount, cars]) => {
+                return cars.map(car => (
+                    {...car, likes: likesCount[car.id]}
+                ))
             })
         )
     }

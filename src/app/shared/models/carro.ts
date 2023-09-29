@@ -8,6 +8,7 @@ export interface ICarPicture {
     allowComments: boolean
     showTooltip: boolean
     showOverlay: boolean
+    likes: number
     createdAt: Date
     updatedAt: Date
 }
