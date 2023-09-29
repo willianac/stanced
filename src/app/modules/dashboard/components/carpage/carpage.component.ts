@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { from } from 'rxjs';
+import { TokenService } from 'src/app/core/authentication/token.service';
 import { CarrosService } from 'src/app/core/services/carros.service';
 import { CommentsService } from 'src/app/core/services/comments.service';
 import { DeleteCarService } from 'src/app/core/services/deletecar.service';
@@ -18,6 +19,7 @@ export class CarpageComponent {
   carinfo!: ICarPicture
   commentInput = ""
   commentList = this.commentService.getComments(this.carID ?? "")
+  userid!: number;
 
   constructor(
     private route: ActivatedRoute, 
@@ -25,7 +27,8 @@ export class CarpageComponent {
     private commentService: CommentsService,
     private deleteCarService: DeleteCarService,
     private savedImagesService: SavedImagesService,
-    private likesService: LikesService
+    private likesService: LikesService,
+    private token: TokenService
     ) {}
 
   sendComment() {
@@ -53,8 +56,10 @@ export class CarpageComponent {
   }
 
   ngOnInit() {
+    this.userid = this.token.getDecodedToken().id
     this.carService.getCars().subscribe({
       next : (response) => {
+        console.log(response)
         this.carinfo = response.find(car => car.id === Number(this.carID)) as ICarPicture
       }
     })
