@@ -1,17 +1,38 @@
 <app-header></app-header>
-<div class="max-w-7xl block mt-24 mx-auto">
+<div class="max-w-7xl block mt-24 mx-auto border-2 shadow-xl">
     <div class="flex flex-wrap gap-12 w-full">
-        <div *ngIf="carinfo" class="flex flex-col justify-center items-center max-w-2xl">
-            <div class="flex">
-                <app-card-photo
-                    [description]="carinfo.description"
-                    [url]="carinfo.url"
-                    [username]="carinfo.name"
-                    [id]="carinfo.id"
-                ></app-card-photo>
-                <div class="flex flex-col gap-1 ml-0.5">
-                    <svg (click)="saveImage()" class="text-zinc-700 hover:text-black transition cursor-pointer" xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path fill="currentColor" d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"/></svg>
-                    <svg (click)="deleteImage()" class="text-red-500 cursor-pointer hover:text-red-800 transition" xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path fill="currentColor" d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+        <div *ngIf="carinfo" class="p-4">
+            <h2 class="font-display font-semibold tracking-wide text-3xl border-b-2 pb-3 mb-4">{{carinfo.title}}</h2>
+            <div class="flex flex-col justify-center max-w-2xl">
+                <div class="flex mb-6">
+                    <app-card-photo      
+                        [url]="carinfo.url"
+                        [id]="carinfo.id"
+                    ></app-card-photo>
+                    <div class="flex flex-col gap-1 ml-0.5">
+                        <svg (click)="saveImage()" class="text-zinc-700 hover:text-black transition cursor-pointer" xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path fill="currentColor" d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"/></svg>
+                        <svg (click)="deleteImage()" class="text-red-500 cursor-pointer hover:text-red-800 transition" xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path fill="currentColor" d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-3">
+                        <i class="pi pi-user bg-blue-400 rounded-full p-2"></i>
+                        <span class="font-bold text-lg">{{carinfo.user_name}}</span>
+                        <span class="text-xs text-zinc-500">{{carinfo.createdAt | date}}</span>
+                    </div>
+                    <p class="mt-4 text-zinc-700">{{carinfo.description}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1">
+            <div *ngIf="commentList | async as comments; else noCommentText" class="p-5 overflow-y-auto max-h-[40rem]">
+                <h2 class="font-bold text-xl mb-5">Comentários</h2>
+                <div *ngFor="let comment of comments" class="mb-3">
+                    <div class="flex flex-col relative py-3 px-5 rounded-sm bg-zinc-500 bg-opacity-10">
+                        <span class="font-semibold text-zinc-800">{{comment.username}}</span>
+                        <p class="text-sm text-zinc-800">{{comment.comment}}</p>
+                        <span class="text-xs text-zinc-500 absolute left-28 top-3">{{comment.createdAt | date}}</span>       
+                    </div>
                 </div>
             </div>
             <form (ngSubmit)="sendComment()" class="mt-8 flex gap-2 w-full">
@@ -24,16 +45,6 @@
                 >   
                 <button class="bg-bgblue px-4 rounded-sm font-medium text-white hover:bg-indigo-800 transition">Enviar</button>
             </form>
-        </div>
-        <div *ngIf="commentList | async as comments; else noCommentText" class="flex-1 p-5 overflow-y-auto max-h-[40rem]">
-            <h2 class="font-bold text-xl mb-5">Comentários</h2>
-            <div *ngFor="let comment of comments" class="mb-3">
-                <div class="flex flex-col relative py-3 px-5 rounded-sm bg-zinc-500 bg-opacity-10">
-                    <span class="font-semibold text-zinc-800">{{comment.username}}</span>
-                    <p class="text-sm text-zinc-800">{{comment.comment}}</p>
-                    <span class="text-xs text-zinc-500 absolute left-28 top-3">{{comment.createdAt | date}}</span>       
-                </div>
-            </div>
         </div>
     </div>
 </div>

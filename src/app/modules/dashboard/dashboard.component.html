@@ -2,13 +2,13 @@
     <app-photo-grid>
         <div *ngFor="let carro of carros" class="cursor-pointer relative" (mouseenter)="carro.showOverlay = true" (mouseleave)="carro.showOverlay = false">
             <div routerLink="car/{{carro.id}}" *ngIf="carro.showOverlay" class="absolute bg-black h-full w-full bg-opacity-20 flex py-3 px-5 items-end justify-between overflow-hidden" @fadeIn @fadeOut>
-                <span @riseText class="text-white font-bold">Por {{carro.name}}</span>
-                <span @riseText class="text-white font-bold">{{carro.description}}</span>
+                <span @riseText class="text-white font-bold">Por {{carro.user_name}}</span>
+                <span @riseText class="text-white font-bold">{{carro.title}}</span>
             </div>
             <app-card-photo
                 [url]="carro.url"
                 [description]="carro.description"
-                [username]="carro.name"
+                [username]="carro.user_name"
             ></app-card-photo>
         </div>
     </app-photo-grid>

@@ -21,7 +21,7 @@ export class CarrosService {
             }),
             map((res) => {
                 return res.map((car => {
-                    return {...car, description : car.description.toUpperCase()}
+                    return {...car, description : car.description}
                 }))
             })
         )
