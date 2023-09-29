@@ -4,6 +4,7 @@ import { from } from 'rxjs';
 import { CarrosService } from 'src/app/core/services/carros.service';
 import { CommentsService } from 'src/app/core/services/comments.service';
 import { DeleteCarService } from 'src/app/core/services/deletecar.service';
+import { LikesService } from 'src/app/core/services/likes.service';
 import { SavedImagesService } from 'src/app/core/services/savedimages.service';
 import { ICarPicture } from 'src/app/shared/models/carro';
 
@@ -23,7 +24,8 @@ export class CarpageComponent {
     private carService: CarrosService, 
     private commentService: CommentsService,
     private deleteCarService: DeleteCarService,
-    private savedImagesService: SavedImagesService
+    private savedImagesService: SavedImagesService,
+    private likesService: LikesService
     ) {}
 
   sendComment() {
@@ -36,6 +38,10 @@ export class CarpageComponent {
         error : (err) => console.error(err)
       })
     }
+  }
+
+  like(photoid: number) {
+    this.likesService.sendLike(photoid).subscribe()
   }
 
   deleteImage() {
