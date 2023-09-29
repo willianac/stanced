@@ -42,7 +42,6 @@ export class DashboardComponent implements OnInit{
   constructor(private carrosService: CarrosService) {}
 
   public handleOverlay() {
-    console.log("mouse aqui")
     this.showCarInfoOverlay = !this.showCarInfoOverlay
   }
 

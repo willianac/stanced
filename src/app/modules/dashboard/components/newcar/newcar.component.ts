@@ -11,7 +11,8 @@ import NewCarService from 'src/app/core/services/newcar.service';
 export class NewcarComponent {
   photoForm = this.fb.group({
     file : ["", Validators.required],
-    description: ["", [Validators.required, Validators.maxLength(300)]],
+    title: ["", Validators.required],
+    description: ["", [Validators.maxLength(300)]],
     allowComments: [true]
   })
 
@@ -22,11 +23,12 @@ export class NewcarComponent {
   uploadFoto() {
     const allowComments = this.photoForm.get("allowComments")?.value
     const formdata = new FormData()
-    formdata.append("comments", allowComments ? "true" : "false")
+    formdata.append("allowComments", allowComments ? "true" : "false")
+    formdata.append("title", this.photoForm.get("title")?.value as string)
     formdata.append("description", this.photoForm.get("description")?.value as string)
     formdata.append("image", this.file)
     this.newCarService.sendNewCar(formdata).subscribe({
-      next : (res) =>  this.router.navigateByUrl("dashboard"),
+      next : () => this.router.navigateByUrl("dashboard"),
       error : (err) => console.error(err)
     })
   }

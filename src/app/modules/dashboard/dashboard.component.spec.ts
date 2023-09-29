@@ -10,15 +10,6 @@ import { Observable, of } from "rxjs"
 function returnCarPhotos(): Observable<ICarPicture[]> {
   let photos: ICarPicture[] = []
 
-  for(let i = 0; i < 6; i++) {
-    photos.push({
-      url : "https://jdmpics.s3.sa-east-1.amazonaws.com/1681246633818.jpg",
-      id : 2,
-      name : "nissan",
-      description : "carro brabo de testes"
-    })
-  }
-
   return of(photos)
 }
 

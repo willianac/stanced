@@ -1,5 +1,66 @@
 <app-header></app-header>
-<main class="max-w-7xl mx-auto mt-12">
+<main class="max-w-5xl shadow-xl p-12 border-2 mx-auto mt-12 rounded">
+    <form [formGroup]="photoForm" (ngSubmit)="uploadFoto()" class="flex justify-between flex-wrap">
+        <div>
+            <h1 class="text-2xl font-semibold mb-5">Faça o upload da foto</h1>
+            <input type="file" formControlName="file" (change)="file = $any($event.target).files[0]" accept="image/png, image/jpeg">
+        </div>
+        <div>
+            <div class="flex flex-col mb-4">
+                <label for="title" class="text-sm font-bold">Titulo*</label>
+                <input 
+                    formControlName="title"
+                    type="text" 
+                    name="title" 
+                    id="title"
+                    class="border-2 h-10 rounded-sm font-normal text-base indent-2 bg-zinc-100 transition duration-300 focus:border-bgblue outline-none"
+                >
+            </div>
+            <div class="flex flex-col mb-4">
+                <label for="description" class="text-sm font-bold">Descrição</label>
+                <textarea 
+                    id="description"
+                    formControlName="description" 
+                    cols="28" 
+                    rows="3" 
+                    class="rounded-sm font-normal text-base p-2 bg-zinc-100 border-2
+                          transition duration-300 focus:border-bgblue outline-none">
+                </textarea>
+            </div>
+            <div class="mb-4 flex items-center">
+                <label for="comments" class="text-sm font-bold">Permitir comentários</label>
+                <input type="checkbox" formControlName="allowComments" class="ml-1">
+            </div>
+            <div class="flex flex-col gap-3">
+                <button 
+                    type="submit" 
+                    [disabled]="photoForm.invalid" 
+                    class="bg-bgblue p-2 rounded-sm text-textyellow font-bold hover:bg-indigo-800
+                            disabled:bg-zinc-300 disabled:text-zinc-500 transition duration-300"
+                    >Enviar
+                </button>
+                <a 
+                    routerLink="/dashboard"
+                    class="w-full border-2 text-zinc-500 hover:bg-zinc-200 hover:bg-opacity-30 
+                        hover:text-black transition duration-300 rounded-sm text-center p-2 font-bold"
+                    >Cancelar
+                </a>
+            </div>
+        </div>
+    </form>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <main class="max-w-7xl mx-auto mt-12">
     <h1 class="text-2xl font-semibold mb-4">Faça o upload da foto</h1>
     <form [formGroup]="photoForm" (ngSubmit)="uploadFoto()" class="flex justify-between flex-wrap">
         <div>
@@ -18,4 +79,4 @@
             </div>
         </div>
     </form>
-</main>
+</main> -->
