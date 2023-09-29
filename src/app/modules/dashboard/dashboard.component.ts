@@ -1,6 +1,7 @@
 import { animate, animateChild, query, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { CarrosService } from 'src/app/core/services/carros.service';
+import { LikesService } from 'src/app/core/services/likes.service';
 import { ICarPicture } from 'src/app/shared/models/carro';
 
 const enterTr = transition(":enter", [
@@ -37,16 +38,15 @@ const riseText = trigger("riseText", [textAnimation])
 })
 export class DashboardComponent implements OnInit{
   carros!: ICarPicture[]
-  showCarInfoOverlay = false;
 
-  constructor(private carrosService: CarrosService) {}
+  constructor(private carrosService: CarrosService, private likesService: LikesService) {}
 
-  public handleOverlay() {
-    this.showCarInfoOverlay = !this.showCarInfoOverlay
+  public like(id: number) {
+    this.likesService.sendLike(id).subscribe()
   }
 
   ngOnInit(): void {
-    this.carrosService.retornaCarros().subscribe({
+    this.carrosService.getCars().subscribe({
       next : (response) => {
         this.carros = response
       },

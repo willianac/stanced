@@ -1,9 +1,16 @@
 <app-header></app-header>
     <app-photo-grid>
         <div *ngFor="let carro of carros" class="cursor-pointer relative" (mouseenter)="carro.showOverlay = true" (mouseleave)="carro.showOverlay = false">
-            <div routerLink="car/{{carro.id}}" *ngIf="carro.showOverlay" class="absolute bg-black h-full w-full bg-opacity-20 flex py-3 px-5 items-end justify-between overflow-hidden" @fadeIn @fadeOut>
-                <span @riseText class="text-white font-bold">Por {{carro.user_name}}</span>
-                <span @riseText class="text-white font-bold">{{carro.title}}</span>
+            <div *ngIf="carro.showOverlay" class="absolute bg-black h-full w-full bg-opacity-20 flex flex-col justify-between py-3 px-5 overflow-hidden" @fadeIn @fadeOut>
+                <div class="flex justify-end items-center gap-x-2">
+                    <span class="text-white font-medium">{{carro.likes}}</span>
+                    <i (click)="like(carro.id)" class="pi pi-heart text-white font-medium text-lg hover:text-red-500"></i>
+                </div>
+                <div routerLink="car/{{carro.id}}" class="flex-1"></div>
+                <div class="flex justify-between">
+                    <span @riseText class="text-white font-bold">{{carro.title}}</span>
+                    <span @riseText class="text-white font-bold">Por {{carro.user_name}}</span>
+                </div>
             </div>
             <app-card-photo
                 [url]="carro.url"

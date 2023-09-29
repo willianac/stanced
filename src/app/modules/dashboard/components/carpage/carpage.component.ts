@@ -47,9 +47,8 @@ export class CarpageComponent {
   }
 
   ngOnInit() {
-    this.carService.retornaCarros().subscribe({
+    this.carService.getCars().subscribe({
       next : (response) => {
-        console.log(response)
         this.carinfo = response.find(car => car.id === Number(this.carID)) as ICarPicture
       }
     })
