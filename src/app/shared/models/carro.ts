@@ -9,6 +9,8 @@ export interface ICarPicture {
     showTooltip: boolean
     showOverlay: boolean
     likes: number
+    didUserLiked: boolean
+    shouldHeartBeFilled: boolean
     createdAt: Date
     updatedAt: Date
 }

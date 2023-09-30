@@ -11,8 +11,13 @@
                     ></app-card-photo>
                     <small class="text-sm font-medium text-zinc-600 mb-4">Curtido por {{carinfo.likes}} pessoas</small>
                     <div class="flex justify-between items-center">
-                        <div (click)="like(carinfo.id)" class="flex items-center gap-x-2 group cursor-pointer">
-                            <i class="pi pi-heart text-xl font-semibold text-zinc-800 group-hover:text-red-500"></i>
+                        <div (click)="like(carinfo.id)" (click)="carinfo.shouldHeartBeFilled = true" class="flex items-center gap-x-2 group cursor-pointer">
+                            <i *ngIf="carinfo.didUserLiked || carinfo.shouldHeartBeFilled; else userDidntLikedYet" class="pi pi-heart-fill text-xl font-semibold text-red-500"></i>
+                            
+                            <ng-template #userDidntLikedYet>
+                                <i class="pi pi-heart text-xl font-semibold text-red-zinc-800 group-hover:text-red-500"></i>
+                            </ng-template>
+
                             <span class="font-semibold text-lg text-zinc-800 group-hover:text-red-500">Curtir</span>
                         </div>
                         <div class="flex gap-x-3">
