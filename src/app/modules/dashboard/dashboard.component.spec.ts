@@ -8,42 +8,42 @@ import { ICarPicture } from "../../shared/models/carro"
 import { Observable, of } from "rxjs"
 
 function returnCarPhotos(): Observable<ICarPicture[]> {
-  let photos: ICarPicture[] = []
+	const photos: ICarPicture[] = []
 
-  return of(photos)
+	return of(photos)
 }
 
 describe("Dashboard Component", () => {
-  let fixture: ComponentFixture<DashboardComponent>;
-  let service: CarrosService;
+	let fixture: ComponentFixture<DashboardComponent>;
+	let service: CarrosService;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports : [
-        DashboardModule,
-        HttpClientModule,
-        RouterTestingModule
-      ]
-    }).compileComponents()
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			imports : [
+				DashboardModule,
+				HttpClientModule,
+				RouterTestingModule
+			]
+		}).compileComponents()
 
-    fixture = TestBed.createComponent(DashboardComponent)
-    service = TestBed.inject(CarrosService)
-  })
+		fixture = TestBed.createComponent(DashboardComponent)
+		service = TestBed.inject(CarrosService)
+	})
 
-  it("Component should be created", () => {
-    const component = fixture.componentInstance
+	it("Component should be created", () => {
+		const component = fixture.componentInstance
 
-    expect(component).toBeTruthy()
-  })
+		expect(component).toBeTruthy()
+	})
 
-  it("Should display images when receive data", () => {
-    const carImages = returnCarPhotos()
-    const photoGrid = fixture.nativeElement.querySelector("app-photo-grid")
+	it("Should display images when receive data", () => {
+		const carImages = returnCarPhotos()
+		const photoGrid = fixture.nativeElement.querySelector("app-photo-grid")
 
-    spyOn(service, "retornaCarros")
-      .and.callFake(returnCarPhotos)
-    fixture.detectChanges()
+		spyOn(service, "clearCache")
+			.and.callFake(returnCarPhotos)
+		fixture.detectChanges()
 
-    expect(photoGrid).not.toBeNull()
-  })
+		expect(photoGrid).not.toBeNull()
+	})
 })
