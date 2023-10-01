@@ -43,8 +43,13 @@ export class CarpageComponent {
     }
   }
 
-  like(photoid: number) {
-    this.likesService.sendLike(photoid).subscribe()
+  handleLike(isPhotoAlreadyLiked: boolean, photoid: number) {
+    if(isPhotoAlreadyLiked) {
+      this.carinfo.shouldHeartBeFilled = false
+      return this.likesService.removeLike(photoid).subscribe()
+    }
+    this.carinfo.shouldHeartBeFilled = true
+    return this.likesService.sendLike(photoid).subscribe()
   }
 
   deleteImage() {
@@ -59,8 +64,8 @@ export class CarpageComponent {
     this.userid = this.token.getDecodedToken().id
     this.carService.getCars().subscribe({
       next : (response) => {
-        console.log(response)
         this.carinfo = response.find(car => car.id === Number(this.carID)) as ICarPicture
+        this.carinfo.shouldHeartBeFilled = this.carinfo.didUserLiked ? true : false
       }
     })
   }
