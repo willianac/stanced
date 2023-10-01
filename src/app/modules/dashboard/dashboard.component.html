@@ -4,11 +4,11 @@
             <div *ngIf="carro.showOverlay" class="absolute bg-black h-full w-full bg-opacity-20 flex flex-col justify-between py-3 px-5 overflow-hidden" @fadeIn @fadeOut>
                 <div class="flex justify-end items-center gap-x-2">
                     <span class="text-white font-medium">{{carro.likes}}</span>
-
-                    <i *ngIf="carro.didUserLiked || carro.shouldHeartBeFilled; else userDidntLikedYet" class="pi pi-heart-fill text-red-500 font-medium text-lg hover:text-red-700"></i>
+									
+                    <i (click)="handleLike(carro.didUserLiked, carro.id)" *ngIf="carro.shouldHeartBeFilled; else userDidntLikedYet" class="pi pi-heart-fill text-red-500 font-medium text-lg hover:text-red-700"></i>
                     
                     <ng-template #userDidntLikedYet>
-                        <i (click)="like(carro.id)" (click)="carro.shouldHeartBeFilled = true" class="pi pi-heart text-white font-medium text-lg hover:text-red-500"></i>
+                        <i (click)="handleLike(carro.didUserLiked, carro.id)" (click)="carro.shouldHeartBeFilled = true" class="pi pi-heart text-white font-medium text-lg hover:text-red-500"></i>
                     </ng-template>
                 </div>
                 <div routerLink="car/{{carro.id}}" class="flex-1"></div>
