@@ -11,4 +11,5 @@ export class CardPhotoComponent {
   @Input() username!: string
   showTooltip = false;
   showOverlay = false;
+  shouldHeartBeFilled = false;
 }

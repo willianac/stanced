@@ -4,14 +4,26 @@
         <div *ngIf="carinfo" class="p-4">
             <h2 class="font-display font-semibold tracking-wide text-3xl border-b-2 pb-3 mb-4">{{carinfo.title}}</h2>
             <div class="flex flex-col justify-center max-w-2xl">
-                <div class="flex mb-6">
+                <div class="flex flex-col mb-6">
                     <app-card-photo      
                         [url]="carinfo.url"
                         [id]="carinfo.id"
                     ></app-card-photo>
-                    <div class="flex flex-col gap-1 ml-0.5">
-                        <svg (click)="saveImage()" class="text-zinc-700 hover:text-black transition cursor-pointer" xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path fill="currentColor" d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"/></svg>
-                        <svg (click)="deleteImage()" class="text-red-500 cursor-pointer hover:text-red-800 transition" xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path fill="currentColor" d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                    <small class="text-sm font-medium text-zinc-600 mb-4">Curtido por {{carinfo.likes}} pessoas</small>
+                    <div class="flex justify-between items-center">
+                        <div (click)="handleLike(carinfo.shouldHeartBeFilled, carinfo.id)" class="flex items-center gap-x-2 group cursor-pointer">    
+                            <i *ngIf="carinfo.shouldHeartBeFilled; else userDidntLikedYet" class="pi pi-heart-fill text-xl font-semibold text-red-500"></i>
+
+                            <ng-template #userDidntLikedYet>
+                                <i class="pi pi-heart text-xl font-semibold text-red-zinc-800 group-hover:text-red-500"></i>
+                            </ng-template>
+
+                            <span class="font-semibold text-lg text-zinc-800 group-hover:text-red-500">Curtir</span>
+                        </div>
+                        <div class="flex gap-x-3">
+                            <svg (click)="saveImage()" class="text-zinc-800 hover:text-bgblue transition cursor-pointer" xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28"><path fill="currentColor" d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z"/></svg>
+                            <svg *ngIf="carinfo.userid === userid" (click)="deleteImage()" class="text-zinc-800 hover:text-red-700 cursor-pointer transition" xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" width="28"><path fill="currentColor" d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -35,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <form (ngSubmit)="sendComment()" class="mt-8 flex gap-2 w-full">
+            <form (ngSubmit)="sendComment()" class="mt-4 flex gap-2 w-full px-5">
                 <input 
                     [(ngModel)]="commentInput"
                     type="text" 

@@ -18,6 +18,11 @@ export class LikesService {
     return this.http.post<void>("http://localhost:3000/like", { userid, photoid })
   }
 
+  public removeLike(photoid: number): Observable<void> {
+    const userid = this.token.getDecodedToken().id
+    return this.http.delete<void>("http://localhost:3000/like", {body: { photoid, userid }})
+  }
+
   public getLikes(): Observable<PhotoIdAndLikeCount> {
     return this.http.get<PhotoIdAndLikeCount>("http://localhost:3000/like")
   }

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { from } from 'rxjs';
+import { TokenService } from 'src/app/core/authentication/token.service';
 import { CarrosService } from 'src/app/core/services/carros.service';
 import { CommentsService } from 'src/app/core/services/comments.service';
 import { DeleteCarService } from 'src/app/core/services/deletecar.service';
+import { LikesService } from 'src/app/core/services/likes.service';
 import { SavedImagesService } from 'src/app/core/services/savedimages.service';
 import { ICarPicture } from 'src/app/shared/models/carro';
 
@@ -17,13 +19,16 @@ export class CarpageComponent {
   carinfo!: ICarPicture
   commentInput = ""
   commentList = this.commentService.getComments(this.carID ?? "")
+  userid!: number;
 
   constructor(
     private route: ActivatedRoute, 
     private carService: CarrosService, 
     private commentService: CommentsService,
     private deleteCarService: DeleteCarService,
-    private savedImagesService: SavedImagesService
+    private savedImagesService: SavedImagesService,
+    private likesService: LikesService,
+    private token: TokenService
     ) {}
 
   sendComment() {
@@ -38,6 +43,15 @@ export class CarpageComponent {
     }
   }
 
+  handleLike(isPhotoAlreadyLiked: boolean, photoid: number) {
+    if(isPhotoAlreadyLiked) {
+      this.carinfo.shouldHeartBeFilled = false
+      return this.likesService.removeLike(photoid).subscribe()
+    }
+    this.carinfo.shouldHeartBeFilled = true
+    return this.likesService.sendLike(photoid).subscribe()
+  }
+
   deleteImage() {
     this.deleteCarService.delete(this.carID!).subscribe()
   }
@@ -47,9 +61,11 @@ export class CarpageComponent {
   }
 
   ngOnInit() {
+    this.userid = this.token.getDecodedToken().id
     this.carService.getCars().subscribe({
       next : (response) => {
         this.carinfo = response.find(car => car.id === Number(this.carID)) as ICarPicture
+        this.carinfo.shouldHeartBeFilled = this.carinfo.didUserLiked ? true : false
       }
     })
   }
