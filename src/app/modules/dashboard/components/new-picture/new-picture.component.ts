@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import NewPictureService from "src/app/core/services/new-picture.service";
+import { PicturesService } from "src/app/core/services/pictures.service";
 
 @Component({
 	selector: "app-newpicture",
@@ -18,7 +18,7 @@ export class NewPictureComponent {
 
 	file!: File
 
-	constructor(private fb: FormBuilder, private NewPictureService: NewPictureService, private router: Router) {}
+	constructor(private fb: FormBuilder, private picsService: PicturesService, private router: Router) {}
 
 	uploadFoto() {
 		const allowComments = this.photoForm.get("allowComments")?.value
@@ -27,7 +27,7 @@ export class NewPictureComponent {
 		formdata.append("title", this.photoForm.get("title")?.value as string)
 		formdata.append("description", this.photoForm.get("description")?.value as string)
 		formdata.append("image", this.file)
-		this.NewPictureService.sendNewPicture(formdata).subscribe({
+		this.picsService.sendNewPicture(formdata).subscribe({
 			next : () => this.router.navigateByUrl("dashboard"),
 			error : (err) => console.error(err)
 		})

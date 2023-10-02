@@ -4,7 +4,6 @@ import { from } from "rxjs"
 import { TokenService } from "src/app/core/authentication/token.service"
 import { PicturesService } from "src/app/core/services/pictures.service"
 import { CommentsService } from "src/app/core/services/comments.service"
-import { DeletePictureService } from "src/app/core/services/delete-car.service"
 import { LikesService } from "src/app/core/services/likes.service"
 import { SavedImagesService } from "src/app/core/services/savedimages.service"
 import { IPicture } from "src/app/shared/models/Picture"
@@ -25,7 +24,6 @@ export class PicturePageComponent implements OnInit {
     private route: ActivatedRoute, 
     private picsService: PicturesService, 
     private commentService: CommentsService,
-    private DeletePictureService: DeletePictureService,
     private savedImagesService: SavedImagesService,
     private likesService: LikesService,
     private token: TokenService
@@ -53,7 +51,7 @@ export class PicturePageComponent implements OnInit {
 	}
 
 	deleteImage() {
-		this.DeletePictureService.delete(this.pictureID!).subscribe()
+		this.picsService.deletePicture(this.pictureID!).subscribe()
 	}
 
 	saveImage() {
