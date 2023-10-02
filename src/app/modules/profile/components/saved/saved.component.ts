@@ -30,8 +30,8 @@ export class SavedComponent implements OnInit {
   
   constructor(private savedImagesService: SavedImagesService) {}
 
-  public removeFromSaved(car: IPicture) {
-    this.savedImagesService.removeSavedImage((car.id).toString()).subscribe()
+  public removeFromSaved(picture: IPicture) {
+    this.savedImagesService.removeSavedImage((picture.id).toString()).subscribe()
   }
 
   ngOnInit(): void {

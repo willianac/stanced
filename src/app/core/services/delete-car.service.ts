@@ -10,8 +10,8 @@ export class DeletePictureService {
 
 	constructor(private http: HttpClient, private cs: PicturesService) {}
 
-	public delete(carID: string): Observable<any> {
-		return this.http.delete<any>("http://localhost:3000/deleteimage", {body: { carID }}).pipe(
+	public delete(pictureID: string): Observable<any> {
+		return this.http.delete<any>("http://localhost:3000/deleteimage", {body: { pictureID }}).pipe(
 			tap(() => this.cs.clearCache())
 		)
 	}

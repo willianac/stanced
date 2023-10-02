@@ -19,9 +19,9 @@ export class PicturesService {
 
     public getPictures(): Observable<IPicture[]> {
         return forkJoin([this.likes, this.pictures]).pipe(
-            map(([likesCount, cars]) => {
-                return cars.map(car => (
-                    {...car, likes: likesCount[car.id]}
+            map(([likesCount, pictures]) => {
+                return pictures.map(picture => (
+                    {...picture, likes: likesCount[picture.id]}
                 ))
             })
         )

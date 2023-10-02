@@ -10,10 +10,10 @@ import { PicturesService } from "./pictures.service";
 export default class NewPictureService {
 	constructor(private http: HttpClient, private token: TokenService, private PicturesService: PicturesService) {}
 
-	public sendNewPicture(newcar: FormData): Observable<any>{
+	public sendNewPicture(newPicture: FormData): Observable<any>{
 		const token = this.token.getDecodedToken()
-		newcar.append("userid", token.id.toString())
-		return this.http.post<any>("http://localhost:3000/sendimage", newcar).pipe(
+		newPicture.append("userid", token.id.toString())
+		return this.http.post<any>("http://localhost:3000/sendimage", newPicture).pipe(
 			tap(() => this.PicturesService.clearCache())
 		)
 	}

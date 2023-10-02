@@ -20,7 +20,7 @@ export class SavedImagesService {
   public getUserSavedImage(): Observable<IPicture[]> {
     const userid = this.tokenService.getDecodedToken().id
     return this.http.get<IPicture[]>("http://localhost:3000/getusersavedimages?id=" + userid).pipe(
-      tap(cars => this.userSavedImages.next(cars))
+      tap(pictures => this.userSavedImages.next(pictures))
     )
   }
 

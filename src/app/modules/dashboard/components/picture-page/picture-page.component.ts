@@ -23,7 +23,7 @@ export class PicturePageComponent implements OnInit {
 
 	constructor(
     private route: ActivatedRoute, 
-    private carService: PicturesService, 
+    private picsService: PicturesService, 
     private commentService: CommentsService,
     private DeletePictureService: DeletePictureService,
     private savedImagesService: SavedImagesService,
@@ -62,7 +62,7 @@ export class PicturePageComponent implements OnInit {
 
 	ngOnInit() {
 		this.userid = this.token.getDecodedToken().id
-		this.carService.getPictures().subscribe({
+		this.picsService.getPictures().subscribe({
 			next : (response) => {
 				this.picture = response.find(car => car.id === Number(this.pictureID)) as IPicture
 				this.picture.shouldHeartBeFilled = this.picture.didUserLiked ? true : false

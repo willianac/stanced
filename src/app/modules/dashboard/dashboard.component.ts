@@ -51,24 +51,24 @@ export class DashboardComponent implements OnInit{
 	}
 
 	private handleHeartIcon(photoid: number, action: "fill" | "empty") {
-		const updatedCarList = this.pictures.map(car => {
+		const updatedPictureList = this.pictures.map(car => {
 			if(car.id === photoid) {
 				if(action === "fill") return {...car, shouldHeartBeFilled: true}
 				if(action === "empty") return {...car, shouldHeartBeFilled: false}
 			}
 			return car
 		})
-		this.pictures = updatedCarList
+		this.pictures = updatedPictureList
 	}
 
 	ngOnInit(): void {
 		this.PicturesService.getPictures().subscribe({
 			next : (response) => {
-				response.forEach(car => {
-					if(car.didUserLiked) {
-						car.shouldHeartBeFilled = true
+				response.forEach(picture => {
+					if(picture.didUserLiked) {
+						picture.shouldHeartBeFilled = true
 					} else {
-						car.shouldHeartBeFilled = false
+						picture.shouldHeartBeFilled = false
 					}
 				})
 				this.pictures = response

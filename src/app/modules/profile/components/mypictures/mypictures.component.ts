@@ -11,10 +11,10 @@ import { IPicture } from 'src/app/shared/models/Picture';
 })
 export class MypicturesComponent implements OnInit {
   constructor(private tokenService: TokenService, private PicturesService: PicturesService) {}
-  myCars$!: Observable<IPicture[]>;
+  myPictures$!: Observable<IPicture[]>;
 
   ngOnInit(): void {
     const userID = this.tokenService.getDecodedToken().id;
-    this.myCars$ = this.PicturesService.getPicturesByUserId(userID)
+    this.myPictures$ = this.PicturesService.getPicturesByUserId(userID)
   }
 }
