@@ -3,8 +3,8 @@ export interface ICarPicture {
     url: string
     title: string
     description: string
-    user_name: string
-    userid: number
+    owner_name: string
+    owner_id: number
     allowComments: boolean
     showTooltip: boolean
     showOverlay: boolean
