@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { NewcarComponent } from "./components/newcar/newcar.component";
+import { NewPictureComponent } from "./components/new-picture/new-picture.component";
 import { DashboardComponent } from "./dashboard.component";
-import { CarpageComponent } from "./components/carpage/carpage.component";
+import { PicturePageComponent } from "./components/picture-page/picture-page.component";
 
 const routes: Routes = [
 	{
@@ -10,12 +10,12 @@ const routes: Routes = [
 		component : DashboardComponent
 	},
 	{
-		path : "newcar",
-		component : NewcarComponent
+		path : "new",
+		component : NewPictureComponent
 	},
 	{
-		path : "car/:id",
-		component : CarpageComponent
+		path : "picture/:id",
+		component : PicturePageComponent
 	}
 ];
 

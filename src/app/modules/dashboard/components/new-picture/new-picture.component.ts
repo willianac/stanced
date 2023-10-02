@@ -4,11 +4,11 @@ import { Router } from "@angular/router";
 import NewPictureService from "src/app/core/services/new-picture.service";
 
 @Component({
-	selector: "app-newcar",
-	templateUrl: "./newcar.component.html",
-	styleUrls: ["./newcar.component.css"]
+	selector: "app-newpicture",
+	templateUrl: "./new-picture.component.html",
+	styleUrls: ["./new-picture.component.css"]
 })
-export class NewcarComponent {
+export class NewPictureComponent {
 	photoForm = this.fb.group({
 		file : ["", Validators.required],
 		title: ["", Validators.required],

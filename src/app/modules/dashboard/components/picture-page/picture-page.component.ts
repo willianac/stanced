@@ -10,15 +10,15 @@ import { SavedImagesService } from "src/app/core/services/savedimages.service"
 import { IPicture } from "src/app/shared/models/Picture"
 
 @Component({
-	selector: "app-carpage",
-	templateUrl: "./carpage.component.html",
-	styleUrls: ["./carpage.component.css"]
+	selector: "app-picture-page",
+	templateUrl: "./picture-page.component.html",
+	styleUrls: ["./picture-page.component.css"]
 })
-export class CarpageComponent implements OnInit {
-	carID = this.route.snapshot.paramMap.get("id")
-	carinfo!: IPicture
+export class PicturePageComponent implements OnInit {
+	pictureID = this.route.snapshot.paramMap.get("id")
+	picture!: IPicture
 	commentInput = ""
-	commentList = this.commentService.getComments(this.carID ?? "")
+	commentList = this.commentService.getComments(this.pictureID ?? "")
 	userid!: number
 
 	constructor(
@@ -33,7 +33,7 @@ export class CarpageComponent implements OnInit {
 
 	sendComment() {
 		if(this.commentInput.length > 3) {
-			this.commentService.send(this.commentInput, Number(this.carID)).subscribe({
+			this.commentService.send(this.commentInput, Number(this.pictureID)).subscribe({
 				next : (val) => {
 					this.commentInput = ""
 					this.commentList = from([val])
@@ -45,27 +45,27 @@ export class CarpageComponent implements OnInit {
 
 	handleLike(isPhotoAlreadyLiked: boolean, photoid: number) {
 		if(isPhotoAlreadyLiked) {
-			this.carinfo.shouldHeartBeFilled = false
+			this.picture.shouldHeartBeFilled = false
 			return this.likesService.removeLike(photoid).subscribe()
 		}
-		this.carinfo.shouldHeartBeFilled = true
+		this.picture.shouldHeartBeFilled = true
 		return this.likesService.sendLike(photoid).subscribe()
 	}
 
 	deleteImage() {
-		this.DeletePictureService.delete(this.carID!).subscribe()
+		this.DeletePictureService.delete(this.pictureID!).subscribe()
 	}
 
 	saveImage() {
-		this.savedImagesService.saveImage(this.carID!).subscribe()
+		this.savedImagesService.saveImage(this.pictureID!).subscribe()
 	}
 
 	ngOnInit() {
 		this.userid = this.token.getDecodedToken().id
 		this.carService.getPictures().subscribe({
 			next : (response) => {
-				this.carinfo = response.find(car => car.id === Number(this.carID)) as IPicture
-				this.carinfo.shouldHeartBeFilled = this.carinfo.didUserLiked ? true : false
+				this.picture = response.find(car => car.id === Number(this.pictureID)) as IPicture
+				this.picture.shouldHeartBeFilled = this.picture.didUserLiked ? true : false
 			}
 		})
 	}

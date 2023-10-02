@@ -15,7 +15,7 @@
         <nav>
             <div *ngIf="username$ | async as user; else loginTemplate" class="flex gap-5 items-center">
                 <a 
-                    routerLink="/dashboard/newcar"
+                    routerLink="/dashboard/new"
                     class="p-1.5 bg-textyellow flex items-center gap-1.5 rounded-sm hover:bg-yellow-100 transition">
                     <i class="pi pi-plus text-sm"></i>
                     <span class="font-bold">Nova foto</span>
