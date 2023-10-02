@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenService } from 'src/app/core/authentication/token.service';
-import { CarrosService } from 'src/app/core/services/carros.service';
-import { ICarPicture } from 'src/app/shared/models/carro';
+import { PicturesService } from 'src/app/core/services/pictures.service';
+import { IPicture } from 'src/app/shared/models/Picture';
 
 @Component({
   selector: 'app-mypictures',
@@ -10,11 +10,11 @@ import { ICarPicture } from 'src/app/shared/models/carro';
   styleUrls: ['./mypictures.component.css']
 })
 export class MypicturesComponent implements OnInit {
-  constructor(private tokenService: TokenService, private carrosService: CarrosService) {}
-  myCars$!: Observable<ICarPicture[]>;
+  constructor(private tokenService: TokenService, private PicturesService: PicturesService) {}
+  myPictures$!: Observable<IPicture[]>;
 
   ngOnInit(): void {
     const userID = this.tokenService.getDecodedToken().id;
-    this.myCars$ = this.carrosService.getCarsByID(userID)
+    this.myPictures$ = this.PicturesService.getPicturesByUserId(userID)
   }
 }

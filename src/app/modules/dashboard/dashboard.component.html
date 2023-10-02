@@ -1,26 +1,26 @@
 <app-header></app-header>
 <app-photo-grid>
-	<div *ngFor="let carro of carros" class="cursor-pointer relative" (mouseenter)="carro.showOverlay = true" (mouseleave)="carro.showOverlay = false">
-		<div *ngIf="carro.showOverlay" class="absolute bg-black h-full w-full bg-opacity-20 flex flex-col justify-between py-3 px-5 overflow-hidden" @fadeIn @fadeOut>
+	<div *ngFor="let picture of pictures" class="cursor-pointer relative" (mouseenter)="picture.showOverlay = true" (mouseleave)="picture.showOverlay = false">
+		<div *ngIf="picture.showOverlay" class="absolute bg-black h-full w-full bg-opacity-20 flex flex-col justify-between py-3 px-5 overflow-hidden" @fadeIn @fadeOut>
 			<div class="flex justify-end items-center gap-x-2">
-				<span class="text-white font-medium">{{carro.likes}}</span>
+				<span class="text-white font-medium">{{picture.likes}}</span>
 			
-				<i (click)="handleLike(carro.didUserLiked, carro.id)" *ngIf="carro.shouldHeartBeFilled; else userDidntLikedYet" class="pi pi-heart-fill text-red-500 font-medium text-lg hover:text-red-700"></i>
+				<i (click)="handleLike(picture.didUserLiked, picture.id)" *ngIf="picture.shouldHeartBeFilled; else userDidntLikedYet" class="pi pi-heart-fill text-red-500 font-medium text-lg hover:text-red-700"></i>
 				<ng-template #userDidntLikedYet>
-					<i (click)="handleLike(carro.didUserLiked, carro.id)" (click)="carro.shouldHeartBeFilled = true" class="pi pi-heart text-white font-medium text-lg hover:text-red-500"></i>
+					<i (click)="handleLike(picture.didUserLiked, picture.id)" (click)="picture.shouldHeartBeFilled = true" class="pi pi-heart text-white font-medium text-lg hover:text-red-500"></i>
 				</ng-template>
 
 			</div>
-			<div routerLink="car/{{carro.id}}" class="flex-1"></div>
+			<div routerLink="picture/{{picture.id}}" class="flex-1"></div>
 			<div class="flex justify-between">
-				<span @riseText class="text-white font-bold">{{carro.title}}</span>
-				<span @riseText class="text-white">Por {{carro.user_name}}</span>
+				<span @riseText class="text-white font-bold">{{picture.title}}</span>
+				<span @riseText class="text-white">Por {{picture.owner_name}}</span>
 			</div>
 		</div>
 		<app-card-photo
-			[url]="carro.url"
-			[description]="carro.description"
-			[username]="carro.user_name"
+			[url]="picture.url"
+			[description]="picture.description"
+			[username]="picture.owner_name"
 		></app-card-photo>
 	</div>
 </app-photo-grid>

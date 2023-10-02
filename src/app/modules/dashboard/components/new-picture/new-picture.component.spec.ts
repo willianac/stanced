@@ -1,15 +1,15 @@
 // import { TestBed, ComponentFixture } from "@angular/core/testing"
-// import { NewcarComponent } from "./newcar.component"
+// import { NewPictureComponent } from "./newcar.component"
 
 // describe("Newcar component", () => {
-//     let fixture: ComponentFixture<NewcarComponent>
+//     let fixture: ComponentFixture<NewPictureComponent>
 
 //     beforeEach(async () => {
 //         await TestBed.configureTestingModule({
-//             declarations : [NewcarComponent], 
+//             declarations : [NewPictureComponent], 
 //         }).compileComponents()
 
-//         fixture = TestBed.createComponent(NewcarComponent)
+//         fixture = TestBed.createComponent(NewPictureComponent)
 //     })
 
 //     it("Should create component", () => {

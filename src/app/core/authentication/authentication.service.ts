@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode";
 import { TokenService } from "./token.service";
 import { IFullUser, JWTtoken } from "./user";
 
+import { environment } from "src/environments/environment.development";
 
 @Injectable({
     providedIn : "root"
@@ -20,7 +21,7 @@ export class AuthenticationService {
     }
 
     public register(user: IFullUser): Observable<any> {
-        return this.http.post<any>("http://localhost:3000/register", user).pipe(
+        return this.http.post<any>(environment.apiUrl + "/register", user).pipe(
             tap(val => {
                 this.token.setToken(val.token)
                 this.notify()
@@ -29,7 +30,7 @@ export class AuthenticationService {
     }
 
     public login(user: IFullUser): Observable<any> {
-        return this.http.post<any>("http://localhost:3000/login", user).pipe(
+        return this.http.post<any>(environment.apiUrl + "/login", user).pipe(
             tap(val => {
                 this.token.setToken(val.token)
                 this.notify()
@@ -44,7 +45,7 @@ export class AuthenticationService {
 
     public validateToken() {
         const token = this.token.getToken()
-        this.http.post("http://localhost:3000/verifytoken", {token}).subscribe({
+        this.http.post(environment.apiUrl + "/verifytoken", {token}).subscribe({
             next : (val) => this.notify(),
             error : (err) => this.logout()
         })

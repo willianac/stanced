@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { TokenService } from "../authentication/token.service";
 
+import { environment } from "src/environments/environment.development";
+
 type PhotoIdAndLikeCount = {
   [key: string]: number
 }
@@ -15,15 +17,15 @@ export class LikesService {
 
   public sendLike(photoid: number): Observable<void> {
     const userid = this.token.getDecodedToken().id;
-    return this.http.post<void>("http://localhost:3000/like", { userid, photoid })
+    return this.http.post<void>(environment.apiUrl + "/like", { userid, photoid })
   }
 
   public removeLike(photoid: number): Observable<void> {
     const userid = this.token.getDecodedToken().id
-    return this.http.delete<void>("http://localhost:3000/like", {body: { photoid, userid }})
+    return this.http.delete<void>(environment.apiUrl + "/like", {body: { photoid, userid }})
   }
 
   public getLikes(): Observable<PhotoIdAndLikeCount> {
-    return this.http.get<PhotoIdAndLikeCount>("http://localhost:3000/like")
+    return this.http.get<PhotoIdAndLikeCount>(environment.apiUrl + "/like")
   }
 }

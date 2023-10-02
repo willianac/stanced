@@ -1,14 +1,14 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import NewCarService from "src/app/core/services/newcar.service";
+import { PicturesService } from "src/app/core/services/pictures.service";
 
 @Component({
-	selector: "app-newcar",
-	templateUrl: "./newcar.component.html",
-	styleUrls: ["./newcar.component.css"]
+	selector: "app-newpicture",
+	templateUrl: "./new-picture.component.html",
+	styleUrls: ["./new-picture.component.css"]
 })
-export class NewcarComponent {
+export class NewPictureComponent {
 	photoForm = this.fb.group({
 		file : ["", Validators.required],
 		title: ["", Validators.required],
@@ -18,7 +18,7 @@ export class NewcarComponent {
 
 	file!: File
 
-	constructor(private fb: FormBuilder, private newCarService: NewCarService, private router: Router) {}
+	constructor(private fb: FormBuilder, private picsService: PicturesService, private router: Router) {}
 
 	uploadFoto() {
 		const allowComments = this.photoForm.get("allowComments")?.value
@@ -27,7 +27,7 @@ export class NewcarComponent {
 		formdata.append("title", this.photoForm.get("title")?.value as string)
 		formdata.append("description", this.photoForm.get("description")?.value as string)
 		formdata.append("image", this.file)
-		this.newCarService.sendNewCar(formdata).subscribe({
+		this.picsService.sendNewPicture(formdata).subscribe({
 			next : () => this.router.navigateByUrl("dashboard"),
 			error : (err) => console.error(err)
 		})

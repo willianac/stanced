@@ -1,18 +1,18 @@
 // import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { CarpageComponent } from './carpage.component';
+// import { PicturePageComponent } from './carpage.component';
 
-// describe('CarpageComponent', () => {
-//   let component: CarpageComponent;
-//   let fixture: ComponentFixture<CarpageComponent>;
+// describe('PicturePageComponent', () => {
+//   let component: PicturePageComponent;
+//   let fixture: ComponentFixture<PicturePageComponent>;
 
 //   beforeEach(async () => {
 //     await TestBed.configureTestingModule({
-//       declarations: [ CarpageComponent ]
+//       declarations: [ PicturePageComponent ]
 //     })
 //     .compileComponents();
 
-//     fixture = TestBed.createComponent(CarpageComponent);
+//     fixture = TestBed.createComponent(PicturePageComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });
