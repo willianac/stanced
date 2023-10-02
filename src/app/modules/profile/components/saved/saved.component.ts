@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { SavedImagesService } from 'src/app/core/services/savedimages.service';
-import { ICarPicture } from 'src/app/shared/models/carro';
+import { IPicture } from 'src/app/shared/models/Picture';
 
 const enterTransition = transition(":enter", [
   style({
@@ -30,7 +30,7 @@ export class SavedComponent implements OnInit {
   
   constructor(private savedImagesService: SavedImagesService) {}
 
-  public removeFromSaved(car: ICarPicture) {
+  public removeFromSaved(car: IPicture) {
     this.savedImagesService.removeSavedImage((car.id).toString()).subscribe()
   }
 

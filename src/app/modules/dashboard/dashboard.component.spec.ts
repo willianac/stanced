@@ -2,20 +2,20 @@ import { ComponentFixture, TestBed } from "@angular/core/testing"
 import { RouterTestingModule } from "@angular/router/testing"
 import { DashboardComponent } from "./dashboard.component"
 import { DashboardModule } from "./dashboard.module"
-import { CarrosService } from "src/app/core/services/carros.service"
+import { PicturesService } from "src/app/core/services/pictures.service"
 import { HttpClientModule } from "@angular/common/http"
-import { ICarPicture } from "../../shared/models/carro"
+import { IPicture } from "../../shared/models/Picture"
 import { Observable, of } from "rxjs"
 
-function returnCarPhotos(): Observable<ICarPicture[]> {
-	const photos: ICarPicture[] = []
+function returnCarPhotos(): Observable<IPicture[]> {
+	const photos: IPicture[] = []
 
 	return of(photos)
 }
 
 describe("Dashboard Component", () => {
 	let fixture: ComponentFixture<DashboardComponent>;
-	let service: CarrosService;
+	let service: PicturesService;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -27,7 +27,7 @@ describe("Dashboard Component", () => {
 		}).compileComponents()
 
 		fixture = TestBed.createComponent(DashboardComponent)
-		service = TestBed.inject(CarrosService)
+		service = TestBed.inject(PicturesService)
 	})
 
 	it("Component should be created", () => {

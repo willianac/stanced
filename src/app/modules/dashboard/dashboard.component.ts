@@ -1,8 +1,8 @@
 import { animate, animateChild, query, style, transition, trigger } from "@angular/animations"
 import { Component, OnInit } from "@angular/core"
-import { CarrosService } from "src/app/core/services/carros.service"
+import { PicturesService } from "src/app/core/services/pictures.service"
 import { LikesService } from "src/app/core/services/likes.service"
-import { ICarPicture } from "src/app/shared/models/carro"
+import { IPicture } from "src/app/shared/models/Picture"
 
 const enterTr = transition(":enter", [
 	style({
@@ -37,9 +37,9 @@ const riseText = trigger("riseText", [textAnimation])
 	animations: [fadeIn, fadeOut, riseText]
 })
 export class DashboardComponent implements OnInit{
-	carros!: ICarPicture[]
+	pictures!: IPicture[]
 
-	constructor(private carrosService: CarrosService, private likesService: LikesService) {}
+	constructor(private PicturesService: PicturesService, private likesService: LikesService) {}
 
 	public handleLike(isPhotoAlreadyLiked: boolean, id: number) {
 		if(isPhotoAlreadyLiked) {
@@ -51,18 +51,18 @@ export class DashboardComponent implements OnInit{
 	}
 
 	private handleHeartIcon(photoid: number, action: "fill" | "empty") {
-		const updatedCarList = this.carros.map(car => {
+		const updatedCarList = this.pictures.map(car => {
 			if(car.id === photoid) {
 				if(action === "fill") return {...car, shouldHeartBeFilled: true}
 				if(action === "empty") return {...car, shouldHeartBeFilled: false}
 			}
 			return car
 		})
-		this.carros = updatedCarList
+		this.pictures = updatedCarList
 	}
 
 	ngOnInit(): void {
-		this.carrosService.getCars().subscribe({
+		this.PicturesService.getPictures().subscribe({
 			next : (response) => {
 				response.forEach(car => {
 					if(car.didUserLiked) {
@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit{
 						car.shouldHeartBeFilled = false
 					}
 				})
-				this.carros = response
+				this.pictures = response
 			},
 			error : (err) => console.error(err)
 		})

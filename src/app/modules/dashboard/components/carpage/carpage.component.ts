@@ -2,12 +2,12 @@ import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute } from "@angular/router"
 import { from } from "rxjs"
 import { TokenService } from "src/app/core/authentication/token.service"
-import { CarrosService } from "src/app/core/services/carros.service"
+import { PicturesService } from "src/app/core/services/pictures.service"
 import { CommentsService } from "src/app/core/services/comments.service"
-import { DeleteCarService } from "src/app/core/services/deletecar.service"
+import { DeletePictureService } from "src/app/core/services/delete-car.service"
 import { LikesService } from "src/app/core/services/likes.service"
 import { SavedImagesService } from "src/app/core/services/savedimages.service"
-import { ICarPicture } from "src/app/shared/models/carro"
+import { IPicture } from "src/app/shared/models/Picture"
 
 @Component({
 	selector: "app-carpage",
@@ -16,16 +16,16 @@ import { ICarPicture } from "src/app/shared/models/carro"
 })
 export class CarpageComponent implements OnInit {
 	carID = this.route.snapshot.paramMap.get("id")
-	carinfo!: ICarPicture
+	carinfo!: IPicture
 	commentInput = ""
 	commentList = this.commentService.getComments(this.carID ?? "")
 	userid!: number
 
 	constructor(
     private route: ActivatedRoute, 
-    private carService: CarrosService, 
+    private carService: PicturesService, 
     private commentService: CommentsService,
-    private deleteCarService: DeleteCarService,
+    private DeletePictureService: DeletePictureService,
     private savedImagesService: SavedImagesService,
     private likesService: LikesService,
     private token: TokenService
@@ -53,7 +53,7 @@ export class CarpageComponent implements OnInit {
 	}
 
 	deleteImage() {
-		this.deleteCarService.delete(this.carID!).subscribe()
+		this.DeletePictureService.delete(this.carID!).subscribe()
 	}
 
 	saveImage() {
@@ -62,9 +62,9 @@ export class CarpageComponent implements OnInit {
 
 	ngOnInit() {
 		this.userid = this.token.getDecodedToken().id
-		this.carService.getCars().subscribe({
+		this.carService.getPictures().subscribe({
 			next : (response) => {
-				this.carinfo = response.find(car => car.id === Number(this.carID)) as ICarPicture
+				this.carinfo = response.find(car => car.id === Number(this.carID)) as IPicture
 				this.carinfo.shouldHeartBeFilled = this.carinfo.didUserLiked ? true : false
 			}
 		})

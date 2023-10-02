@@ -1,5 +1,5 @@
 import { TestBed } from "@angular/core/testing";
-import { CarrosService } from "./carros.service"
+import { PicturesService } from "./pictures.service"
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing"
 
 const mockData = {
@@ -28,16 +28,16 @@ const mockData = {
 
 
 describe("Carros Service", () => {
-  let service: CarrosService;
+  let service: PicturesService;
   let httpController: HttpTestingController
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports : [HttpClientTestingModule],
-      providers : [CarrosService]
+      providers : [PicturesService]
     }).compileComponents()
 
-    service = TestBed.inject(CarrosService)
+    service = TestBed.inject(PicturesService)
     httpController = TestBed.inject(HttpTestingController)
   })
 

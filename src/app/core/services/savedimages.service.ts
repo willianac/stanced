@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { TokenService } from '../authentication/token.service';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
-import { ICarPicture } from 'src/app/shared/models/carro';
+import { IPicture } from 'src/app/shared/models/Picture';
 
 @Injectable({
   providedIn: "root"
 })
 export class SavedImagesService {
-  userSavedImages = new BehaviorSubject<ICarPicture[]>([]);
+  userSavedImages = new BehaviorSubject<IPicture[]>([]);
 
   constructor(private tokenService: TokenService, private http: HttpClient) {}
 
@@ -17,9 +17,9 @@ export class SavedImagesService {
     return this.http.post<void>("http://localhost:3000/saveusersavedimage", { userid, photoid })
   }
 
-  public getUserSavedImage(): Observable<ICarPicture[]> {
+  public getUserSavedImage(): Observable<IPicture[]> {
     const userid = this.tokenService.getDecodedToken().id
-    return this.http.get<ICarPicture[]>("http://localhost:3000/getusersavedimages?id=" + userid).pipe(
+    return this.http.get<IPicture[]>("http://localhost:3000/getusersavedimages?id=" + userid).pipe(
       tap(cars => this.userSavedImages.next(cars))
     )
   }
@@ -32,7 +32,7 @@ export class SavedImagesService {
     )
   }
 
-  public returnSavedImages(): Observable<ICarPicture[]> {
+  public returnSavedImages(): Observable<IPicture[]> {
     return this.userSavedImages.asObservable()
   }
 }
