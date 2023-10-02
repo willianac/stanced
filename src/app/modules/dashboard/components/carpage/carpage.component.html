@@ -36,8 +36,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="flex-1">
-			<div *ngIf="commentList | async as comments; else noCommentText" class="p-5 overflow-y-auto max-h-[40rem]">
+		<div *ngIf="carinfo.allowComments; else commentsNotAllowed" class="flex-1">
+			<div *ngIf="commentList | async as comments; else noComments" class="p-5 overflow-y-auto max-h-[40rem]">
 				<h2 class="font-bold text-xl mb-5">Comentários</h2>
 				<div *ngFor="let comment of comments" class="mb-3">
 					<div class="flex flex-col relative py-3 px-5 rounded-sm bg-zinc-500 bg-opacity-10">
@@ -61,6 +61,12 @@
 	</div>
 </div>
 
-<ng-template #noCommentText>
+<ng-template #commentsNotAllowed>
+	<div class="p-5 flex-1">
+		<span class="mt-2 block text-center font-medium text-zinc-800">Usuário desativou os comentários.</span>
+	</div>
+</ng-template>
+
+<ng-template #noComments>
   <p class="text-base text-center">Sem comentários ainda</p>
 </ng-template>
