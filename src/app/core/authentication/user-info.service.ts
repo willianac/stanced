@@ -4,6 +4,8 @@ import { Observable, tap } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { AuthenticationService } from "./authentication.service";
 
+import { environment } from "src/environments/environment.development";
+
 type Response = {
   auth: boolean,
   token: string
@@ -21,7 +23,7 @@ export class UserInfoService {
 
   public changeName(newName: string): Observable<Response> {
     const userid = this.tokenService.getDecodedToken().id
-    return this.http.put<Response>("http://localhost:3000/changeusername", { userid, newName }).pipe(
+    return this.http.put<Response>(environment.apiUrl + "/changeusername", { userid, newName }).pipe(
       tap((res) => {
         this.tokenService.deleteToken()
         this.tokenService.setToken(res.token)
@@ -32,7 +34,7 @@ export class UserInfoService {
 
   public changeEmail(newEmail: string): Observable<Response> {
     const userid = this.tokenService.getDecodedToken().id
-    return this.http.put<Response>("http://localhost:3000/changeuseremail", { userid, newEmail }).pipe(
+    return this.http.put<Response>(environment.apiUrl + "/changeuseremail", { userid, newEmail }).pipe(
       tap((res) => {
         this.tokenService.deleteToken()
         this.tokenService.setToken(res.token)
