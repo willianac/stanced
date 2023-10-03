@@ -1,5 +1,11 @@
 <form (ngSubmit)="fazerLogin()" class="w-96 font-bold" [formGroup]="loginForm">
     <h1 class="mb-2 text-center text-2xl text-black">Acessar sua conta</h1>
+
+		<app-auth-error
+			*ngIf="showError"
+			[message]="errorMessage"
+		></app-auth-error>
+		
     <div class="flex flex-col mb-6">
         <label for="email" class="mb-2 text-zinc-800">E-mail</label>
         <input 
@@ -7,14 +13,14 @@
             formControlName="email" 
             class="border-2 h-12 rounded-sm font-normal text-base indent-4 bg-zinc-100 transition duration-300 focus:border-bgblue"
         />
-        <app-error-message 
-            message="email em formato invalido"
+        <app-input-fill-error 
+            message="email em formato inválido"
             *ngIf="loginForm.get('email')?.errors?.['email']"
-        ></app-error-message>
-        <app-error-message 
+        ></app-input-fill-error>
+        <app-input-fill-error 
             message="email é obrigatório"
             *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched"
-        ></app-error-message>
+        ></app-input-fill-error>
     </div>
     <div class="flex flex-col">
         <label for="password" class="mb-2 text-zinc-800">Senha</label>
@@ -22,14 +28,14 @@
             type="password" 
             formControlName="password" 
             class="border-2 h-12 rounded-sm font-normal text-base indent-4 bg-zinc-100 transition duration-300 focus:border-bgblue"/>
-        <app-error-message
+        <app-input-fill-error
             message="senha deve ter no minimo 6 caracteres"
             *ngIf="loginForm.get('password')?.errors?.['minlength']"
-        ></app-error-message>
-        <app-error-message
+        ></app-input-fill-error>
+        <app-input-fill-error
             message="senha é obrigatória"
             *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched"
-        ></app-error-message>
+        ></app-input-fill-error>
         <div class="flex justify-end mt-2">
             <small class="text-zinc-500 hover:text-zinc-800 underline underline-offset-2 transition duration-300">esqueceu a senha?</small>
         </div>
@@ -40,7 +46,7 @@
         type="submit">
         Entrar
     </button>
-    <a routerLink="register" class="text-sm hover:text-bgblue transition mt-0.5">
-        Ainda nao tem uma conta?
+    <a routerLink="register" class="text-sm font-normal hover:text-bgblue transition mt-0.5">
+        Ainda não tem uma conta?
     </a>
 </form>

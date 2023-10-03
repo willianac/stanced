@@ -1,29 +1,36 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
-import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
-import { IFullUser } from 'src/app/core/authentication/user';
+import { AuthenticationService } from "src/app/core/authentication/authentication.service";
+import { IFullUser } from "src/app/core/authentication/user";
 
 @Component({
-  selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css']
+	selector: "app-login-form",
+	templateUrl: "./login-form.component.html",
+	styleUrls: ["./login-form.component.css"]
 })
 export class LoginFormComponent {
+	loginForm = this.fb.group({
+		email: ["", [Validators.required, Validators.email]],
+		password: ["", [Validators.required, Validators.minLength(6)]]
+	})
+	public showError = false;
+	public errorMessage = "";
 
-  loginForm = this.fb.group({
-    email: ["", [Validators.required, Validators.email]],
-    password: ["", [Validators.required, Validators.minLength(6)]]
-  })
+	constructor(private router: Router, private auth: AuthenticationService, private fb: FormBuilder) {}
 
-  constructor(private router: Router, private auth: AuthenticationService, private fb: FormBuilder) {}
-
-  public fazerLogin() {
-    const usuario = this.loginForm.getRawValue() as IFullUser
-    this.auth.login(usuario).subscribe({
-      next : () => this.router.navigateByUrl('dashboard'),
-      error: (err) => console.error(err)
-    })
-  }
+	public fazerLogin() {
+		const usuario = this.loginForm.getRawValue() as IFullUser
+		this.auth.login(usuario).subscribe({
+			next : () => this.router.navigateByUrl("dashboard"),
+			error: (err) => {
+				this.showError = true
+				if(err.status === 422) {
+					return this.errorMessage = err.error.message
+				}
+				return this.errorMessage = "Erro inesperado do servidor"
+			}
+		})
+	}
 }

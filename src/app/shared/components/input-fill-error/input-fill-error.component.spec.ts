@@ -1,18 +1,18 @@
 // import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { ErrorMessageComponent } from './error-message.component';
+// import { InputFillErrorComponent } from './error-message.component';
 
-// describe('ErrorMessageComponent', () => {
-//   let component: ErrorMessageComponent;
-//   let fixture: ComponentFixture<ErrorMessageComponent>;
+// describe('InputFillErrorComponent', () => {
+//   let component: InputFillErrorComponent;
+//   let fixture: ComponentFixture<InputFillErrorComponent>;
 
 //   beforeEach(async () => {
 //     await TestBed.configureTestingModule({
-//       declarations: [ ErrorMessageComponent ]
+//       declarations: [ InputFillErrorComponent ]
 //     })
 //     .compileComponents();
 
-//     fixture = TestBed.createComponent(ErrorMessageComponent);
+//     fixture = TestBed.createComponent(InputFillErrorComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });
