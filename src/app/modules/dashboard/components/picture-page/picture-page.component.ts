@@ -7,6 +7,7 @@ import { CommentsService } from "src/app/core/services/comments.service"
 import { LikesService } from "src/app/core/services/likes.service"
 import { SavedImagesService } from "src/app/core/services/savedimages.service"
 import { IPicture } from "src/app/shared/models/Picture"
+import { ToastrService } from "ngx-toastr"
 
 @Component({
 	selector: "app-picture-page",
@@ -26,7 +27,8 @@ export class PicturePageComponent implements OnInit {
     private commentService: CommentsService,
     private savedImagesService: SavedImagesService,
     private likesService: LikesService,
-    private token: TokenService
+    private token: TokenService,
+		private toast: ToastrService
 	) {}
 
 	sendComment() {
@@ -55,7 +57,11 @@ export class PicturePageComponent implements OnInit {
 	}
 
 	saveImage() {
-		this.savedImagesService.saveImage(this.pictureID!).subscribe()
+		this.savedImagesService.saveImage(this.pictureID!).subscribe({
+			next: () => {
+				this.toast.success("Foto adicionada aos seus salvos", "Salvo", { positionClass: "toast-top-left" });
+			}
+		})
 	}
 
 	ngOnInit() {
