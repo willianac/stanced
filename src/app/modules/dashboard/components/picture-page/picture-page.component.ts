@@ -33,23 +33,22 @@ export class PicturePageComponent implements OnInit {
 
 	sendComment() {
 		if(this.commentInput.length > 3) {
-			this.commentService.send(this.commentInput, Number(this.pictureID)).subscribe({
+			this.commentService.send(this.commentInput, this.pictureID as string).subscribe({
 				next : (val) => {
 					this.commentInput = ""
-					this.commentList = from([val])
 				},
 				error : (err) => console.error(err)
 			})
 		}
 	}
 
-	handleLike(isPhotoAlreadyLiked: boolean, photoid: number) {
+	handleLike(isPhotoAlreadyLiked: boolean, picture_id: string) {
 		if(isPhotoAlreadyLiked) {
 			this.picture.shouldHeartBeFilled = false
-			return this.likesService.removeLike(photoid).subscribe()
+			return this.likesService.removeLike(picture_id).subscribe()
 		}
 		this.picture.shouldHeartBeFilled = true
-		return this.likesService.sendLike(photoid).subscribe()
+		return this.likesService.sendLike(picture_id).subscribe()
 	}
 
 	deleteImage() {
@@ -68,7 +67,8 @@ export class PicturePageComponent implements OnInit {
 		this.userid = this.token.getDecodedToken().id
 		this.picsService.getPictures().subscribe({
 			next : (response) => {
-				this.picture = response.find(car => car.id === Number(this.pictureID)) as IPicture
+				console.log(response)
+				this.picture = response.find(picture => picture.id === this.pictureID) as IPicture
 				this.picture.shouldHeartBeFilled = this.picture.didUserLiked ? true : false
 			}
 		})

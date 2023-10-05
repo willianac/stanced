@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit{
 
 	constructor(private PicturesService: PicturesService, private likesService: LikesService) {}
 
-	public handleLike(isPhotoAlreadyLiked: boolean, id: number) {
+	public handleLike(isPhotoAlreadyLiked: boolean, id: string) {
 		if(isPhotoAlreadyLiked) {
 			this.handleHeartIcon(id, "empty")
 			return this.likesService.removeLike(id).subscribe()
@@ -50,9 +50,9 @@ export class DashboardComponent implements OnInit{
 		return this.likesService.sendLike(id).subscribe()
 	}
 
-	private handleHeartIcon(photoid: number, action: "fill" | "empty") {
+	private handleHeartIcon(photoID: string, action: "fill" | "empty") {
 		const updatedPictureList = this.pictures.map(car => {
-			if(car.id === photoid) {
+			if(car.id === photoID) {
 				if(action === "fill") return {...car, shouldHeartBeFilled: true}
 				if(action === "empty") return {...car, shouldHeartBeFilled: false}
 			}

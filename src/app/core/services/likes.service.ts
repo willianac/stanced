@@ -10,22 +10,22 @@ type PhotoIdAndLikeCount = {
 }
 
 @Injectable({
-  providedIn: "root"
+	providedIn: "root"
 })
 export class LikesService {
-  constructor(private http: HttpClient, private token: TokenService) {}
+	constructor(private http: HttpClient, private token: TokenService) {}
 
-  public sendLike(photoid: number): Observable<void> {
-    const userid = this.token.getDecodedToken().id;
-    return this.http.post<void>(environment.apiUrl + "/like", { userid, photoid })
-  }
+	public sendLike(picture_id: string): Observable<void> {
+		const user_id = this.token.getDecodedToken().id;
+		return this.http.post<void>(environment.apiUrl + "/like", { user_id, picture_id })
+	}
 
-  public removeLike(photoid: number): Observable<void> {
-    const userid = this.token.getDecodedToken().id
-    return this.http.delete<void>(environment.apiUrl + "/like", {body: { photoid, userid }})
-  }
+	public removeLike(picture_id: string): Observable<void> {
+		const user_id = this.token.getDecodedToken().id
+		return this.http.delete<void>(environment.apiUrl + "/like", {body: { picture_id, user_id }})
+	}
 
-  public getLikes(): Observable<PhotoIdAndLikeCount> {
-    return this.http.get<PhotoIdAndLikeCount>(environment.apiUrl + "/like")
-  }
+	public getLikes(): Observable<PhotoIdAndLikeCount> {
+		return this.http.get<PhotoIdAndLikeCount>(environment.apiUrl + "/like")
+	}
 }

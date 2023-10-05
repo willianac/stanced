@@ -1,5 +1,5 @@
 export interface IPicture {
-	id: number
+	id: string
 	url: string
 	title: string
 	description: string
