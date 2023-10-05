@@ -1,7 +1,7 @@
 <app-header></app-header>
 <app-photo-grid>
 	<div *ngFor="let picture of pictures" class="cursor-pointer relative" (mouseenter)="picture.showOverlay = true" (mouseleave)="picture.showOverlay = false">
-		<div *ngIf="picture.showOverlay" class="absolute bg-black h-full w-full bg-opacity-20 flex flex-col justify-between py-3 px-5 overflow-hidden" @fadeIn @fadeOut>
+		<div *ngIf="picture.showOverlay" class="absolute bg-black w-full inset-0 bg-opacity-20 flex flex-col justify-between py-3 px-5" @fadeIn @fadeOut>
 			<div class="flex justify-end items-center gap-x-2">
 				<span class="text-white font-medium">{{picture.likes}}</span>
 			

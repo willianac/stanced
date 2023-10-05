@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 import { PicturesService } from "src/app/core/services/pictures.service";
 
 @Component({
@@ -18,7 +19,12 @@ export class NewPictureComponent {
 
 	file!: File
 
-	constructor(private fb: FormBuilder, private picsService: PicturesService, private router: Router) {}
+	constructor(
+		private fb: FormBuilder, 
+		private picsService: PicturesService, 
+		private router: Router, 
+		private toast: ToastrService
+	) {}
 
 	uploadFoto() {
 		const allowComments = this.photoForm.get("allowComments")?.value
@@ -28,7 +34,10 @@ export class NewPictureComponent {
 		formdata.append("description", this.photoForm.get("description")?.value as string)
 		formdata.append("image", this.file)
 		this.picsService.sendNewPicture(formdata).subscribe({
-			next : () => this.router.navigateByUrl("dashboard"),
+			next : () => {
+				this.router.navigateByUrl("dashboard")
+				this.toast.success("Foto enviada com sucesso", "Enviada", { positionClass: "toast-top-left" })
+			},
 			error : (err) => console.error(err)
 		})
 	}

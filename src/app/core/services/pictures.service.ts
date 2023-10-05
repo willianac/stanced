@@ -41,8 +41,8 @@ export class PicturesService {
 		return this.http.get<IPicture[]>(environment.apiUrl + "/getimagesbyuserid?id=" + id)
 	}
 
-	public deletePicture(pictureID: string): Observable<void> {
-		return this.http.delete<void>(environment.apiUrl + "/deleteimage", {body: { pictureID }}).pipe(
+	public deletePicture(picture_id: string): Observable<void> {
+		return this.http.delete<void>(environment.apiUrl + "/deleteimage", {body: { picture_id }}).pipe(
 			tap(() => this.clearCache())
 		)
 	}

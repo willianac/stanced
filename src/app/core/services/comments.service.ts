@@ -13,13 +13,13 @@ export class CommentsService {
 
 	constructor(private http: HttpClient, private token: TokenService) { }
 
-	public send(comment: string, pictureID: number): Observable<IComment[]> {
-		const { name } = this.token.getDecodedToken()
+	public send(comment: string, picture_id: string): Observable<void> {
+		const author_id = this.token.getDecodedToken().id
 
-		return this.http.post<IComment[]>(environment.apiUrl + "/sendcomment", {
+		return this.http.post<void>(environment.apiUrl + "/sendcomment", {
 			comment,
-			name,
-			photoid : pictureID
+			author_id,
+			picture_id
 		})
 	}
 
