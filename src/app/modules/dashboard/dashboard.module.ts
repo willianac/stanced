@@ -9,10 +9,19 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PictureComponent } from "./pages/picture/picture.component";
 import { HeaderModule } from "src/app/core/header/header.module";
 import { CardPhotoModule } from "src/app/shared/components/card-photo/card-photo.module";
+import { CommentComponent } from "./components/comment/comment.component";
+import { CommentsContainerComponent } from "./components/comments-container/comments-container-component";
 
 
 @NgModule({
-	declarations: [DashboardComponent, PhotoGridComponent, NewPictureComponent, PictureComponent],
+	declarations: [
+		DashboardComponent, 
+		PhotoGridComponent, 
+		NewPictureComponent, 
+		PictureComponent, 
+		CommentComponent, 
+		CommentsContainerComponent
+	],
 	imports: [
 		CommonModule,
 		DashboardRoutingModule,
