@@ -26,7 +26,7 @@ export class SavedImagesService {
 		)
 	}
 
-	public removeSavedImage(picture_id: string): Observable<any> {
+	public removeSavedImage(picture_id: string): Observable<IPicture[]> {
 		const user_id = this.tokenService.getDecodedToken().id
 		return this.http.delete<void>(environment.apiUrl + "/removesaved", { body: { user_id, picture_id } }).pipe(
 			switchMap(() => this.getUserSavedImage()),

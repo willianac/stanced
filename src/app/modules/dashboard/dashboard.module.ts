@@ -4,15 +4,24 @@ import { CommonModule } from "@angular/common";
 import { DashboardRoutingModule } from "./dashboard-routing.module";
 import { DashboardComponent } from "./dashboard.component";
 import { PhotoGridComponent } from "./components/photo-grid/photo-grid.component";
-import { NewPictureComponent } from "./components/new-picture/new-picture.component";
+import { NewPictureComponent } from "./pages/new-picture/new-picture.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { PicturePageComponent } from "./components/picture-page/picture-page.component";
+import { PictureComponent } from "./pages/picture/picture.component";
 import { HeaderModule } from "src/app/core/header/header.module";
 import { CardPhotoModule } from "src/app/shared/components/card-photo/card-photo.module";
+import { CommentComponent } from "./components/comment/comment.component";
+import { CommentsContainerComponent } from "./components/comments-container/comments-container-component";
 
 
 @NgModule({
-	declarations: [DashboardComponent, PhotoGridComponent, NewPictureComponent, PicturePageComponent],
+	declarations: [
+		DashboardComponent, 
+		PhotoGridComponent, 
+		NewPictureComponent, 
+		PictureComponent, 
+		CommentComponent, 
+		CommentsContainerComponent
+	],
 	imports: [
 		CommonModule,
 		DashboardRoutingModule,

@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute } from "@angular/router"
-import { from } from "rxjs"
 import { TokenService } from "src/app/core/authentication/token.service"
 import { PicturesService } from "src/app/core/services/pictures.service"
 import { CommentsService } from "src/app/core/services/comments.service"
@@ -11,14 +10,14 @@ import { ToastrService } from "ngx-toastr"
 
 @Component({
 	selector: "app-picture-page",
-	templateUrl: "./picture-page.component.html",
-	styleUrls: ["./picture-page.component.css"]
+	templateUrl: "./picture.component.html",
+	styleUrls: ["./picture.component.css"]
 })
-export class PicturePageComponent implements OnInit {
+export class PictureComponent implements OnInit {
 	pictureID = this.route.snapshot.paramMap.get("id")
 	picture!: IPicture
 	commentInput = ""
-	commentList = this.commentService.getComments(this.pictureID ?? "")
+	commentList$ = this.commentService.returnCommentsAsObservable()
 	userid!: number
 
 	constructor(
@@ -34,7 +33,7 @@ export class PicturePageComponent implements OnInit {
 	sendComment() {
 		if(this.commentInput.length > 3) {
 			this.commentService.send(this.commentInput, this.pictureID as string).subscribe({
-				next : (val) => {
+				next : () => {
 					this.commentInput = ""
 				},
 				error : (err) => console.error(err)
@@ -52,11 +51,11 @@ export class PicturePageComponent implements OnInit {
 	}
 
 	deleteImage() {
-		this.picsService.deletePicture(this.pictureID!).subscribe()
+		this.picsService.deletePicture(this.pictureID as string).subscribe()
 	}
 
 	saveImage() {
-		this.savedImagesService.saveImage(this.pictureID!).subscribe({
+		this.savedImagesService.saveImage(this.pictureID as string).subscribe({
 			next: () => {
 				this.toast.success("Foto adicionada aos seus salvos", "Salvo", { positionClass: "toast-top-left" });
 			}
@@ -67,10 +66,10 @@ export class PicturePageComponent implements OnInit {
 		this.userid = this.token.getDecodedToken().id
 		this.picsService.getPictures().subscribe({
 			next : (response) => {
-				console.log(response)
 				this.picture = response.find(picture => picture.id === this.pictureID) as IPicture
 				this.picture.shouldHeartBeFilled = this.picture.didUserLiked ? true : false
 			}
 		})
+		this.commentService.getComments(this.pictureID as string).subscribe()
 	}
 }

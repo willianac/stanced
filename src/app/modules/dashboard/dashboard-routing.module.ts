@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { NewPictureComponent } from "./components/new-picture/new-picture.component";
+import { NewPictureComponent } from "./pages/new-picture/new-picture.component";
 import { DashboardComponent } from "./dashboard.component";
-import { PicturePageComponent } from "./components/picture-page/picture-page.component";
+import { PictureComponent } from "./pages/picture/picture.component";
 
 const routes: Routes = [
 	{
@@ -15,7 +15,7 @@ const routes: Routes = [
 	},
 	{
 		path : "picture/:id",
-		component : PicturePageComponent
+		component : PictureComponent
 	}
 ];
 
