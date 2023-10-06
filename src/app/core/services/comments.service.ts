@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { TokenService } from "../authentication/token.service";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable, concatMap, tap } from "rxjs";
 import { IComment } from "src/app/shared/models/Comment";
 
 import { environment } from "src/environments/environment.development";
@@ -10,21 +10,31 @@ import { environment } from "src/environments/environment.development";
 	providedIn: "root"
 })
 export class CommentsService {
+	private comments = new BehaviorSubject<IComment[]>([])
 
-	constructor(private http: HttpClient, private token: TokenService) { }
+	constructor(private http: HttpClient, private token: TokenService) {}
 
-	public send(comment: string, picture_id: string): Observable<void> {
+	public send(comment: string, picture_id: string): Observable<IComment[]> {
 		const author_id = this.token.getDecodedToken().id
 
-		return this.http.post<void>(environment.apiUrl + "/sendcomment", {
+		return this.http.post(environment.apiUrl + "/sendcomment", {
 			comment,
 			author_id,
 			picture_id
-		})
+		}).pipe(
+			concatMap(() => this.getComments(picture_id)),
+			tap((comments) => this.comments.next(comments))
+		)
 	}
 
 	public getComments(id:string): Observable<IComment[]> {
 		const headers = new HttpHeaders({id})
-		return this.http.get<IComment[]>(environment.apiUrl + "/getcomments", {headers : headers})
+		return this.http.get<IComment[]>(environment.apiUrl + "/getcomments", {headers : headers}).pipe(
+			tap((comments) => this.comments.next(comments))
+		)
+	}
+
+	public returnCommentsAsObservable() {
+		return this.comments.asObservable()
 	}
 }
