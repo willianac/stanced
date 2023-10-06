@@ -10,10 +10,10 @@ import { ToastrService } from "ngx-toastr"
 
 @Component({
 	selector: "app-picture-page",
-	templateUrl: "./picture-page.component.html",
-	styleUrls: ["./picture-page.component.css"]
+	templateUrl: "./picture.component.html",
+	styleUrls: ["./picture.component.css"]
 })
-export class PicturePageComponent implements OnInit {
+export class PictureComponent implements OnInit {
 	pictureID = this.route.snapshot.paramMap.get("id")
 	picture!: IPicture
 	commentInput = ""
