@@ -34,6 +34,10 @@ export class CommentsService {
 		)
 	}
 
+	public remove(id: string): Observable<void> {
+		return this.http.delete<void>(environment.apiUrl + "/removecomment", { body: { id } })
+	}
+
 	public returnCommentsAsObservable() {
 		return this.comments.asObservable()
 	}
