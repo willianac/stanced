@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpEvent } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, forkJoin, map, tap } from "rxjs";
 import { IPicture } from "src/app/shared/models/Picture";
@@ -29,10 +29,13 @@ export class PicturesService {
 		)
 	}
 
-	public sendNewPicture(newPicture: FormData): Observable<void>{
+	public sendNewPicture(newPicture: FormData): Observable<HttpEvent<void>>{
 		const token = this.token.getDecodedToken()
 		newPicture.append("userid", token.id.toString())
-		return this.http.post<void>(environment.apiUrl + "/sendimage", newPicture).pipe(
+		return this.http.post<void>(environment.apiUrl + "/sendimage", newPicture, {
+			observe: "events",
+			reportProgress: true
+		}).pipe(
 			tap(() => this.clearCache())
 		)
 	}
