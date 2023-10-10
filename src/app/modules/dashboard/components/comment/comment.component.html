@@ -1,5 +1,22 @@
-<div class="flex flex-col relative py-3 px-5 rounded-sm bg-zinc-500 bg-opacity-10">
-	<span class="font-semibold text-zinc-800">{{author}}</span>
+<div 
+	(mouseenter)="showEllipsis = true" 
+	(mouseleave)="showEllipsis = false" 
+	(click)="handleCommentClick($event)"
+	class="flex flex-col relative py-3 px-5 rounded-sm bg-zinc-500 bg-opacity-10" 
+>
+	<div class="flex items-center gap-5">
+		<span class="font-semibold text-zinc-800">{{author}}</span>
+		<span class="text-xs text-zinc-500">{{date | date:"short"}}</span>
+	</div>
 	<p class="text-sm text-zinc-800">{{text}}</p>
-	<span class="text-xs text-zinc-500 absolute left-28 top-3">{{date | date:"short"}}</span>       
+	<i *ngIf="showEllipsis" (click)="handleMenu()" #toggleButton class="pi pi-ellipsis-h absolute right-5 top-3"></i>    
+	
+	<div *ngIf="showMenu" class="absolute top-8 z-10 right-2" #menu>
+		<app-menu>
+			<li class="hover:bg-zinc-200 py-2 cursor-pointer">
+				<i class="pi pi-trash ml-2"></i>
+				<span class="ml-2">Excluir</span>
+			</li>
+		</app-menu>
+	</div>
 </div>
