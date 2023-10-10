@@ -1,6 +1,6 @@
+import { HttpEventType } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { PicturesService } from "src/app/core/services/pictures.service";
 
@@ -18,11 +18,11 @@ export class NewPictureComponent {
 	})
 
 	file!: File
+	progress = 0
 
 	constructor(
 		private fb: FormBuilder, 
-		private picsService: PicturesService, 
-		private router: Router, 
+		private picsService: PicturesService,
 		private toast: ToastrService
 	) {}
 
@@ -34,11 +34,17 @@ export class NewPictureComponent {
 		formdata.append("description", this.photoForm.get("description")?.value as string)
 		formdata.append("image", this.file)
 		this.picsService.sendNewPicture(formdata).subscribe({
-			next : () => {
-				this.router.navigateByUrl("dashboard")
-				this.toast.success("Foto enviada com sucesso", "Enviada", { positionClass: "toast-top-left" })
+			next : (e) => {
+				if(e.type === HttpEventType.UploadProgress) {
+					const percentDone = Math.round((e.loaded / (e.total || 1)) * 100)
+					this.progress = percentDone
+				}
 			},
-			error : (err) => console.error(err)
+			error : (err) => console.error(err),
+			complete: () => {
+				this.toast.success("Foto enviada com sucesso", "Enviada", { positionClass: "toast-top-left" })
+				this.progress = 0
+			}
 		})
 	}
 }

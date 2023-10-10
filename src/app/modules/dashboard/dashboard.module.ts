@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { ProgressBarModule } from "primeng/progressbar";
 
 import { DashboardRoutingModule } from "./dashboard-routing.module";
 import { DashboardComponent } from "./dashboard.component";
@@ -30,7 +31,8 @@ import { MenuModule } from "src/app/shared/components/menu/menu.module";
 		FormsModule,
 		HeaderModule,
 		CardPhotoModule,
-		MenuModule
+		MenuModule,
+		ProgressBarModule
 	]
 })
 export class DashboardModule { }
