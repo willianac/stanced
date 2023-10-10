@@ -11,6 +11,7 @@ import { HeaderModule } from "src/app/core/header/header.module";
 import { CardPhotoModule } from "src/app/shared/components/card-photo/card-photo.module";
 import { CommentComponent } from "./components/comment/comment.component";
 import { CommentsContainerComponent } from "./components/comments-container/comments-container-component";
+import { MenuModule } from "src/app/shared/components/menu/menu.module";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { CommentsContainerComponent } from "./components/comments-container/comm
 		ReactiveFormsModule,
 		FormsModule,
 		HeaderModule,
-		CardPhotoModule
+		CardPhotoModule,
+		MenuModule
 	]
 })
 export class DashboardModule { }

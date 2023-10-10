@@ -1,11 +1,13 @@
-<div *ngIf="commentList$ | async as comments; else noComments" class="p-5 overflow-y-auto max-h-[40rem]">
+<div *ngIf="commentList$ | async as comments; else noComments" class="p-5">
 	<h2 class="font-bold text-xl mb-5">Comentários</h2>
-	<div *ngFor="let comment of comments" class="mb-3">
-		<app-comment
-			[author]="comment.user.name"
-			[text]="comment.comment"
-			[date]="comment.createdAt"
-		></app-comment>
+	<div class="max-h-[35rem] overflow-y-auto">
+		<div *ngFor="let comment of comments" class="mb-3">
+			<app-comment
+				[author]="comment.user.name"
+				[text]="comment.comment"
+				[date]="comment.createdAt"
+			></app-comment>
+		</div>
 	</div>
 </div>
 
