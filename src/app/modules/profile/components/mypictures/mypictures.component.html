@@ -1,11 +1,11 @@
 <h2 class="text-2xl font-bold mb-6">Fotos publicadas</h2>
-<div *ngIf="myPictures$ | async as pictures" class="w-full flex flex-col items-center gap-4">
+<div *ngIf="myPictures$ | async as pictures" class="w-full flex flex-col items-center gap-4 relative">
   <div *ngFor="let picture of pictures">
     <span class="block text-right">{{picture.createdAt | date }}</span>
-    <app-card-photo
-      [description]="picture.description"
-      [url]="picture.url"
-      [username]="picture.owner_name"
-    ></app-card-photo>
+    <app-photo
+			[src]="picture.url"
+			[id]="picture.id"
+			(deleteImageEvent)="deleteImage($event)"
+		></app-photo>
   </div>
-</div> 
+</div>
