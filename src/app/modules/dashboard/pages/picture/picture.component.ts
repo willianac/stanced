@@ -50,10 +50,6 @@ export class PictureComponent implements OnInit {
 		return this.likesService.sendLike(picture_id).subscribe()
 	}
 
-	deleteImage() {
-		this.picsService.deletePicture(this.pictureID as string).subscribe()
-	}
-
 	saveImage() {
 		this.savedImagesService.saveImage(this.pictureID as string).subscribe({
 			next: () => {
