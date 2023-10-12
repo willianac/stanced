@@ -18,7 +18,7 @@ export class PictureComponent implements OnInit {
 	picture!: IPicture
 	commentInput = ""
 	commentList$ = this.commentService.returnCommentsAsObservable()
-	userid!: number
+	userid = ""
 
 	constructor(
     private route: ActivatedRoute, 

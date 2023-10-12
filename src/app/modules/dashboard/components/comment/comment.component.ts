@@ -14,10 +14,14 @@ export class CommentComponent {
 	@Output() editCommentEvent = new EventEmitter<string>()
 	@Output() deleteCommentEvent = new EventEmitter<string>()
 	showMenu = false;
-	
+	userid = ""
+
 	constructor(
-		private elementRef: ElementRef
-	) {}
+		private elementRef: ElementRef,
+		private token: TokenService
+	) {
+		this.userid = token.getDecodedToken().id
+	}
 
 	public handleMenu() {
 		this.showMenu = !this.showMenu
