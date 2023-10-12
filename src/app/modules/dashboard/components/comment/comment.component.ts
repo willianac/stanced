@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from "@angular/core";
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from "@angular/core";
 import { CommentsService } from "src/app/core/services/comments.service";
 
 @Component({
@@ -13,18 +13,13 @@ export class CommentComponent {
 	@Output() editCommentEvent = new EventEmitter<string>()
 	showMenu = false;
 
-	@ViewChild("toggleButton") toggleButton!: ElementRef
-	@ViewChild("menu") menu!: ElementRef
-
 	constructor(
 		private elementRef: ElementRef, 
 		private commentsService: CommentsService, 
-		private changeDetector: ChangeDetectorRef
 	) {}
 
 	public handleMenu() {
 		this.showMenu = !this.showMenu
-		this.changeDetector.detectChanges()
 	}
 
 	@HostListener("document:click", ["$event"])
@@ -36,9 +31,11 @@ export class CommentComponent {
 
 	public deleteComment() {
 		this.commentsService.remove(this.id).subscribe()
+		this.handleMenu()
 	}
 
 	public emitEditCommentEvent() {
 		this.editCommentEvent.emit(this.id)
+		this.handleMenu()
 	}
 }

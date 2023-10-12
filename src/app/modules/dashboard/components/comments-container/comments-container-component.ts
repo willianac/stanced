@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { Observable } from "rxjs";
+import { CommentsService } from "src/app/core/services/comments.service";
 import { IComment } from "src/app/shared/models/Comment";
 
 @Component({
@@ -10,7 +11,9 @@ import { IComment } from "src/app/shared/models/Comment";
 export class CommentsContainerComponent {
 	@Input() commentList$!: Observable<IComment[]>
 	isEditCommentModalOpen = false
-	editingCommentId? = ""
+	editingCommentId = ""
+
+	constructor(private commentsService: CommentsService) {}
 	
 	public openModal(id: string) {
 		this.isEditCommentModalOpen = true
@@ -19,11 +22,12 @@ export class CommentsContainerComponent {
 
 	public closeModal() {
 		this.isEditCommentModalOpen = false
-		this.editingCommentId = undefined
+		this.editingCommentId = ""
 	}
 
 	public editComment(newComment: string) {
-		console.log(this.editingCommentId)
-		console.log(newComment)
+		this.commentsService.edit(this.editingCommentId, newComment).subscribe({
+			next: () => this.closeModal()
+		})
 	}
 }
