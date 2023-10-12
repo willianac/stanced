@@ -1,0 +1,21 @@
+<div class="absolute bg-black inset-0 bg-opacity-50">
+	<div class="bg-white max-w-lg relative mx-auto top-48 rounded-sm shadow-lg shadow-black/20">
+		<i (click)="close()" class="pi pi-times absolute right-3 top-3 cursor-pointer p-2 rounded-full hover:bg-zinc-200"></i>
+		<div class="px-8 pt-8 flex gap-2">
+			<i class="pi pi-pencil relative top-1"></i>
+			<div>
+				<h2 class="font-semibold text-lg text-zinc-900 mb-1">{{title}}</h2>
+				<p class="text-zinc-600 leading-snug">{{description}}</p>
+			</div>
+		</div>
+		<form class="mt-5">
+			<div class="px-8">
+				<input [(ngModel)]="newText" type="text" name="newText" placeholder="{{inputPlaceholder ?? ''}}" class="outline-none border-2 h-9 w-full rounded-sm font-normal text-base indent-2.5 transition duration-300 focus:border-bgblue">
+			</div>
+			<div class="flex justify-end gap-4 mt-5 bg-zinc-100 px-8 py-3">
+				<button (click)="close()" type="button" class="border border-zinc-300 shadow bg-white p-2.5 rounded-sm text-zinc-600 transition hover:bg-zinc-50">Cancelar</button>
+				<button (click)="save()" type="submit" class="bg-bgblue p-2.5 rounded-sm text-white font-medium shadow transition hover:bg-indigo-800">Salvar</button>
+			</div>
+		</form>
+	</div>
+</div>

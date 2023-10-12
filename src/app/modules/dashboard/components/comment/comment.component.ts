@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from "@angular/core";
 import { CommentsService } from "src/app/core/services/comments.service";
 
 @Component({
@@ -10,6 +10,7 @@ export class CommentComponent {
 	@Input() author = ""
 	@Input() text = ""
 	@Input() date = ""
+	@Output() editCommentEvent = new EventEmitter<string>()
 	showMenu = false;
 
 	@ViewChild("toggleButton") toggleButton!: ElementRef
@@ -35,5 +36,9 @@ export class CommentComponent {
 
 	public deleteComment() {
 		this.commentsService.remove(this.id).subscribe()
+	}
+
+	public emitEditCommentEvent() {
+		this.editCommentEvent.emit(this.id)
 	}
 }
