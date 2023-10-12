@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from "@angular/core";
-import { CommentsService } from "src/app/core/services/comments.service";
+import { TokenService } from "src/app/core/authentication/token.service";
 
 @Component({
 	templateUrl: "comment.component.html",
@@ -8,14 +8,15 @@ import { CommentsService } from "src/app/core/services/comments.service";
 export class CommentComponent {
 	@Input() id = ""
 	@Input() author = ""
+	@Input() authorId = ""
 	@Input() text = ""
 	@Input() date = ""
 	@Output() editCommentEvent = new EventEmitter<string>()
+	@Output() deleteCommentEvent = new EventEmitter<string>()
 	showMenu = false;
-
+	
 	constructor(
-		private elementRef: ElementRef, 
-		private commentsService: CommentsService, 
+		private elementRef: ElementRef
 	) {}
 
 	public handleMenu() {
@@ -29,8 +30,8 @@ export class CommentComponent {
 		}
 	}
 
-	public deleteComment() {
-		this.commentsService.remove(this.id).subscribe()
+	public emiteDeleteCommentEvent() {
+		this.deleteCommentEvent.emit(this.id)
 		this.handleMenu()
 	}
 

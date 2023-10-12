@@ -4,10 +4,12 @@
 		<div *ngFor="let comment of comments" class="mb-3">
 			<app-comment
 				[author]="comment.user.name"
+				[authorId]="comment.user.id"
 				[text]="comment.comment"
 				[date]="comment.createdAt"
 				[id]="comment.id"
 				(editCommentEvent)="openModal($event)"
+				(deleteCommentEvent)="deleteComment($event)"
 			></app-comment>
 		</div>
 	</div>

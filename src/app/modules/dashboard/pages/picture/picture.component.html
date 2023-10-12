@@ -38,6 +38,7 @@
 		<div *ngIf="picture?.allowComments; else commentsNotAllowed" class="flex-1">
 			<app-comments-container
 				[commentList$]="commentList$"
+				[pictureId]="pictureID!"
 			></app-comments-container>
 			<form (ngSubmit)="sendComment()" class="mt-4 flex gap-2 w-full px-5">
 				<input 

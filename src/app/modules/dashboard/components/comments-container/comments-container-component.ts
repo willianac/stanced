@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, concatMap, of, tap } from "rxjs";
 import { CommentsService } from "src/app/core/services/comments.service";
 import { IComment } from "src/app/shared/models/Comment";
 
@@ -10,6 +10,7 @@ import { IComment } from "src/app/shared/models/Comment";
 
 export class CommentsContainerComponent {
 	@Input() commentList$!: Observable<IComment[]>
+	@Input() pictureId = ""
 	isEditCommentModalOpen = false
 	editingCommentId = ""
 
@@ -26,8 +27,22 @@ export class CommentsContainerComponent {
 	}
 
 	public editComment(newComment: string) {
-		this.commentsService.edit(this.editingCommentId, newComment).subscribe({
+		this.commentsService.edit(this.editingCommentId, newComment).pipe(
+			concatMap(() => this.commentsService.getComments(this.pictureId)),
+			tap((comments) => {
+				this.commentList$ = of(comments)
+			})
+		).subscribe({
 			next: () => this.closeModal()
 		})
+	}
+
+	public deleteComment(id: string) {
+		this.commentsService.remove(id).pipe(
+			concatMap(() => this.commentsService.getComments(this.pictureId)),
+			tap((comments) => {
+				this.commentList$ = of(comments)
+			})
+		).subscribe()
 	}
 }
