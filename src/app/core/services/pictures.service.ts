@@ -12,7 +12,7 @@ import { environment } from "src/environments/environment.development";
 })
 export class PicturesService {
 	private cacheData: IPicture[] = []
-	private userid: number = this.token.getDecodedToken().id
+	private userid: string = this.token.getDecodedToken().id
 
 	constructor(private http: HttpClient, private likesService: LikesService, private token: TokenService) {}
 
@@ -40,7 +40,7 @@ export class PicturesService {
 		)
 	}
     
-	public getPicturesByUserId(id: number): Observable<IPicture[]> {
+	public getPicturesByUserId(id: string): Observable<IPicture[]> {
 		return this.http.get<IPicture[]>(environment.apiUrl + "/getimagesbyuserid?id=" + id)
 	}
 

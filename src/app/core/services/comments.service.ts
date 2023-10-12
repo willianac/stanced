@@ -38,6 +38,10 @@ export class CommentsService {
 		return this.http.delete<void>(environment.apiUrl + "/removecomment", { body: { id } })
 	}
 
+	public edit(id: string, comment: string): Observable<void> {
+		return this.http.put<void>(environment.apiUrl + "/comment", { id, comment })
+	}
+
 	public returnCommentsAsObservable() {
 		return this.comments.asObservable()
 	}

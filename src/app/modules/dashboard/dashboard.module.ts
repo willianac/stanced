@@ -13,6 +13,7 @@ import { CardPhotoModule } from "src/app/shared/components/card-photo/card-photo
 import { CommentComponent } from "./components/comment/comment.component";
 import { CommentsContainerComponent } from "./components/comments-container/comments-container-component";
 import { MenuModule } from "src/app/shared/components/menu/menu.module";
+import { EditModalModule } from "src/app/shared/components/edit-modal/edit-modal.module";
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { MenuModule } from "src/app/shared/components/menu/menu.module";
 		HeaderModule,
 		CardPhotoModule,
 		MenuModule,
-		ProgressBarModule
+		ProgressBarModule,
+		EditModalModule
 	]
 })
 export class DashboardModule { }

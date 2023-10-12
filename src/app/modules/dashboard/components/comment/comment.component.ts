@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, ViewChild } from "@angular/core";
-import { CommentsService } from "src/app/core/services/comments.service";
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from "@angular/core";
+import { TokenService } from "src/app/core/authentication/token.service";
 
 @Component({
 	templateUrl: "comment.component.html",
@@ -8,22 +8,23 @@ import { CommentsService } from "src/app/core/services/comments.service";
 export class CommentComponent {
 	@Input() id = ""
 	@Input() author = ""
+	@Input() authorId = ""
 	@Input() text = ""
 	@Input() date = ""
+	@Output() editCommentEvent = new EventEmitter<string>()
+	@Output() deleteCommentEvent = new EventEmitter<string>()
 	showMenu = false;
-
-	@ViewChild("toggleButton") toggleButton!: ElementRef
-	@ViewChild("menu") menu!: ElementRef
+	userid = ""
 
 	constructor(
-		private elementRef: ElementRef, 
-		private commentsService: CommentsService, 
-		private changeDetector: ChangeDetectorRef
-	) {}
+		private elementRef: ElementRef,
+		private token: TokenService
+	) {
+		this.userid = token.getDecodedToken().id
+	}
 
 	public handleMenu() {
 		this.showMenu = !this.showMenu
-		this.changeDetector.detectChanges()
 	}
 
 	@HostListener("document:click", ["$event"])
@@ -33,7 +34,13 @@ export class CommentComponent {
 		}
 	}
 
-	public deleteComment() {
-		this.commentsService.remove(this.id).subscribe()
+	public emiteDeleteCommentEvent() {
+		this.deleteCommentEvent.emit(this.id)
+		this.handleMenu()
+	}
+
+	public emitEditCommentEvent() {
+		this.editCommentEvent.emit(this.id)
+		this.handleMenu()
 	}
 }

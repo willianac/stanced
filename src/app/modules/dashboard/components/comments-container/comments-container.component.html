@@ -4,9 +4,12 @@
 		<div *ngFor="let comment of comments" class="mb-3">
 			<app-comment
 				[author]="comment.user.name"
+				[authorId]="comment.user.id"
 				[text]="comment.comment"
 				[date]="comment.createdAt"
 				[id]="comment.id"
+				(editCommentEvent)="openModal($event)"
+				(deleteCommentEvent)="deleteComment($event)"
 			></app-comment>
 		</div>
 	</div>
@@ -15,3 +18,11 @@
 <ng-template #noComments>
   <p class="text-base text-center">Sem comentários ainda</p>
 </ng-template>
+
+<app-edit-modal
+	*ngIf="isEditCommentModalOpen"
+	title="Editar comentário"
+	description="Digite o novo comentário"
+	(saveEvent)="editComment($event)"
+	(closeModalEvent)="closeModal()"
+></app-edit-modal>
