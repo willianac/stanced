@@ -1,8 +1,9 @@
 import { animate, animateChild, query, style, transition, trigger } from "@angular/animations"
-import { Component, OnInit } from "@angular/core"
+import { Component, OnDestroy, OnInit } from "@angular/core"
 import { PicturesService } from "src/app/core/services/pictures.service"
 import { LikesService } from "src/app/core/services/likes.service"
 import { IPicture } from "src/app/shared/models/Picture"
+import { Subscription, finalize, take } from "rxjs"
 
 const enterTr = transition(":enter", [
 	style({
@@ -36,8 +37,9 @@ const riseText = trigger("riseText", [textAnimation])
 	styleUrls: ["./dashboard.component.css"],
 	animations: [fadeIn, fadeOut, riseText]
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit, OnDestroy {
 	pictures!: IPicture[]
+	picturesSubscription!: Subscription
 
 	constructor(private PicturesService: PicturesService, private likesService: LikesService) {}
 
@@ -62,7 +64,7 @@ export class DashboardComponent implements OnInit{
 	}
 
 	ngOnInit(): void {
-		this.PicturesService.getPictures().subscribe({
+		this.picturesSubscription = this.PicturesService.getPictures().subscribe({
 			next : (response) => {
 				response.forEach(picture => {
 					if(picture.didUserLiked) {
@@ -75,5 +77,9 @@ export class DashboardComponent implements OnInit{
 			},
 			error : (err) => console.error(err)
 		})
+	}
+
+	ngOnDestroy(): void {
+		this.picturesSubscription.unsubscribe()
 	}
 }
