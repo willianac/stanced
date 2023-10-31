@@ -10,6 +10,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { ChangeUserInfoModal } from 'src/app/shared/components/change-userinfo-modal/change-userinfo-modal.module';
 import { HeaderModule } from 'src/app/core/header/header.module';
 import { PhotoModule } from 'src/app/shared/components/photo/photo.module';
+import { AvatarModule } from 'src/app/shared/components/avatar/avatar.module';
+import { MenuModule } from 'src/app/shared/components/menu/menu.module';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { PhotoModule } from 'src/app/shared/components/photo/photo.module';
     CardPhotoModule,
     ChangeUserInfoModal,
     HeaderModule,
-		PhotoModule
+		PhotoModule,
+		AvatarModule,
+		MenuModule
   ]
 })
 export class ProfileModule { }
