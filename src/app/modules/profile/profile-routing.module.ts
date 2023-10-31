@@ -10,6 +10,11 @@ const routes: Routes = [
     path: "",
     component: ProfileComponent,
     children: [
+			{
+				path: "",
+				redirectTo: "settings",
+				pathMatch: "full"
+			},
       {
         path: "mypictures",
         component: MypicturesComponent

@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core"
 import { PicturesService } from "src/app/core/services/pictures.service"
 import { LikesService } from "src/app/core/services/likes.service"
 import { IPicture } from "src/app/shared/models/Picture"
-import { Subscription, finalize, take } from "rxjs"
+import { Subscription } from "rxjs"
 
 const enterTr = transition(":enter", [
 	style({

@@ -12,34 +12,42 @@ type Response = {
 }
 
 @Injectable({
-  providedIn: "root"
+	providedIn: "root"
 })
 export class UserInfoService {
-  constructor(
+	constructor(
     private tokenService: TokenService, 
     private http: HttpClient, 
     private authService: AuthenticationService
-  ) {}
+	) {}
 
-  public changeName(newName: string): Observable<Response> {
-    const userid = this.tokenService.getDecodedToken().id
-    return this.http.put<Response>(environment.apiUrl + "/changeusername", { userid, newName }).pipe(
-      tap((res) => {
-        this.tokenService.deleteToken()
-        this.tokenService.setToken(res.token)
-        this.authService.notify()
-      })
-    )
-  }
+	public changeName(newName: string): Observable<Response> {
+		const userid = this.tokenService.getDecodedToken().id
+		return this.http.put<Response>(environment.apiUrl + "/changeusername", { userid, newName }).pipe(
+			tap((res) => {
+				this.tokenService.deleteToken()
+				this.tokenService.setToken(res.token)
+				this.authService.notify()
+			})
+		)
+	}
 
-  public changeEmail(newEmail: string): Observable<Response> {
-    const userid = this.tokenService.getDecodedToken().id
-    return this.http.put<Response>(environment.apiUrl + "/changeuseremail", { userid, newEmail }).pipe(
-      tap((res) => {
-        this.tokenService.deleteToken()
-        this.tokenService.setToken(res.token)
-        this.authService.notify()
-      })
-    )
-  }
+	public changeEmail(newEmail: string): Observable<Response> {
+		const userid = this.tokenService.getDecodedToken().id
+		return this.http.put<Response>(environment.apiUrl + "/changeuseremail", { userid, newEmail }).pipe(
+			tap((res) => {
+				this.tokenService.deleteToken()
+				this.tokenService.setToken(res.token)
+				this.authService.notify()
+			})
+		)
+	}
+
+	public setProfileAvatar(imgFile: any): Observable<any> {
+		const userid = this.tokenService.getDecodedToken().id
+		const data = new FormData();
+		data.append("image", imgFile)
+		data.append("userid", userid)
+		return this.http.post(environment.apiUrl + "/profileavatar", data)
+	}
 }
