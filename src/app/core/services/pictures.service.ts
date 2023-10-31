@@ -12,15 +12,15 @@ import { environment } from "src/environments/environment.development";
 })
 export class PicturesService {
 	private cacheData: IPicture[] = []
-	private userid: string = this.token.getDecodedToken().id
 
 	constructor(private http: HttpClient, private likesService: LikesService, private token: TokenService) {}
 
-	private likes = this.likesService.getLikes()
-	private pictures = this.http.get<IPicture[]>(environment.apiUrl + "/getimages?userid=" + this.userid)
-
 	public getPictures(): Observable<IPicture[]> {
-		return forkJoin([this.likes, this.pictures]).pipe(
+		const userid = this.token.getDecodedToken().id
+		const likes = this.likesService.getLikes()
+		const pictures = this.http.get<IPicture[]>(environment.apiUrl + "/getimages?userid=" + userid)
+
+		return forkJoin([likes, pictures]).pipe(
 			map(([likesCount, pictures]) => {
 				return pictures.map(picture => (
 					{...picture, likes: likesCount[picture.id]}
