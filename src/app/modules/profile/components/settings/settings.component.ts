@@ -1,5 +1,7 @@
 import { animate, style, transition, trigger } from "@angular/animations";
+import { HttpEventType } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
+import { AuthenticationService } from "src/app/core/authentication/authentication.service";
 import { TokenService } from "src/app/core/authentication/token.service";
 import { JWTtoken } from "src/app/core/authentication/user";
 import { UserInfoService } from "src/app/core/authentication/user-info.service";
@@ -27,11 +29,18 @@ const fadeOut = trigger("fadeOut", [leaveTransition])
 })
 export class SettingsComponent implements OnInit {
 	userInfo!: JWTtoken;
+	userAvatar!: string
 	showModal = false;
 	modalEditType!: "name" | "email";
 	showAvatarMenu = false;
+
+	isUploading = false;
   
-	constructor(private tokenService: TokenService, private userInfoService: UserInfoService) {}
+	constructor(
+		private tokenService: TokenService, 
+		private userInfoService: UserInfoService, 
+		private auth: AuthenticationService
+	) {}
 
 	public openModal(editType: "name" | "email") {
 		this.modalEditType = editType
@@ -47,11 +56,22 @@ export class SettingsComponent implements OnInit {
 	}
 
 	public onFileChange(event: any) {
-		this.userInfoService.setProfileAvatar(event.target.files[0]).subscribe()
+		this.isUploading = true
+		this.showAvatarMenu = false
+		this.userInfoService.setProfileAvatar(event.target.files[0]).subscribe({
+			complete: () => this.isUploading = false
+		})
+	}
+
+	public removeAvatar() {
+		this.handleAvatarMenu()
+		this.userInfoService.removeProfileAvatar().subscribe()
 	}
 
 	ngOnInit(): void {
 		this.userInfo = this.tokenService.getDecodedToken()
-		console.log(this.userInfo)
+		this.auth.getAvatar().subscribe({
+			next: (imgUrl) => this.userAvatar = imgUrl
+		})
 	}
 }
