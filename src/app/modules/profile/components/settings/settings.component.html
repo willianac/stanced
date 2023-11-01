@@ -4,7 +4,12 @@
 		<app-avatar
 			size="10"
 			[src]="userAvatar"
+			*ngIf="!isUploading; else loading"
 		></app-avatar>
+
+		<ng-template #loading>
+			<i class="pi pi-spin pi-spinner text-8xl" ></i>
+		</ng-template>
 		<div class="relative">
 			<button (click)="handleAvatarMenu()" class="border-2 rounded-sm py-1.5 px-3 flex items-center gap-1 hover:bg-zinc-200 transition">
 				<i class="pi pi-pencil text-sm"></i>	

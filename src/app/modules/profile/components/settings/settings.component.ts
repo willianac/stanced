@@ -1,4 +1,5 @@
 import { animate, style, transition, trigger } from "@angular/animations";
+import { HttpEventType } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "src/app/core/authentication/authentication.service";
 import { TokenService } from "src/app/core/authentication/token.service";
@@ -32,6 +33,8 @@ export class SettingsComponent implements OnInit {
 	showModal = false;
 	modalEditType!: "name" | "email";
 	showAvatarMenu = false;
+
+	isUploading = false;
   
 	constructor(
 		private tokenService: TokenService, 
@@ -53,8 +56,10 @@ export class SettingsComponent implements OnInit {
 	}
 
 	public onFileChange(event: any) {
+		this.isUploading = true
+		this.showAvatarMenu = false
 		this.userInfoService.setProfileAvatar(event.target.files[0]).subscribe({
-			next: () => this.handleAvatarMenu()
+			complete: () => this.isUploading = false
 		})
 	}
 
