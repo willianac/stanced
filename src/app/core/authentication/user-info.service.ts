@@ -43,11 +43,17 @@ export class UserInfoService {
 		)
 	}
 
-	public setProfileAvatar(imgFile: any): Observable<any> {
+	public setProfileAvatar(imgFile: any): Observable<Response> {
 		const userid = this.tokenService.getDecodedToken().id
 		const data = new FormData();
 		data.append("image", imgFile)
 		data.append("userid", userid)
-		return this.http.post(environment.apiUrl + "/profileavatar", data)
+		return this.http.post<Response>(environment.apiUrl + "/profileavatar", data).pipe(
+			tap((res) => {
+				this.tokenService.deleteToken()
+				this.tokenService.setToken(res.token)
+				this.authService.notify()
+			})
+		)
 	}
 }

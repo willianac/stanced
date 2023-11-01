@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from "@angular/animations";
 import { Component, OnInit } from "@angular/core";
+import { AuthenticationService } from "src/app/core/authentication/authentication.service";
 import { TokenService } from "src/app/core/authentication/token.service";
 import { JWTtoken } from "src/app/core/authentication/user";
 import { UserInfoService } from "src/app/core/authentication/user-info.service";
@@ -27,11 +28,16 @@ const fadeOut = trigger("fadeOut", [leaveTransition])
 })
 export class SettingsComponent implements OnInit {
 	userInfo!: JWTtoken;
+	userAvatar!: string
 	showModal = false;
 	modalEditType!: "name" | "email";
 	showAvatarMenu = false;
   
-	constructor(private tokenService: TokenService, private userInfoService: UserInfoService) {}
+	constructor(
+		private tokenService: TokenService, 
+		private userInfoService: UserInfoService, 
+		private auth: AuthenticationService
+	) {}
 
 	public openModal(editType: "name" | "email") {
 		this.modalEditType = editType
@@ -52,6 +58,8 @@ export class SettingsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.userInfo = this.tokenService.getDecodedToken()
-		console.log(this.userInfo)
+		this.auth.getAvatar().subscribe({
+			next: (imgUrl) => this.userAvatar = imgUrl
+		})
 	}
 }
