@@ -21,8 +21,12 @@
                     <span class="font-bold">Nova foto</span>
                 </a>
                 <div class="relative" (click)="handlePopOverMenu()">
-                    <div class="cursor-pointer">
-                        <span class="font-semibold text-textyellow">Olá, {{user}} </span>
+                    <div class="cursor-pointer flex items-center">
+                        <span class="font-semibold text-textyellow mr-2.5">Olá, {{user}} </span>
+												<app-avatar
+													size="2"
+													[src]="avatar"
+												></app-avatar>
                         <i class="pi pi-angle-down pl-0.5 text-textyellow"></i>
                     </div>
                     <div class="absolute top-10 transition-opacity duration-500 z-50" [ngClass]="isPopOverMenuOpen ? 'opacity-100' : 'opacity-0'">
