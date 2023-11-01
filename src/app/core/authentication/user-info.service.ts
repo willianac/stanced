@@ -56,4 +56,15 @@ export class UserInfoService {
 			})
 		)
 	}
+
+	public removeProfileAvatar(): Observable<Response> {
+		const userid = this.tokenService.getDecodedToken().id
+		return this.http.delete<Response>(environment.apiUrl + "/profileavatar", { body: { userid } }).pipe(
+			tap((res) => {
+				this.tokenService.deleteToken()
+				this.tokenService.setToken(res.token)
+				this.authService.notify()
+			})
+		)
+	}
 }

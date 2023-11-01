@@ -53,7 +53,14 @@ export class SettingsComponent implements OnInit {
 	}
 
 	public onFileChange(event: any) {
-		this.userInfoService.setProfileAvatar(event.target.files[0]).subscribe()
+		this.userInfoService.setProfileAvatar(event.target.files[0]).subscribe({
+			next: () => this.handleAvatarMenu()
+		})
+	}
+
+	public removeAvatar() {
+		this.handleAvatarMenu()
+		this.userInfoService.removeProfileAvatar().subscribe()
 	}
 
 	ngOnInit(): void {
