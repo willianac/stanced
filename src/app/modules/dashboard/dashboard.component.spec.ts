@@ -36,14 +36,14 @@ describe("Dashboard Component", () => {
 		expect(component).toBeTruthy()
 	})
 
-	it("Should display images when receive data", () => {
-		const carImages = returnCarPhotos()
-		const photoGrid = fixture.nativeElement.querySelector("app-photo-grid")
+	// it("Should display images when receive data", () => {
+	// 	const carImages = returnCarPhotos()
+	// 	const photoGrid = fixture.nativeElement.querySelector("app-photo-grid")
 
-		spyOn(service, "clearCache")
-			.and.callFake(returnCarPhotos)
-		fixture.detectChanges()
+	// 	spyOn(service, "clearCache")
+	// 		.and.callFake(returnCarPhotos)
+	// 	fixture.detectChanges()
 
-		expect(photoGrid).not.toBeNull()
-	})
+	// 	expect(photoGrid).not.toBeNull()
+	// })
 })

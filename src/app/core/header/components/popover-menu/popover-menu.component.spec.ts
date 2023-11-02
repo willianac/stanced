@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PopoverMenuComponent } from './popover-menu.component';
+import { PopoverMenuComponent } from "./popover-menu.component";
 
-describe('PopoverMenuComponent', () => {
-  let component: PopoverMenuComponent;
-  let fixture: ComponentFixture<PopoverMenuComponent>;
+describe("PopoverMenuComponent", () => {
+	let component: PopoverMenuComponent;
+	let fixture: ComponentFixture<PopoverMenuComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ PopoverMenuComponent ]
-    })
-    .compileComponents();
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			declarations: [ PopoverMenuComponent ]
+		})
+			.compileComponents();
 
-    fixture = TestBed.createComponent(PopoverMenuComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(PopoverMenuComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it("should create", () => {
+		expect(component).toBeTruthy();
+	});
 });

@@ -4,8 +4,8 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
 @NgModule({
-  declarations: [ChangeUserinfoModalComponent],
-  imports: [CommonModule, FormsModule],
-  exports: [ChangeUserinfoModalComponent]
+	declarations: [ChangeUserinfoModalComponent],
+	imports: [CommonModule, FormsModule],
+	exports: [ChangeUserinfoModalComponent]
 })
 export class ChangeUserInfoModal {}
