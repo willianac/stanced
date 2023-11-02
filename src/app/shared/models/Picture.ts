@@ -13,4 +13,7 @@ export interface IPicture {
 	shouldHeartBeFilled: boolean
 	createdAt: Date
 	updatedAt: Date
+	user: {
+		profile_img_url: string
+	}
 }

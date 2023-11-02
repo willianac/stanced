@@ -14,6 +14,7 @@ import { CommentComponent } from "./components/comment/comment.component";
 import { CommentsContainerComponent } from "./components/comments-container/comments-container-component";
 import { MenuModule } from "src/app/shared/components/menu/menu.module";
 import { EditModalModule } from "src/app/shared/components/edit-modal/edit-modal.module";
+import { AvatarModule } from "src/app/shared/components/avatar/avatar.module";
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { EditModalModule } from "src/app/shared/components/edit-modal/edit-modal
 		CardPhotoModule,
 		MenuModule,
 		ProgressBarModule,
-		EditModalModule
+		EditModalModule,
+		AvatarModule
 	]
 })
 export class DashboardModule { }
