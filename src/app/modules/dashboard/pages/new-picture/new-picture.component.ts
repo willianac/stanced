@@ -13,7 +13,7 @@ export class NewPictureComponent {
 	photoForm = this.fb.group({
 		file : ["", Validators.required],
 		title: ["", Validators.required],
-		description: ["", [Validators.maxLength(300)]],
+		description: ["", [Validators.maxLength(2000)]],
 		allowComments: [true]
 	})
 

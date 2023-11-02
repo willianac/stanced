@@ -13,8 +13,14 @@
 			</div>
 			<div routerLink="picture/{{picture.id}}" class="flex-1"></div>
 			<div class="flex justify-between">
-				<span @riseText class="text-white font-bold">{{picture.title}}</span>
-				<span @riseText class="text-white">Por {{picture.owner_name}}</span>
+				<span class="text-white font-bold">{{picture.title}}</span>
+				<div class="flex items-center gap-1.5 overflow-hidden">
+					<app-avatar
+						size="1.6"
+						[src]="picture.user.profile_img_url"
+					></app-avatar>
+					<span class="text-white">{{picture.owner_name}}</span>
+				</div>
 			</div>
 		</div>
 		<app-card-photo

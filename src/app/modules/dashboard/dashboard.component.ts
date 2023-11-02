@@ -1,4 +1,4 @@
-import { animate, animateChild, query, style, transition, trigger } from "@angular/animations"
+import { animate, style, transition, trigger } from "@angular/animations"
 import { Component, OnDestroy, OnInit } from "@angular/core"
 import { PicturesService } from "src/app/core/services/pictures.service"
 import { LikesService } from "src/app/core/services/likes.service"
@@ -9,8 +9,7 @@ const enterTr = transition(":enter", [
 	style({
 		opacity: 0
 	}),
-	animate("0.2s linear", style({ opacity: 1 })),
-	query("@riseText", animateChild())
+	animate("0.2s linear", style({ opacity: 1 }))
 ])
 
 const leaveTr = transition(":leave", [
@@ -66,6 +65,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.picturesSubscription = this.PicturesService.getPictures().subscribe({
 			next : (response) => {
+				console.log(response)
 				response.forEach(picture => {
 					if(picture.didUserLiked) {
 						picture.shouldHeartBeFilled = true
