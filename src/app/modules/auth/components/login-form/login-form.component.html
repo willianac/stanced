@@ -1,5 +1,6 @@
-<form (ngSubmit)="fazerLogin()" class="w-96" [formGroup]="loginForm">
-    <h1 class="mb-2 text-center text-2xl font-semibold text-zinc-800">Bem vindo de volta!</h1>
+<form (ngSubmit)="fazerLogin()" class="w-screen px-6 md:px-20 py-12 md:max-w-3xl" [formGroup]="loginForm">
+    <h1 class="mb-2 text-3xl font-semibold text-zinc-600">Bem vindo de volta!</h1>
+		<p class="mb-12 text-zinc-600">Entre na sua conta para continuar</p>
 
 		<app-auth-error
 			*ngIf="showError"
@@ -7,12 +8,15 @@
 		></app-auth-error>
 		
     <div class="flex flex-col mb-6">
-        <label for="email" class="mb-2 text-zinc-800">E-mail</label>
-        <input 
-            type="email" 
-            formControlName="email" 
-            class="border-2 h-12 rounded-sm font-normal text-base indent-4 bg-zinc-100 transition duration-300 focus:border-bgblue"
-        />
+				<div class="flex relative items-center">
+					<i class="pi pi-envelope text-zinc-400 absolute top-2.5 left-3 text-xl"></i>
+					<input 
+						type="email" 
+						formControlName="email"
+						placeholder="Email"
+						class="border-2 h-12 rounded-sm text-zinc-600 indent-10 bg-zinc-100 transition duration-300 focus:border-bgblue w-full"
+					/>
+				</div>
         <app-input-fill-error 
             message="email em formato inválido"
             *ngIf="loginForm.get('email')?.errors?.['email']"
@@ -23,11 +27,15 @@
         ></app-input-fill-error>
     </div>
     <div class="flex flex-col">
-        <label for="password" class="mb-2 text-zinc-800">Senha</label>
-        <input 
-            type="password" 
-            formControlName="password" 
-            class="border-2 h-12 rounded-sm font-normal text-base indent-4 bg-zinc-100 transition duration-300 focus:border-bgblue"/>
+				<div class="flex relative items-center">
+					<i class="pi pi-lock text-zinc-400 absolute top-2.5 left-3 text-xl"></i>
+					<input 
+						type="password" 
+						formControlName="password"
+						placeholder="Sua senha"
+						class="border-2 h-12 w-full rounded-sm text-zinc-600 indent-10 bg-zinc-100 transition duration-300 focus:border-bgblue"
+					/>
+				</div>
         <app-input-fill-error
             message="senha deve ter no minimo 6 caracteres"
             *ngIf="loginForm.get('password')?.errors?.['minlength']"
@@ -36,17 +44,27 @@
             message="senha é obrigatória"
             *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched"
         ></app-input-fill-error>
-        <div class="flex justify-end mt-2">
-            <small class="text-zinc-500 hover:text-zinc-800 underline underline-offset-2 transition duration-300">esqueceu a senha?</small>
+        <div class="flex justify-end mt-5">
+            <small class="text-bgblue font-semibold cursor-pointer hover:underline transition duration-300">Esqueceu a senha?</small>
         </div>
     </div>
-    <button 
-        class="mt-5 min-w-full h-12 rounded-sm font-bold disabled:text-zinc-800 bg-bgblue disabled:bg-zinc-300 text-textyellow transition-all hover:bg-indigo-800 duration-300" 
+    <div class="flex flex-col items-center mt-5">
+			<button 
+        class="min-w-full h-12 rounded-sm font-bold bg-bgblue text-textyellow transition-all hover:bg-indigo-800 duration-300" 
         [disabled]="loginForm.invalid" 
         type="submit">
         Entrar
-    </button>
-    <a routerLink="register" class="text-sm font-normal hover:text-bgblue transition mt-0.5">
-        Ainda não tem uma conta?
-    </a>
+    	</button>
+			<div class="flex w-full items-center">
+				<hr class="h-px w-full my-6 border-0 dark:bg-gray-300">
+				<span class="px-5 text-zinc-600 font-medium">ou</span>
+				<hr class="h-px w-full my-6 border-0 dark:bg-gray-300">
+			</div>
+			<button
+				routerLink="register" 
+				class="min-w-full h-12 rounded-sm font-semibold text-zinc-700 transition-all border-2 border-zinc-300 hover:bg-zinc-200 duration-300" >
+				Cadastrar
+			</button>
+		</div>
 </form>
+<hr>

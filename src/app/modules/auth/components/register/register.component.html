@@ -1,5 +1,6 @@
-<form [formGroup]="registerForm" (ngSubmit)="registrar()" class="w-96">
-    <h1 class="mb-2 text-center font-semibold text-2xl text-zinc-800">Crie uma conta</h1>
+<form [formGroup]="registerForm" (ngSubmit)="registrar()" class="w-screen px-6 md:px-20 py-12 md:max-w-3xl">
+	<h1 class="mb-2 text-3xl font-semibold text-zinc-600">Crie uma conta</h1>
+	<p class="mb-12 text-zinc-600">Compartilhe com outros usuários suas customizações favoritas de carros.</p>
 
 		<app-auth-error
 			*ngIf="showError"
@@ -7,36 +8,66 @@
 		></app-auth-error>
 
     <div class="flex flex-col mb-6">
-        <label for="name" class="text-zinc-800 mb-2">Nome</label>
-        <input formControlName="name" type="text" class="border-2 h-12 rounded-sm bg-zinc-100 font-normal indent-4 focus:border-bgblue transition duration-300"/>
+			<div class="flex relative items-center">
+				<i class="pi pi-user text-zinc-400 absolute top-2.5 left-3 text-xl"></i>
+				<input 
+					formControlName="name"
+					placeholder="Seu nome"
+					type="text" 
+					class="border-2 h-12 rounded-sm text-zinc-600 indent-10 bg-zinc-100 transition duration-300 focus:border-bgblue w-full"
+				/>
+			</div>
         <app-input-fill-error
-            message="nome muito curto"
-            *ngIf="registerForm.get('name')?.errors?.['minlength']"
+				message="nome muito curto"
+				*ngIf="registerForm.get('name')?.errors?.['minlength']"
         ></app-input-fill-error>
     </div>
     <div class="flex flex-col mb-6">
-        <label for="email" class="mb-2 text-zinc-800">E-mail</label>
-        <input formControlName="email" type="email" class="border-2 h-12 rounded-sm bg-zinc-100 font-normal indent-4 focus:border-bgblue transition duration-300"/>
+			<div class="flex relative items-center">
+				<i class="pi pi-envelope text-zinc-400 absolute top-2.5 left-3 text-xl"></i>
+				<input 
+					formControlName="email"
+					placeholder="Email"
+					type="email" 
+					class="border-2 h-12 rounded-sm text-zinc-600 indent-10 bg-zinc-100 transition duration-300 focus:border-bgblue w-full"
+				/>
+			</div>
         <app-input-fill-error
             message="email inválido"
             *ngIf="registerForm.get('email')?.errors?.['email']"
         ></app-input-fill-error>
     </div>
     <div class="flex flex-col">
-        <label for="password" class="mb-2 text-zinc-800">Senha</label>
-        <input formControlName="password" type="password" class="border-2 h-12 rounded-sm bg-zinc-100 font-normal indent-4 focus:border-bgblue transition duration-300"/>
+			<div class="flex relative items-center">
+				<i class="pi pi-lock text-zinc-400 absolute top-2.5 left-3 text-xl"></i>
+        <input 
+					formControlName="password"
+					placeholder="Senha"
+					type="password" 
+					class="border-2 h-12 rounded-sm text-zinc-600 indent-10 bg-zinc-100 transition duration-300 focus:border-bgblue w-full"
+				/>
+			</div>
         <app-input-fill-error
             message="senha deve ter no minimo 6 caracteres"
             *ngIf="registerForm.get('password')?.errors?.['minlength']"
         ></app-input-fill-error>
     </div>
-    <button
-        [disabled]="registerForm.invalid"
-        class="mt-5 min-w-full h-12 rounded-sm font-bold disabled:text-zinc-800 bg-bgblue disabled:bg-zinc-300 text-textyellow transition-all hover:bg-indigo-800 duration-300" 
-        type="submit">
-        Registrar
+		<div class="flex flex-col items-center mt-5">
+			<button
+				[disabled]="registerForm.invalid"
+				class="min-w-full h-12 rounded-sm font-bold bg-bgblue text-textyellow transition-all hover:bg-indigo-800 duration-300" 
+				type="submit">
+				Registrar
     </button>
-    <a routerLink="/auth" class="text-sm hover:text-bgblue transition mt-0.5">
-        Já possui uma conta?
-    </a>
+		<div class="flex w-full items-center">
+			<hr class="h-px w-full my-6 border-0 dark:bg-gray-300">
+			<span class="px-5 text-zinc-600 font-medium">ou</span>
+			<hr class="h-px w-full my-6 border-0 dark:bg-gray-300">
+		</div>
+		<button
+				routerLink="/auth" 
+				class="min-w-full h-12 rounded-sm font-semibold text-zinc-700 transition-all border-2 border-zinc-300 hover:bg-zinc-200 duration-300" >
+				Entrar
+			</button>
+	</div>
 </form>
