@@ -1,14 +1,8 @@
-<div class="body-background h-screen">
-    <h1 class="text-4xl font-medium text-white text-center pt-16">
-        Explore customizações de diversos carros
-    </h1>
-    <div class="flex flex-col items-center justify-center bg-zinc-100 max-w-fit mx-auto mt-12 rounded-sm shadow-lg shadow-black/60">
-        <div class="flex items-center gap-1 w-full px-4 py-2.5">
-            <i class="pi pi-cog text-bgblue text-lg relative top-0.5"></i>
-            <h2 class="font-display font-bold text-bgblue text-lg">stanced</h2>
-        </div>
-				<div class="p-12">
-					<router-outlet class="mt-7"></router-outlet>
-				</div>
-    </div>
+<div class="h-screen body-background flex flex-col">
+	<div class="flex pl-3 pt-1.5">
+		<h2 class="text-bgblue font-display text-xl sm:hidden">stanced</h2>
+	</div>
+	<div class="mt-24 bg-zinc-100 md:max-w-fit md:mx-auto sm:shadow-black/50 sm:shadow-2xl sm:rounded">
+		<router-outlet></router-outlet>
+	</div>
 </div>
