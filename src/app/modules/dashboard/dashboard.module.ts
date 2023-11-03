@@ -15,6 +15,7 @@ import { CommentsContainerComponent } from "./components/comments-container/comm
 import { MenuModule } from "src/app/shared/components/menu/menu.module";
 import { EditModalModule } from "src/app/shared/components/edit-modal/edit-modal.module";
 import { AvatarModule } from "src/app/shared/components/avatar/avatar.module";
+import { MobilePhotoInfoComponent } from "./components/mobile-photo-info/mobile-photo-info.component";
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AvatarModule } from "src/app/shared/components/avatar/avatar.module";
 		NewPictureComponent, 
 		PictureComponent, 
 		CommentComponent, 
-		CommentsContainerComponent
+		CommentsContainerComponent, 
+		MobilePhotoInfoComponent
 	],
 	imports: [
 		CommonModule,
