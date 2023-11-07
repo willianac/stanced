@@ -1,13 +1,13 @@
 <app-header></app-header>
-<main class="max-w-5xl shadow-xl p-12 border-2 mx-auto mt-12 rounded">
+<main class="max-w-5xl shadow-xl py-12 px-6 md:px-12 border-2 mx-auto mt-28 rounded">
 	<form [formGroup]="photoForm" (ngSubmit)="uploadFoto()" class="flex justify-between flex-wrap">
-		<div>
+		<div class="mb-6 md:mb-0">
 			<h1 class="text-2xl font-semibold mb-5">Faça o upload da foto</h1>
 			<input type="file" formControlName="file" (change)="file = $any($event.target).files[0]" accept="image/png, image/jpeg">
 		</div>
-		<div>
+		<div class="flex-1 md:flex-none">
 			<div class="flex flex-col mb-4">
-				<label for="title" class="text-sm font-bold">Titulo*</label>
+				<label for="title" class="text-sm font-semibold">Titulo*</label>
 				<input 
 					formControlName="title"
 					type="text" 
@@ -17,7 +17,7 @@
 				>
 			</div>
 			<div class="flex flex-col mb-4">
-				<label for="description" class="text-sm font-bold">Descrição</label>
+				<label for="description" class="text-sm font-semibold">Descrição</label>
 				<textarea 
 					id="description"
 					formControlName="description" 
@@ -28,7 +28,7 @@
 				</textarea>
 			</div>
 			<div class="mb-4 flex items-center">
-				<label for="comments" class="text-sm font-bold">Permitir comentários</label>
+				<label for="comments" class="text-sm font-semibold">Permitir comentários</label>
 				<input type="checkbox" formControlName="allowComments" class="ml-1">
 			</div>
 			<div class="flex flex-col gap-3">
