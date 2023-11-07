@@ -28,15 +28,15 @@
 			</div>
 		</div>
 	</div>
-  <div class="flex gap-36 mb-5 border-b-2 py-2 items-center relative mt-10">
+  <div class="flex justify-between md:justify-start md:gap-36 mb-5 border-b-2 py-2 items-center relative mt-10">
     <span>Nome</span>
     <span>{{userInfo.name}}</span>
-    <i (click)="openModal('name')" class="pi pi-pencil hover:bg-zinc-200 hover:text-bgblue p-2 rounded-full transition duration-300 cursor-pointer absolute right-40"></i>
+    <i (click)="openModal('name')" class="pi pi-pencil hover:bg-zinc-200 hover:text-bgblue p-2 rounded-full transition duration-300 cursor-pointer md:absolute md:right-20 lg:right-40"></i>
   </div>
-  <div class="flex gap-36 relative">
+  <div class="flex justify-between md:justify-start md:gap-36 relative">
     <span>E-mail</span>
     <span>{{userInfo.email}}</span>
-    <i (click)="openModal('email')" class="pi pi-pencil hover:bg-zinc-200 hover:text-bgblue p-2 rounded-full transition duration-300 cursor-pointer absolute right-40"></i>
+    <i (click)="openModal('email')" class="pi pi-pencil hover:bg-zinc-200 hover:text-bgblue p-2 rounded-full transition duration-300 cursor-pointer md:absolute md:right-20 lg:right-40"></i>
   </div>
 </div>
 
