@@ -2,18 +2,31 @@
 <app-photo-grid>
 	<div *ngFor="let picture of pictures" class="cursor-pointer relative mb-6 lg:mb-0" (mouseenter)="picture.showOverlay = true" (mouseleave)="picture.showOverlay = false">
 		<app-mobile-photo-info
+			[pictureID]="picture.id"
 			[avatar]="picture.user.profile_img_url"
 			[title]="picture.title"
 			[owner]="picture.owner_name"
+			[didUserLiked]="picture.didUserLiked"
+			[likeCount]="picture.likes"
+			[heartFilled]="picture.shouldHeartBeFilled"
+			(likeEvent)="handleLike($event)"
 			class="lg:hidden"
 		></app-mobile-photo-info>
 		<div *ngIf="picture.showOverlay" class="absolute bg-black w-full inset-0 bg-opacity-20 hidden lg:flex flex-col justify-between py-3 px-5" @fadeIn @fadeOut>
 			<div class="flex justify-end items-center gap-x-2">
 				<span class="text-white font-medium">{{picture.likes}}</span>
 	
-				<i (click)="handleLike(picture.didUserLiked, picture.id)" *ngIf="picture.shouldHeartBeFilled; else userDidntLikedYet" class="pi pi-heart-fill text-red-500 font-medium text-lg hover:text-red-700"></i>
+				<i 
+					(click)="handleLike({ isPhotoAlreadyLiked: picture.didUserLiked, id: picture.id })" 
+					*ngIf="picture.shouldHeartBeFilled; else userDidntLikedYet" 
+					class="pi pi-heart-fill text-red-500 font-medium text-lg hover:text-red-700">
+				</i>
 				<ng-template #userDidntLikedYet>
-					<i (click)="handleLike(picture.didUserLiked, picture.id)" (click)="picture.shouldHeartBeFilled = true" class="pi pi-heart text-white font-medium text-lg hover:text-red-500"></i>
+					<i 
+						(click)="handleLike({ isPhotoAlreadyLiked: picture.didUserLiked, id: picture.id })" 
+						(click)="picture.shouldHeartBeFilled = true" 
+						class="pi pi-heart text-white font-medium text-lg hover:text-red-500">
+					</i>
 				</ng-template>
 
 			</div>
