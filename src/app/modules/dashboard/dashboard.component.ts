@@ -42,20 +42,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 	constructor(private PicturesService: PicturesService, private likesService: LikesService) {}
 
-	public handleLike(isPhotoAlreadyLiked: boolean, id: string) {
-		if(isPhotoAlreadyLiked) {
-			this.handleHeartIcon(id, "empty")
-			return this.likesService.removeLike(id).subscribe()
+	public handleLike(likeEvent: {isPhotoAlreadyLiked: boolean, id: string}) {
+		if(likeEvent.isPhotoAlreadyLiked) {
+			this.handleHeartIcon(likeEvent.id, "empty")
+			return this.likesService.removeLike(likeEvent.id).subscribe()
 		}
-		this.handleHeartIcon(id, "fill")
-		return this.likesService.sendLike(id).subscribe()
+		this.handleHeartIcon(likeEvent.id, "fill")
+		return this.likesService.sendLike(likeEvent.id).subscribe()
 	}
 
 	private handleHeartIcon(photoID: string, action: "fill" | "empty") {
 		const updatedPictureList = this.pictures.map(car => {
 			if(car.id === photoID) {
-				if(action === "fill") return {...car, shouldHeartBeFilled: true}
-				if(action === "empty") return {...car, shouldHeartBeFilled: false}
+				if(action === "fill") return {...car, shouldHeartBeFilled: true, didUserLiked: true}
+				if(action === "empty") return {...car, shouldHeartBeFilled: false, didUserLiked: false}
 			}
 			return car
 		})
@@ -65,7 +65,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.picturesSubscription = this.PicturesService.getPictures().subscribe({
 			next : (response) => {
-				console.log(response)
 				response.forEach(picture => {
 					if(picture.didUserLiked) {
 						picture.shouldHeartBeFilled = true

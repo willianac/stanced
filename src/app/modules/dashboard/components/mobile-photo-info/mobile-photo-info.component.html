@@ -9,4 +9,11 @@
 		<h3 class="font-medium text-zinc-800">{{title}}</h3>
 		<span class="text-xs text-zinc-500">por {{owner}}</span>
 	</div>
+	<div class="flex items-center gap-1">
+		<span class="text-lg">{{likeCount}}</span>
+		<i (click)="handleLikeEvent()" *ngIf="!heartFilled; else userDidntLiked" class="pi pi-heart text-xl hover:text-red-600"></i>
+		<ng-template #userDidntLiked>
+			<i (click)="handleLikeEvent()" class="pi pi-heart-fill text-xl text-red-600"></i>
+		</ng-template>
+	</div>
 </div>
