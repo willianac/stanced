@@ -1,13 +1,23 @@
 <h2 class="text-2xl font-bold mb-6">Suas fotos salvas</h2>
 <div *ngIf="userSavedImages$ | async as savedPictures" class="flex flex-col items-center gap-4">
-  <div *ngFor="let picture of savedPictures" (mouseenter)="picture.showTooltip = true" (mouseleave)="picture.showTooltip = false" class="relative group overflow-hidden">
-    <div *ngIf="picture.showTooltip" class="absolute bg-black w-full flex justify-end px-2 py-1 bg-opacity-60" @enterTr @leaveTr>
-      <button (click)="removeFromSaved(picture)" class="text-white bg-red-800 py-0.5 px-2 rounded font-bold text-sm">Remover</button>
-    </div>
-    <app-card-photo
-      [description]="picture.description"
-      [url]="picture.url"
-      [username]="picture.owner_name"
-    ></app-card-photo>
+  <div *ngFor="let picture of savedPictures" class="relative group overflow-hidden">
+		<div class="flex justify-between items-center md:hidden">
+			<div>
+				<span class="font-medium text-lg">{{picture.title}}</span>
+				<div class="flex items-center gap-2 mb-2">
+					<small>{{picture.owner_name}}</small>
+					<small class="block text-xs text-zinc-500">{{picture.createdAt | date }}</small>
+				</div>
+			</div>
+			<button class="p-2 flex items-center gap-1">
+				<span>Remover</span>
+				<i (click)="removeFromSaved(picture)" class="pi pi-trash text-lg"></i>
+			</button>
+		</div>
+		<app-photo
+			[src]="picture.url"
+			[id]="picture.id"
+			(deleteImageEvent)="removeFromSaved(picture)"
+		></app-photo>
   </div>
 </div>
