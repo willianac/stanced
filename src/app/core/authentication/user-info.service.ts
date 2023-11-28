@@ -6,9 +6,14 @@ import { AuthenticationService } from "./authentication.service";
 
 import { environment } from "src/environments/environment.development";
 
-type Response = {
+type ResponseOk = {
   auth: boolean,
   token: string
+}
+
+type ResponseError = {
+	success: boolean
+	message: string
 }
 
 @Injectable({
@@ -21,30 +26,35 @@ export class UserInfoService {
     private authService: AuthenticationService
 	) {}
 
-	public changeName(newName: string): Observable<Response> {
+	public changeName(newName: string): Observable<ResponseOk | ResponseError> {
 		const userid = this.tokenService.getDecodedToken().id
-		return this.http.put<Response>(environment.apiUrl + "/changeusername", { userid, newName }).pipe(
+		return this.http.put<ResponseOk | ResponseError>(environment.apiUrl + "/changeusername", { userid, newName }).pipe(
 			tap((res) => {
+				if("token" in res) {
+					this.updateToken(res.token)
+				}
+			})
+		)
+	}
+
+	public changeEmail(newEmail: string): Observable<ResponseOk | ResponseError> {
+		const userid = this.tokenService.getDecodedToken().id
+		return this.http.put<ResponseOk | ResponseError>(environment.apiUrl + "/changeuseremail", { userid, newEmail }).pipe(
+			tap((res) => {
+				if("success" in res) {
+					throw new Error(res.message)
+				}
 				this.updateToken(res.token)
 			})
 		)
 	}
 
-	public changeEmail(newEmail: string): Observable<Response> {
-		const userid = this.tokenService.getDecodedToken().id
-		return this.http.put<Response>(environment.apiUrl + "/changeuseremail", { userid, newEmail }).pipe(
-			tap((res) => {
-				this.updateToken(res.token)
-			})
-		)
-	}
-
-	public setProfileAvatar(imgFile: any): Observable<HttpEvent<Response>> {
+	public setProfileAvatar(imgFile: any): Observable<HttpEvent<ResponseOk>> {
 		const userid = this.tokenService.getDecodedToken().id
 		const data = new FormData();
 		data.append("image", imgFile)
 		data.append("userid", userid)
-		return this.http.post<Response>(environment.apiUrl + "/profileavatar", data, {
+		return this.http.post<ResponseOk>(environment.apiUrl + "/profileavatar", data, {
 			observe: "events",
 			reportProgress: true
 		}).pipe(
@@ -56,11 +66,13 @@ export class UserInfoService {
 		)
 	}
 
-	public removeProfileAvatar(): Observable<Response> {
+	public removeProfileAvatar(): Observable<ResponseOk | ResponseError> {
 		const userid = this.tokenService.getDecodedToken().id
-		return this.http.delete<Response>(environment.apiUrl + "/profileavatar", { body: { userid } }).pipe(
+		return this.http.delete<ResponseOk | ResponseError>(environment.apiUrl + "/profileavatar", { body: { userid } }).pipe(
 			tap((res) => {
-				this.updateToken(res.token)
+				if("token" in res) {
+					this.updateToken(res.token)	
+				}
 			})
 		)
 	}

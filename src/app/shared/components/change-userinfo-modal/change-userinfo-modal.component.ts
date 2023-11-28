@@ -13,6 +13,9 @@ export class ChangeUserinfoModalComponent {
   newName = "";
   newEmail = "";
 
+  showError = false;
+  errMessage = "";
+
   constructor(private userService: UserInfoService) {}
 
   public changeUserName() {
@@ -22,7 +25,10 @@ export class ChangeUserinfoModalComponent {
   				this.closeModalEvent.emit()
   				window.location.reload()
   			},
-  			error: (err) => alert("Não foi possivel atualizar esse dado")
+  			error: () => {
+  				this.showError = true
+  				this.errMessage = "Erro desconhecido"
+  			}
   		})
   	}
   }
@@ -34,7 +40,13 @@ export class ChangeUserinfoModalComponent {
   				this.closeModalEvent.emit()
   				window.location.reload()
   			},
-  			error: (err) => alert("Não foi possivel atualizar esse dado")
+  			error: (err) => {
+  				this.showError = true
+  				if(err.message === "email already taken") {
+  					return this.errMessage = "Esse email já foi cadastrado por outra pessoa"
+  				}
+  				return this.errMessage = "Erro desconhecido"
+  			}
   		})
   	}
   }

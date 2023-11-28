@@ -1,5 +1,4 @@
 import { animate, style, transition, trigger } from "@angular/animations";
-import { HttpEventType } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "src/app/core/authentication/authentication.service";
 import { TokenService } from "src/app/core/authentication/token.service";
