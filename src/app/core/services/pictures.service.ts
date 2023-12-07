@@ -1,6 +1,6 @@
 import { HttpClient, HttpEvent } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, forkJoin, map, tap } from "rxjs";
+import { Observable, forkJoin, map, switchMap, tap } from "rxjs";
 import { IPicture } from "src/app/shared/models/Picture";
 import { LikesService } from "./likes.service";
 import { TokenService } from "../authentication/token.service";
@@ -44,9 +44,11 @@ export class PicturesService {
 		return this.http.get<IPicture[]>(environment.apiUrl + "/getimagesbyuserid?id=" + id)
 	}
 
-	public deletePicture(picture_id: string): Observable<void> {
+	public deletePicture(picture_id: string): Observable<IPicture[]> {
 		return this.http.delete<void>(environment.apiUrl + "/deleteimage", {body: { picture_id }}).pipe(
-			tap(() => this.clearCache())
+			switchMap(() => {
+				return this.getPicturesByUserId(picture_id)
+			})
 		)
 	}
 
