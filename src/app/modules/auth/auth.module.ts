@@ -8,6 +8,7 @@ import { AuthComponent } from "./auth.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { InputFillErrorModule } from "src/app/shared/components/input-fill-error/input-fill-error.module";
 import { AuthErrorModule } from "src/app/shared/components/auth-error/auth-error.module";
+import { ProgressSpinnerModule } from "primeng/progressspinner";
 
 @NgModule({
 	declarations: [
@@ -20,7 +21,8 @@ import { AuthErrorModule } from "src/app/shared/components/auth-error/auth-error
 		AuthRoutingModule,
 		ReactiveFormsModule,
 		InputFillErrorModule,
-		AuthErrorModule
+		AuthErrorModule,
+		ProgressSpinnerModule
 	],
 })
 export class AuthModule { }

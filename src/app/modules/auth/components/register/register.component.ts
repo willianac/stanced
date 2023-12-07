@@ -15,16 +15,19 @@ export class RegisterComponent {
 		email : ["", [Validators.email, Validators.required]],
 		password : ["", [Validators.minLength(6), Validators.required]]
 	})
+	isLoading = false;
 	showError = false
 	errorMessage = ""
   
 	constructor(private fb: FormBuilder, private auth: AuthenticationService, private router: Router) {}
 
 	public registrar() {
+		this.isLoading = true
 		const formValue = this.registerForm.getRawValue() as IFullUser;
 		this.auth.register(formValue).subscribe({
 			next : () => this.router.navigateByUrl("dashboard"),
 			error : (error) => {
+				this.isLoading = false
 				this.showError = true
 				if(error.status === 409) {
 					return this.errorMessage = "Usuário já cadastrado"

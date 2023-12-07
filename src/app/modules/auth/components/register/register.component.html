@@ -52,10 +52,15 @@
             *ngIf="registerForm.get('password')?.errors?.['minlength']"
         ></app-input-fill-error>
     </div>
+		<div>
+			<div *ngIf="isLoading" class="mt-2 flex justify-center">
+				<i class="pi pi-spin pi-spinner text-3xl text-bgblue"></i>
+			</div>
+		</div>
 		<div class="flex flex-col items-center mt-5">
 			<button
-				[disabled]="registerForm.invalid"
-				class="min-w-full h-12 rounded-sm font-bold bg-bgblue text-textyellow transition-all hover:bg-indigo-800 duration-300" 
+				[disabled]="registerForm.invalid || isLoading"
+				class="min-w-full h-12 rounded-sm font-bold bg-bgblue text-textyellow transition-all hover:bg-indigo-800 duration-300 disabled:bg-zinc-300 disabled:text-zinc-400" 
 				type="submit">
 				Registrar
     </button>
