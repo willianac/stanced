@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { TokenService } from "src/app/core/authentication/token.service";
 import { PicturesService } from "src/app/core/services/pictures.service";
 import { IPicture } from "src/app/shared/models/Picture";
@@ -14,7 +14,12 @@ export class MypicturesComponent implements OnInit {
 	myPictures$!: Observable<IPicture[]>;
 
 	public deleteImage(id: string) {
-		this.PicturesService.deletePicture(id).subscribe()
+		this.PicturesService.deletePicture(id).pipe(
+			tap(() => {
+				const userID = this.tokenService.getDecodedToken().id;
+				this.myPictures$ = this.PicturesService.getPicturesByUserId(userID)
+			})
+		).subscribe()
 	}
 
 	ngOnInit(): void {

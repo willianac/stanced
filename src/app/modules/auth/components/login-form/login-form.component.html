@@ -44,14 +44,17 @@
             message="senha é obrigatória"
             *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched"
         ></app-input-fill-error>
-        <div class="flex justify-end mt-5">
+        <!-- <div class="flex justify-end mt-5">
             <small class="text-bgblue font-semibold cursor-pointer hover:underline transition duration-300">Esqueceu a senha?</small>
-        </div>
+        </div> -->
+			<div *ngIf="isLoading" class="mt-2 flex justify-center">
+				<i class="pi pi-spin pi-spinner text-3xl text-bgblue"></i>
+			</div>
     </div>
     <div class="flex flex-col items-center mt-5">
 			<button 
-        class="min-w-full h-12 rounded-sm font-bold bg-bgblue text-textyellow transition-all hover:bg-indigo-800 duration-300" 
-        [disabled]="loginForm.invalid" 
+        class="min-w-full h-12 rounded-sm font-bold bg-bgblue text-textyellow transition-all hover:bg-indigo-800 duration-300 disabled:bg-zinc-300 disabled:text-zinc-400" 
+        [disabled]="loginForm.invalid || isLoading" 
         type="submit">
         Entrar
     	</button>
