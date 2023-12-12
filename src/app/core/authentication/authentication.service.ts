@@ -7,6 +7,7 @@ import { TokenService } from "./token.service";
 import { IFullUser, JWTtoken } from "./user";
 
 import { environment } from "src/environments/environment.development";
+import { Router } from "@angular/router";
 
 @Injectable({
 	providedIn : "root"
@@ -15,7 +16,7 @@ export class AuthenticationService {
 	user = new BehaviorSubject("")
 	avatar = new BehaviorSubject("")
 
-	constructor(private http: HttpClient, private token: TokenService) {
+	constructor(private http: HttpClient, private token: TokenService, private router: Router) {
 		if(this.token.hasToken()) {
 			this.validateToken()
 		} 
@@ -50,7 +51,10 @@ export class AuthenticationService {
 		const token = this.token.getToken()
 		this.http.post(environment.apiUrl + "/verifytoken", {token}).subscribe({
 			next : () => this.notify(),
-			error : () => this.logout()
+			error : () => {
+				this.logout()
+				this.router.navigateByUrl("auth")
+			}
 		})
 	}
 
